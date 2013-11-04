@@ -35,6 +35,7 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.0.4)
+    choice (0.1.6)
     coderay (1.1.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -75,6 +76,11 @@ GEM
       activesupport (= 3.2.14)
       bundler (~> 1.0)
       railties (= 3.2.14)
+    rails-erd (1.1.0)
+      activerecord (>= 3.0)
+      activesupport (>= 3.0)
+      choice (~> 0.1.6)
+      ruby-graphviz (~> 1.0.4)
     railties (3.2.14)
       actionpack (= 3.2.14)
       activesupport (= 3.2.14)
@@ -85,6 +91,7 @@ GEM
     rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    ruby-graphviz (1.0.9)
     sass (3.2.12)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -115,5 +122,6 @@ DEPENDENCIES
   jquery-rails
   pg
   rails (= 3.2.14)
+  rails-erd
   sass-rails (~> 3.2.3)
   uglifier (>= 1.0.3)
