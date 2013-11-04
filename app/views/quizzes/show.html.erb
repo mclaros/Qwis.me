@@ -15,7 +15,39 @@
 
 
 
-
 <br><br>
+<hr>
 TEMPORARY:
 <%= test_repeater(["content1", "content2", "third","egewtwe","rqwrqw"]) %>
+<br><br>
+
+<div id="test-div"></div>
+<button id="test-button">New test element</button>
+<br><br><br>
+
+<div class="test-form">
+<label for="test-text">Test Input</label>
+<br>
+<input type="text" id="test-text">
+</div>
+<br>
+<button id="new-test-form">New test form</button>
+
+
+<br><br><br>
+
+<script type="text/javascript">
+ var $tdiv = $("#test-div");
+ $("#test-button").on("click", function () {
+ 	$tdiv.append("<p>WOO new test content!</p>")
+ });
+
+ $("#new-test-form").on("click", function () {
+ 	var $lastTDiv = $(".test-form").last();
+ 	var newDiv = $lastTDiv.clone();
+ 	newDiv.css("display", "none")
+ 	$lastTDiv.after(newDiv);
+ 	newDiv.slideToggle();
+
+ });
+</script>
