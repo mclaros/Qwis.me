@@ -1,0 +1,61 @@
+<h1>New quiz</h1>
+
+<form action="<%= quizzes_url %>" method="post">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+	<label for="quiz-title">Title</label>
+	<br>
+	<input type="text" id="quiz-title" name="quiz[title]">
+	
+	<br><br>
+	
+	<label for="quiz-description">Description</label>
+	<br>
+	<textarea id="quiz-description" name="quiz[description]"></textarea>
+	
+	<br><br>
+	
+	<label for="quiz-categories">Categories</label>
+	<select id="quiz-categories" name="quiz[category]">
+		<option></option>
+		<% @categories.each do |category| %>
+			<option value="<%= category %>"><%= category.capitalize %></option>
+		<% end %>
+	</select>
+
+	&nbsp;&nbsp;
+	
+	<label for="quiz-scope">Scope</label>
+	<select id="quiz-scope" name="quiz[scope]">
+		<option></option>
+		<% @scopes.each do |scope| %>
+			<option value="<%= scope %>"><%= scope.capitalize %></option>
+		<% end %>
+	</select>
+
+	<br><br>
+
+	<label for="quiz-prompt">Question</label>
+	<br>
+	<input type="text" id="quiz-prompt" name="quiz[prompt]">
+
+	<br><br>
+
+	<label for="quiz-length">TEMPORARY: Length</label>
+	<br>
+	<input type="text" id="quiz-length" name="quiz[length]">
+
+	<br><br>
+
+	<label for="quiz-time-limit">Time Limit</label>
+	<select id="quiz-time-limit" name="quiz[time_limit]">
+		<option value="1">1:00</option>
+		<option value="5">5:00</option>
+		<option value="10">10:00</option>
+	</select>
+
+	<br><br>
+
+	<input type="submit" value="Create Quiz">
+
+</form>
