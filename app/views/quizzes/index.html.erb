@@ -1,5 +1,9 @@
 <h1>Quizzes</h1>
 
+<%= link_to "New Quiz", new_quiz_url %>
+
+<br><br>
+
 <ul>
 	<% @quizzes.each do |quiz| %>
 		<li>
@@ -7,9 +11,10 @@
 			<%= quiz.title %>
 			</a>
 			<ul>
-				<li><%= quiz.description %></li>
-				<li><%= quiz.category %></li>
-				<li><%= quiz.scope%></li>
+				<li>Time limit: <%= quiz.time_limit %></li>
+				<li>Description: <%= quiz.description || "NONE" %></li>
+				<li>Category: <%= quiz.category %></li>
+				<li>Scope: <%= quiz.scope%></li>
 			</ul>
 		</li>
 	<% end %>

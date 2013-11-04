@@ -11,3 +11,13 @@
  *= require_self
  *= require_tree .
  */
+
+
+/* temporary location, will movelater */
+.hidden-answer {
+	height: 25px;
+	width: 150px;
+	border: 1px solid black;
+	margin: 5px;
+	background-color: chocolate;
+}

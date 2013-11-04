@@ -8,6 +8,9 @@ class Quiz < ActiveRecord::Base
 	validates_length_of :title, :within => 3..50
 	validates_length_of :category, :scope, :within => 3..20
 
+	#belongs_to :author
+	has_many :goal_answers, :dependent => :destroy, :inverse_of => :quiz
+
 	def self.categories
 		cats = [
 				"entertainment", "gaming", "geography", "history", "holiday", 

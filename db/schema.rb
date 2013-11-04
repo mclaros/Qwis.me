@@ -14,6 +14,7 @@
 ActiveRecord::Schema.define(:version => 20131104031959) do
 
   create_table "goal_answers", :force => true do |t|
+    t.integer  "quiz_id",                      :null => false
     t.string   "correct_answer", :limit => 30, :null => false
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
