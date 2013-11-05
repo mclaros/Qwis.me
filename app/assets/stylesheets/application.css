@@ -22,7 +22,31 @@
 	background-color: chocolate;
 }
 
-input[readonly], input[readonly="readonly"] {
+.opt-field-blank {
+	height: 25px;
+	width: 150px;
 	background-color: lightgrey;
 	border: 1px solid darkgrey;
+	float: left;
+	padding: 1px;
+	margin: 2px;
+}
+
+.opt-field-filled {
+	height: 25px;
+	width: 150px;
+	background-color: lightgreen;
+	border: 1px solid green;
+	float: left;
+	padding: 1px;
+	margin: 2px;
+}
+
+.opt-field-active {
+	height: 25px;
+	width: 150px;
+	float: left;
+	border: 1px solid orange;
+	padding: 1px;
+	margin: 2px;
 }

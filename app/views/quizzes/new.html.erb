@@ -69,16 +69,15 @@
 
 		<h4>Valid Answers</h4>
 		Max: 30 characters
-		<br>
-		<input type="text" name="valid_answers[][valid_answer]" placeholder="Blank will not be saved">
-		<input type="text" name="valid_answers[][valid_answer]" placeholder="Blank will not be saved">
-		<input type="text" name="valid_answers[][valid_answer]" placeholder="Blank will not be saved">
-		<input type="text" name="valid_answers[][valid_answer]" placeholder="Blank will not be saved">
-		<input type="text" name="valid_answers[][valid_answer]" placeholder="Blank will not be saved">
-		<br>
-		<button class="save-prompt-field">Save Prompt</button>
-		<br>
+		<br><br>
+		<div class="opt-field-blank">Add valid answer...</div>
+		<div class="opt-field-blank">Add valid answer...</div>
+		<div class="opt-field-blank">Add valid answer...</div>
+		<div class="opt-field-blank">Add valid answer...</div>
+		<div class="opt-field-blank">Add valid answer...</div>
+		<br><br>
 		------
+		
 	</div>
 	<br>
 	<button class="new-prompt-field">Add Prompt</button>
@@ -110,21 +109,67 @@ var dupPromptDiv = function ($dupButton) {
 		$newDiv.css("display", "none");
 		$lastDiv.after($newDiv);
 		$newDiv.slideToggle("fast", function () {
-			$("body").scrollTo({top:'+=250px', left: '0'}, 400);
+			$("body").scrollTo({top:'+=300px', left: '0'}, 400);
 		});
 	});			
 };
 
-var toggleReadOnly = function ($toggleEl) {
-	$toggleEl.on("click", function (event) {
-		event.preventDefault();
-
-		var $parentDiv = $(event.target).parent();
-		var $inputFields = $parentDiv.find("input");
-		//assume all are toggled the same way
-		var newSetting = ($inputFields.first().attr("readonly") === undefined ? true : false)
+var readOnlyToFieldListen = function ($div) {
+	$div.on("click", function (event) {
+		var $origEl = $(event.target);
+		var $fieldInput = $("<input>");
 		
-		$inputFields.attr("readonly", newSetting);
+		$fieldInput.attr({
+			type: "text",
+			class: "opt-field-active",
+			name: "quiz_prompts[][valid_answers][][valid_answer]"
+		});
+
+		//Assume if .val() returns empty string, it is DIV
+		if ($origEl.val() === "") {
+			var text = $origEl.text();
+			text = (text === "Add valid answer..." ? "" : text);
+			$fieldInput.val(text);
+		}
+		else {
+			$fieldInput.val($origEl.val());
+		}
+
+		$origEl.replaceWith($fieldInput);
+		$fieldInput.focus();
+		fieldToReadOnly($fieldInput);		
+	});
+};
+
+var fieldToReadOnly = function ($field) {
+	$field.on("blur keypress", function (event) {
+		//ENTER or TAB
+		var validTrigger = (event.type === "blur" || (event.which === 13 || event.which === 9)); 
+
+		if (validTrigger) {
+			var field = event.target;
+			var valText = $(field).val();
+			var valEmpty = (valText === "");
+			var $readOnlyText;
+
+			if (valEmpty) {
+				$readOnlyText = $("<div>");
+				$readOnlyText.addClass("opt-field-blank");
+				$readOnlyText.text("Add valid answer...");
+			}
+			else {
+				$readOnlyText = $("<input>");
+				$readOnlyText.attr({
+					class: "opt-field-filled",
+					name: "quiz_prompts[][valid_answers][][valid_answer]",
+					readonly: true,
+					value: valText
+				});
+			}
+
+			$(field).replaceWith($readOnlyText);
+			readOnlyToFieldListen($readOnlyText);
+		}
 	});
 };
 
@@ -132,8 +177,10 @@ var toggleReadOnly = function ($toggleEl) {
 $(document).ready(function () {
 	dupPromptDiv($(".new-prompt-field"));
 
-	//should only affect first field div, unfortunately
-	toggleReadOnly($(".save-prompt-field"));
+	$(".opt-field-blank").each(function (idx, el) {
+		readOnlyToFieldListen($(el));
+	});
+
 });
 
 
