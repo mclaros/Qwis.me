@@ -29,7 +29,7 @@ textarea {
 	border: 1px solid darkslategray;
 }
 
-input[type=text] {
+input[type=text], .opt-field-filled {
 	height: 25px;
 	width: 150px;
 	color: black;
@@ -50,7 +50,7 @@ div.opt-field-blank {
 	float: left;
 }
 
-input.opt-field-filled {
+.opt-field-filled {
 	background-color: palegreen;
 	border: 1px solid green;
 	float: left;
