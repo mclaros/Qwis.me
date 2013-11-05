@@ -1,8 +1,8 @@
 class ValidAnswer < ActiveRecord::Base
-	attr_accessible :answer, :goal_answer_id
+	attr_accessible :quiz_prompt_id, :valid_answer
 
-	validates_presence_of :answer, :goal_answer_id
-	validates_length_of :answer, :maximum => 30
+	validates_presence_of :quiz_prompt_id, :valid_answer
+	validates_length_of :valid_answer, :maximum => 30
 
-	belongs_to :goal_answer
+	belongs_to :quiz_prompt
 end

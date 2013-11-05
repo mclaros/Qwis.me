@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  quiz_prompt_id: 1
-  valid_answer: MyString
+  quiz_id: 1
+  goal_answer: MyString
 
 two:
-  quiz_prompt_id: 1
-  valid_answer: MyString
+  quiz_id: 1
+  goal_answer: MyString

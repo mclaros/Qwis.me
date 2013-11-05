@@ -25,7 +25,7 @@ TEMPORARY:
 <button id="test-button">New test element</button>
 <br><br><br>
 
-<div class="test-form">
+<div class="test-form" data-number="1">
 <label for="test-text">Test Input</label>
 <br>
 <input type="text" id="test-text">
@@ -45,9 +45,11 @@ TEMPORARY:
  $("#new-test-form").on("click", function () {
  	var $lastTDiv = $(".test-form").last();
  	var newDiv = $lastTDiv.clone();
+ 	var newData = $lastTDiv.data("number") + 1;
+ 	newDiv.data("number", "werwr");
  	newDiv.css("display", "none")
  	$lastTDiv.after(newDiv);
- 	newDiv.slideToggle();
+ 	// newDiv.slideToggle();
 
  });
 </script>
