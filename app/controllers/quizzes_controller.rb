@@ -18,6 +18,11 @@ class QuizzesController < ApplicationController
 
 	def create
 		@quiz = Quiz.new(params[:quiz])
+
+		#building quiz prompts
+		params[:quiz_prompts].each do |values_hash|
+			@quiz.quiz_prompts.new(values_hash)
+		end
 		
 		#TEMPORARY, will set to current_user later
 		@quiz.author_id = 1

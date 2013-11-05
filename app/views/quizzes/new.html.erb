@@ -35,12 +35,6 @@
 
 	<br><br>
 
-	<label for="q-prompt-question">Question</label>
-	<br>
-	<input type="text" id="q-prompt-question" name="quiz[quiz_prompt][question]">
-
-	<br><br>
-
 	<label for="quiz-length">TEMPORARY: Length</label>
 	<br>
 	<input type="text" id="quiz-length" name="quiz[length]">
@@ -54,7 +48,31 @@
 		<option value="10">10:00</option>
 	</select>
 
+	<hr>
+	
+	<div class="prompt-fields">
+		<h3>Prompt</h3>
+		
+		<label>
+			Question
+			<br>
+			<input type="text" id="q-prompt-question" name="quiz_prompts[][question]">
+		</label>
+
+		<br>
+
+		<label>
+			Answer
+			<br>
+			<input type="text" id="q-prompt-answer" name="quiz_prompts[][correct_answer]">
+		</label>	
+	</div>
+	
 	<br><br>
+
+	<button class="new-prompt-field">Add Prompt</button>
+
+	<hr>
 
 	<input type="submit" value="Create Quiz">
 
@@ -63,3 +81,33 @@
 <br><br>
 
 <%= link_to "Quiz Index", quizzes_url %>
+
+
+
+
+<!-- TEMPORARY LOCATION -->
+<script type="text/javascript">
+
+var dupPromptDiv = function ($dupButton) {
+	$dupButton.on("click", function (event) {
+		event.preventDefault();
+
+		var $lastDiv = $(".prompt-fields").last();
+		var $newDiv = $lastDiv.clone();
+
+		$newDiv.find("input").val("");
+		$newDiv.css("display", "none");
+		$lastDiv.after($newDiv);
+		$newDiv.slideToggle("fast", function () {
+			$("body").scrollTo({top:'+=150px', left: '0'}, 400);
+		});
+	});			
+};
+
+
+$(document).ready(function () {
+	dupPromptDiv($(".new-prompt-field"));
+});
+
+
+</script>
