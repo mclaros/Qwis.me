@@ -23,8 +23,14 @@ class QuizzesController < ApplicationController
 		params[:quiz_prompts].each do |values_hash|
 			@quiz.quiz_prompts.new(values_hash)
 		end
+
+		#TEMPORARY: set all valid answers to first quiz prompt
+		first_prompt = @quiz.quiz_prompts.first
+		params[:valid_answers].each do |values_hash|
+			first_prompt.valid_answers.new(values_hash)
+		end
 		
-		#TEMPORARY, will set to current_user later
+		#TEMPORARY: will set to current_user later
 		@quiz.author_id = 1
 
 		if @quiz.save

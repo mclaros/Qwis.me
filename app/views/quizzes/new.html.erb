@@ -54,22 +54,33 @@
 		<h3>Prompt</h3>
 		
 		<label>
-			Question
+			Question (3-100 characters)
 			<br>
-			<input type="text" id="q-prompt-question" name="quiz_prompts[][question]">
+			<input type="text" name="quiz_prompts[][question]">
 		</label>
 
 		<br>
 
 		<label>
-			Answer
+			Answer (max 30 characters)
 			<br>
-			<input type="text" id="q-prompt-answer" name="quiz_prompts[][correct_answer]">
-		</label>	
-	</div>
-	
-	<br><br>
+			<input type="text" name="quiz_prompts[][correct_answer]">
+		</label>
 
+		<h4>Valid Answers</h4>
+		Max: 30 characters
+		<br>
+		<input type="text" name="valid_answers[][valid_answer]" placeholder="Blank will not be saved">
+		<input type="text" name="valid_answers[][valid_answer]" placeholder="Blank will not be saved">
+		<input type="text" name="valid_answers[][valid_answer]" placeholder="Blank will not be saved">
+		<input type="text" name="valid_answers[][valid_answer]" placeholder="Blank will not be saved">
+		<input type="text" name="valid_answers[][valid_answer]" placeholder="Blank will not be saved">
+		<br>
+		<button class="save-prompt-field">Save Prompt</button>
+		<br>
+		------
+	</div>
+	<br>
 	<button class="new-prompt-field">Add Prompt</button>
 
 	<hr>
@@ -99,14 +110,30 @@ var dupPromptDiv = function ($dupButton) {
 		$newDiv.css("display", "none");
 		$lastDiv.after($newDiv);
 		$newDiv.slideToggle("fast", function () {
-			$("body").scrollTo({top:'+=150px', left: '0'}, 400);
+			$("body").scrollTo({top:'+=250px', left: '0'}, 400);
 		});
 	});			
+};
+
+var toggleReadOnly = function ($toggleEl) {
+	$toggleEl.on("click", function (event) {
+		event.preventDefault();
+
+		var $parentDiv = $(event.target).parent();
+		var $inputFields = $parentDiv.find("input");
+		//assume all are toggled the same way
+		var newSetting = ($inputFields.first().attr("readonly") === undefined ? true : false)
+		
+		$inputFields.attr("readonly", newSetting);
+	});
 };
 
 
 $(document).ready(function () {
 	dupPromptDiv($(".new-prompt-field"));
+
+	//should only affect first field div, unfortunately
+	toggleReadOnly($(".save-prompt-field"));
 });
 
 
