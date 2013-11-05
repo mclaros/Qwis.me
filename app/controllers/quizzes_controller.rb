@@ -19,15 +19,15 @@ class QuizzesController < ApplicationController
 	def create
 		@quiz = Quiz.new(params[:quiz])
 
-		#building quiz prompts
-		params[:quiz_prompts].each do |values_hash|
-			@quiz.quiz_prompts.new(values_hash)
-		end
+		#building quiz_prompts, and their valid_answers
+		params[:quiz_prompts].each do |prompt_vals|
+			prompt_params = prompt_vals.reject {|k| k == "valid_answers"}
+			prompt = @quiz.quiz_prompts.new(prompt_params)
 
-		#TEMPORARY: set all valid answers to first quiz prompt
-		first_prompt = @quiz.quiz_prompts.first
-		params[:valid_answers].each do |values_hash|
-			first_prompt.valid_answers.new(values_hash)
+			#build prompt's valid_answers
+			prompt_vals["valid_answers"].each do |v_ans_vals|
+				prompt.valid_answers.new(v_ans_vals)
+			end
 		end
 		
 		#TEMPORARY: will set to current_user later

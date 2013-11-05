@@ -76,6 +76,10 @@
 		<div class="opt-field-blank">Add valid answer...</div>
 		<div class="opt-field-blank">Add valid answer...</div>
 		<br><br>
+		Qwip: You can press ENTER, TAB, or click elsewhere to set answer
+		<br>
+		TODO: add tab-switching, check for uniqueness
+		<br>
 		------
 		
 	</div>
@@ -91,6 +95,8 @@
 <br><br>
 
 <%= link_to "Quiz Index", quizzes_url %>
+
+<br><br>
 
 
 
@@ -149,6 +155,8 @@ var fieldToReadOnly = function ($field) {
 		if (validTrigger) {
 			var field = event.target;
 			var valText = $(field).val();
+			//trim whitespace
+			valText = $.trim(valText);
 			var valEmpty = (valText === "");
 			var $readOnlyText;
 

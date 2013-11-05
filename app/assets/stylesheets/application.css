@@ -22,31 +22,41 @@
 	background-color: chocolate;
 }
 
-.opt-field-blank {
-	height: 25px;
-	width: 150px;
-	background-color: lightgrey;
-	border: 1px solid darkgrey;
-	float: left;
-	padding: 1px;
-	margin: 2px;
+textarea {
+	color: black;
+	background-color: beige;
+	padding: 2px;
+	border: 1px solid darkslategray;
 }
 
-.opt-field-filled {
+input[type=text] {
 	height: 25px;
 	width: 150px;
-	background-color: lightgreen;
+	color: black;
+	background-color: beige;
+	padding: 2px;
+	border: 1px solid darkslategray;
+	margin: 2px 2px 2px 0px;
+}
+
+div.opt-field-blank {
+	height: 25px;
+	width: 150px;
+	color: dimgray;
+	background-color: ghostwhite;
+	padding: 2px;
+	border: 1px solid darkgray;
+	margin: 2px 2px 2px 0px;
+	float: left;
+}
+
+input.opt-field-filled {
+	background-color: palegreen;
 	border: 1px solid green;
 	float: left;
-	padding: 1px;
-	margin: 2px;
 }
 
-.opt-field-active {
-	height: 25px;
-	width: 150px;
-	float: left;
+input.opt-field-active {
 	border: 1px solid orange;
-	padding: 1px;
-	margin: 2px;
+	float: left;
 }
