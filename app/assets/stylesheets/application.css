@@ -21,3 +21,8 @@
 	margin: 5px;
 	background-color: chocolate;
 }
+
+input[readonly], input[readonly="readonly"] {
+	background-color: lightgrey;
+	border: 1px solid darkgrey;
+}
