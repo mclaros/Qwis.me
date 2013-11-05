@@ -11,13 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131105035118) do
+ActiveRecord::Schema.define(:version => 20131105040210) do
 
   create_table "quiz_prompts", :force => true do |t|
-    t.integer  "quiz_id",                      :null => false
-    t.string   "correct_answer", :limit => 30, :null => false
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.integer  "quiz_id",                       :null => false
+    t.string   "correct_answer", :limit => 30,  :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.string   "question",       :limit => 100, :null => false
   end
 
   add_index "quiz_prompts", ["quiz_id"], :name => "index_quiz_prompts_on_quiz_id"

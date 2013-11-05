@@ -1,17 +1,29 @@
 <h1><%= @quiz.title %></h1>
 
-<h2><%= @quiz.prompt %></h2>
+<h2><%= @prompts.first.question %></h2>
 <input type="text" id="text-matcher-input">
 
 <br><br>
 
-<% @goal_answers.each do |goal_answer| %>
+<% @prompts.each do |prompt| %>
 	<div class="hidden-answer"></div>
 <% end %>
 
 <br><br>
 
 <%= link_to "Quiz Index", quizzes_url %>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -49,7 +61,7 @@ TEMPORARY:
  	newDiv.data("number", "werwr");
  	newDiv.css("display", "none")
  	$lastTDiv.after(newDiv);
- 	// newDiv.slideToggle();
+ 	newDiv.slideToggle();
 
  });
 </script>

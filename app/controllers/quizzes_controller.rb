@@ -6,7 +6,7 @@ class QuizzesController < ApplicationController
 
 	def show
 		@quiz = Quiz.find(params[:id])
-		@goal_answers = @quiz.goal_answers
+		@prompts = @quiz.quiz_prompts
 		render :show
 	end
 
