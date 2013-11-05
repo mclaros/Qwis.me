@@ -11,14 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131105033608) do
-
-  create_table "goal_answers", :force => true do |t|
-    t.integer  "quiz_id",                      :null => false
-    t.string   "correct_answer", :limit => 30, :null => false
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
-  end
+ActiveRecord::Schema.define(:version => 20131105035118) do
 
   create_table "quiz_prompts", :force => true do |t|
     t.integer  "quiz_id",                      :null => false
@@ -46,7 +39,6 @@ ActiveRecord::Schema.define(:version => 20131105033608) do
     t.string   "description",     :limit => 150
     t.string   "category",        :limit => 20,                        :null => false
     t.string   "scope",           :limit => 20,  :default => "common", :null => false
-    t.string   "prompt",          :limit => 100,                       :null => false
     t.boolean  "reviewed_by_mod",                :default => false
     t.integer  "length",                                               :null => false
     t.integer  "time_limit",                                           :null => false
@@ -55,12 +47,12 @@ ActiveRecord::Schema.define(:version => 20131105033608) do
   end
 
   create_table "valid_answers", :force => true do |t|
-    t.integer  "goal_answer_id",               :null => false
-    t.string   "answer",         :limit => 30, :null => false
+    t.integer  "quiz_prompt_id",               :null => false
+    t.string   "valid_answer",   :limit => 30, :null => false
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
   end
 
-  add_index "valid_answers", ["goal_answer_id"], :name => "index_valid_answers_on_goal_answer_id"
+  add_index "valid_answers", ["quiz_prompt_id"], :name => "index_valid_answers_on_quiz_prompt_id"
 
 end

@@ -8,8 +8,9 @@ class Quiz < ActiveRecord::Base
 	validates_length_of :category, :scope, :within => 3..20
 
 	#belongs_to :author
+	has_one :quiz_tracker, :dependent => :destroy, :inverse_of => :quiz
 	has_many :quiz_prompts, :dependent => :destroy, :inverse_of => :quiz
-	has_many :quiz_trackers, :dependent => :destroy, :inverse_of => :quiz
+	#has_one :quiz_perform_tracker
 
 	def self.categories
 		cats = [
