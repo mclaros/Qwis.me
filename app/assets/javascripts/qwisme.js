@@ -4,10 +4,16 @@ window.Qwisme = {
   Views: {},
   Routers: {},
   initialize: function() {
-    alert('Hello from Backbone!');
+    var quizData = $("#bootstrapped_quizzes").html();
+    Qwisme.QUIZZES = new Qwisme.Collections.Quizzes(quizData);
+
+    new Qwisme.Routers.QuizRouter({
+    	$rootEl: $("#root-main-div")
+    });
+    Backbone.history.start();
   }
 };
 
 $(document).ready(function(){
-  // Qwisme.initialize();
+	Qwisme.initialize();
 });

@@ -1,5 +1,6 @@
 Qwisme::Application.routes.draw do
   resources :quizzes
+  resource :static_pages
   get "/quizzes/:id/play", :to => "quizzes#play"
-  root :to => "quizzes#index"
+  root :to => "static_pages#root"
 end

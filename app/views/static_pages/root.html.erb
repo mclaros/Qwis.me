@@ -1,0 +1,5 @@
+<script type="application/json" id="bootstrapped_quizzes">
+	<%= @quizzes.to_json(:include => {:quiz_prompts => { :include=>:valid_answers}} ).html_safe %>
+</script>
+
+<div id="root-main-div"></div>

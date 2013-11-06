@@ -1,0 +1,106 @@
+<h1>Playing...</h1>
+<h2><%= quiz.escape("title") %></h2>
+
+<a href="#">Quiz Index</a>
+
+<h2><%= prompts.first().escape("question") %></h2>
+
+<label for="player-input">Enter text:</label>
+<br>
+<input type="text" id="player-input">
+
+<br><br>
+
+# Correct answers:
+<div id="correct-count">0</div>
+
+<br><br>
+
+<div id="answers-container"></div>
+
+<br><br>
+
+TEMPORARY:
+<ul>
+<% prompts.each(function (prompt) { %>
+	<li>
+		<%= prompt.escape("question") %> ANSWERS:
+		<ul>
+		<% prompt.get("possible_answers").each(function (vAns) { %>
+		<li>
+			<%= vAns.escape("valid_answer") %>
+		</li>
+		<% }) %>
+		</ul>
+	</li>
+<% }) %>
+</ul>
+
+<br><br>
+
+<!-- TEMPORARY LOCATION -->
+
+<%
+	var genAnswerDivs = function ($container) {
+		var $answerDiv = $("<div>");
+		var $hidAnsText = $("<div>");
+		$answerDiv.addClass("answer-div");
+		$hidAnsText.hide();
+
+		var questions = _.keys(quesToAns);
+		_.each(questions, function (question) {
+			var correctAns = _.first(quesToAns[question]);
+			var $newAnswerDiv = $answerDiv.clone();
+			var $newHidAnsText = $hidAnsText.clone();
+
+			$newHidAnsText.text(correctAns);
+			$newAnswerDiv.append($newHidAnsText);
+			$container.append($newAnswerDiv);
+
+			ansDivs[correctAns] = $newAnswerDiv;
+		});
+	};
+
+	var isAnswer = function (trimmedInput) {
+		return _.contains(posAnswers, trimmedInput);
+	};
+
+	var revealAns = function (correctAns) {
+		var $ansDiv = ansDivs[correctAns];
+		var $ansTextDiv = $($ansDiv.find("div"));
+		//animate reveal later
+		$ansDiv.css("background-color", "yellow");
+		$ansTextDiv.show();
+	};
+
+	$(document).ready(function () {
+		ansData = JSON.parse($("#bootstrapped_answers_json").html());
+		quesToAns = ansData.ques_to_ans;
+		ansToQues = ansData.ans_to_ques;
+
+		posAnswers = _.keys(ansToQues);
+		ansDivs = {};
+
+		genAnswerDivs($("#answers-container"));
+
+		$("#player-input").on("keyup keydown", function (event) {
+			var $inputField = $(event.target);
+			var input = $inputField.val();
+			input = $.trim(input);
+
+			if (isAnswer(input)) {
+				var guessQuestion = ansToQues[input];
+				var validAnswers = quesToAns[guessQuestion];
+				var correctAns = _.first(validAnswers);
+
+				$inputField.val("");
+				var newCount = 1 + parseInt($("#correct-count").text());
+				$("#correct-count").text(newCount);
+
+				revealAns(correctAns);
+				posAnswers = _.difference(posAnswers, validAnswers);
+			}
+		});
+	});
+
+%>

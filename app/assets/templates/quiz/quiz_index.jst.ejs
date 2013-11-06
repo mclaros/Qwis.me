@@ -1,0 +1,24 @@
+<h1>BACKBONE: Quizzes</h1>
+
+<a href="/quizzes/new">New Quiz</a>
+
+<br><br>
+
+<ul>
+	<% quizzes.each(function(quiz) { %>
+		<li>
+			<a href="#/quizzes/<%= quiz.id %>">
+			<%= quiz.escape("title") %>
+			</a>
+			<ul>
+				<li><a href="#/quizzes/<%= quiz.id %>/play">
+					Play!
+				</a></li>
+				<li>Time limit: <%= quiz.escape("time_limit") %></li>
+				<li>Description: <%= quiz.escape("description") || "NONE" %></li>
+				<li>Category: <%= quiz.escape("category") %></li>
+				<li>Scope: <%= quiz.escape("scope") %></li>
+			</ul>
+		</li>
+	<% }) %>
+</ul>

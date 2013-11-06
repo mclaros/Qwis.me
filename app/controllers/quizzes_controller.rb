@@ -1,7 +1,12 @@
 class QuizzesController < ApplicationController
 	def index
 		@quizzes = Quiz.all
-		render :index
+
+		# render :json => @quizzes.to_json(:include => {:quiz_prompts => { :include=>:valid_answers}} )
+		respond_to do |format|
+			format.html { render :index }
+			format.json { render "quizzes.rabl", handlers: [:rabl] }
+		end
 	end
 
 	def show
@@ -30,7 +35,11 @@ class QuizzesController < ApplicationController
 		@ans_data = @ans_data.to_json
 		#end build answer data
 
-		render :play
+		# render:json => @ans_data
+		respond_to do |format|
+			format.html { render :play }
+			format.json { render :json => @ans_data }
+		end
 	end
 
 	def new
