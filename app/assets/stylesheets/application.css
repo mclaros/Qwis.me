@@ -35,12 +35,16 @@ div.notices {
 	display: block;
 }
 
-.hidden-answer {
+div.answer-div {
 	height: 25px;
 	width: 150px;
 	border: 1px solid black;
 	margin: 5px;
 	background-color: chocolate;
+}
+
+div.hidden-answer * {
+	visibility: hidden;
 }
 
 textarea {

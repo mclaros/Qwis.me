@@ -13,11 +13,22 @@ class QuizzesController < ApplicationController
 	def play
 		@quiz = Quiz.find(params[:id])
 		@prompts = @quiz.quiz_prompts
-		@prompt_answers_hash_JSON = {}
+		
+		#build answer data
+		@ques_to_ans = {}
+		@ans_to_ques = {}
+
 		@prompts.each do |prompt|
-			@prompt_answers_hash_JSON[prompt.question] = prompt.possible_answers
+			@ques_to_ans[prompt.question] = prompt.possible_answers
+			
+			prompt.possible_answers.each do |pos_ans|
+				@ans_to_ques[pos_ans] = prompt.question
+			end
 		end
-		@prompt_answers_hash_JSON = @prompt_answers_hash_JSON.to_json
+
+		@ans_data = { "ques_to_ans" => @ques_to_ans, "ans_to_ques" => @ans_to_ques }
+		@ans_data = @ans_data.to_json
+		#end build answer data
 
 		render :play
 	end

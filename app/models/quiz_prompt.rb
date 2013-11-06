@@ -9,7 +9,7 @@ class QuizPrompt < ActiveRecord::Base
   has_many :valid_answers, :dependent => :destroy, :inverse_of => :quiz_prompt
 
   def possible_answers
-  	pos_answers = [self.correct_answer];
+  	pos_answers = [self.correct_answer]
 	pos_answers.concat(self.valid_answers.pluck(:valid_answer))
   end
 end
