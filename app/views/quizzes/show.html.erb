@@ -1,5 +1,6 @@
 <h1><%= @quiz.title %></h1>
 
+<%= link_to "Quiz Index", quizzes_url %>
 <h2><%= @prompts.first.question %></h2>
 <input type="text" id="text-matcher-input">
 
@@ -11,7 +12,6 @@
 
 <br><br>
 
-<%= link_to "Quiz Index", quizzes_url %>
 
 
 
@@ -28,40 +28,3 @@
 
 
 <br><br>
-<hr>
-TEMPORARY:
-<%= test_repeater(["content1", "content2", "third","egewtwe","rqwrqw"]) %>
-<br><br>
-
-<div id="test-div"></div>
-<button id="test-button">New test element</button>
-<br><br><br>
-
-<div class="test-form" data-number="1">
-<label for="test-text">Test Input</label>
-<br>
-<input type="text" id="test-text">
-</div>
-<br>
-<button id="new-test-form">New test form</button>
-
-
-<br><br><br>
-
-<script type="text/javascript">
- var $tdiv = $("#test-div");
- $("#test-button").on("click", function () {
- 	$tdiv.append("<p>WOO new test content!</p>")
- });
-
- $("#new-test-form").on("click", function () {
- 	var $lastTDiv = $(".test-form").last();
- 	var newDiv = $lastTDiv.clone();
- 	var newData = $lastTDiv.data("number") + 1;
- 	newDiv.data("number", "werwr");
- 	newDiv.css("display", "none")
- 	$lastTDiv.after(newDiv);
- 	newDiv.slideToggle();
-
- });
-</script>

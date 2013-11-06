@@ -10,6 +10,17 @@ class QuizzesController < ApplicationController
 		render :show
 	end
 
+	def play
+		@quiz = Quiz.find(params[:id])
+		@prompts = @quiz.quiz_prompts
+		@all_answers = []
+		@prompts.each do |prompt|
+			@all_answers.concat(prompt.possible_answers)
+		end
+		
+		render :play
+	end
+
 	def new
 		@categories = Quiz.categories
 		@scopes = Quiz.scopes

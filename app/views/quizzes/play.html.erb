@@ -1,0 +1,58 @@
+<h1>Playing...</h1>
+<h2><%= @quiz.title %></h2>
+
+<%= link_to "Quiz Index", quizzes_url %>
+<h2><%= @prompts.first.question %></h2>
+
+<label for="player-input">Enter text:</label>
+<br>
+<input type="text" id="player-input">
+
+<br><br>
+
+# Correct answers:
+<div id="correct-count">0</div>
+
+<br><br>
+
+TEMPORARY:
+<ul>
+<% @prompts.each do |prompt| %>
+	<li>
+		<%= prompt.question %> ANSWERS:
+		<ul>
+			<li><%= prompt.possible_answers %></li>
+		</ul>
+	</li>
+<% end %>
+</ul>
+
+<br><br>
+
+<!-- TEMPORARY LOCATION -->
+<script type="application/json" id="bootstrapped_answers_json">
+	{ "all_answers": <%= @all_answers.to_json.html_safe %> }
+</script>
+
+<script type="text/javascript">
+	var isAnswer = function (valueStr) {
+		var answersArr = answersObj.all_answers;
+
+		return _.contains(answersArr, valueStr);
+	};
+
+	$(document).ready(function () {
+		answersObj = JSON.parse($("#bootstrapped_answers_json").html());
+
+		$("#player-input").on("keyup", function (event) {
+			var $inputField = $(event.target);
+			var input = $inputField.val();
+			if (isAnswer(input)) {
+				$inputField.val("");
+				var newCount = 1 + parseInt($("#correct-count").text());
+				$("#correct-count").text(newCount);
+			}
+		});
+	});
+
+</script>
