@@ -31,7 +31,7 @@ TEMPORARY:
 
 <!-- TEMPORARY LOCATION -->
 <script type="application/json" id="bootstrapped_answers_json">
-	{ "all_answers": <%= @all_answers.to_json.html_safe %> }
+	@prompt_answers_hash_JSON
 </script>
 
 <script type="text/javascript">
@@ -46,7 +46,7 @@ TEMPORARY:
 
 		$("#player-input").on("keyup", function (event) {
 			var $inputField = $(event.target);
-			var input = $inputField.val();
+			var input = $.trim($inputField.val());
 			if (isAnswer(input)) {
 				$inputField.val("");
 				var newCount = 1 + parseInt($("#correct-count").text());

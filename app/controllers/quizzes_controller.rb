@@ -13,11 +13,12 @@ class QuizzesController < ApplicationController
 	def play
 		@quiz = Quiz.find(params[:id])
 		@prompts = @quiz.quiz_prompts
-		@all_answers = []
+		@prompt_answers_hash_JSON = {}
 		@prompts.each do |prompt|
-			@all_answers.concat(prompt.possible_answers)
+			@prompt_answers_hash_JSON[prompt.question] = prompt.possible_answers
 		end
-		
+		@prompt_answers_hash_JSON = @prompt_answers_hash_JSON.to_json
+
 		render :play
 	end
 
@@ -29,6 +30,8 @@ class QuizzesController < ApplicationController
 
 	def create
 		@quiz = Quiz.new(params[:quiz])
+		#TEMPORARY: will set to current_user later
+		@quiz.author_id = 1
 
 		#building quiz_prompts, and their valid_answers
 		params[:quiz_prompts].each do |prompt_vals|
@@ -41,9 +44,6 @@ class QuizzesController < ApplicationController
 			end
 		end
 		
-		#TEMPORARY: will set to current_user later
-		@quiz.author_id = 1
-
 		if @quiz.save
 			redirect_to quiz_url(@quiz)
 		else
