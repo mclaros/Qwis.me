@@ -8,14 +8,20 @@
 </head>
 <body>
 
-	<br><br>
+	<div id="main-div">
+		
 	<% if flash[:notices] %>
 		<% flash[:notices].each do |notice| %>
-			<%= notice %>
+			<div class="notices">
+				<%= notice %>
+			</div>
 		<% end %>
 	<% end %>
 
-<%= yield %>
+	<%= yield %>
+
+
+	</div>
 
 </body>
 </html>

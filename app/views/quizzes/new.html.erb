@@ -35,12 +35,6 @@
 
 	<br><br>
 
-	<label for="quiz-length">TEMPORARY: Length</label>
-	<br>
-	<input type="text" id="quiz-length" name="quiz[length]">
-
-	<br><br>
-
 	<label for="quiz-time-limit">Time Limit</label>
 	<select id="quiz-time-limit" name="quiz[time_limit]">
 		<option value="1">1:00</option>
@@ -56,7 +50,7 @@
 		<label>
 			Question (3-100 characters)
 			<br>
-			<input type="text" class="prompt-question-field" name="quiz_prompts[][question]">
+			<input type="text" class="prompt-question" name="quiz_prompts[][question]">
 		</label>
 
 		<br>
@@ -64,7 +58,7 @@
 		<label>
 			Answer (max 30 characters)
 			<br>
-			<input type="text" class="prompt-answer-field" name="quiz_prompts[][correct_answer]">
+			<input type="text" class="prompt-answer" name="quiz_prompts[][correct_answer]">
 		</label>
 
 		<h4>Valid Answers</h4>
@@ -87,6 +81,10 @@
 	<button class="new-prompt-field">Add Prompt</button>
 
 	<hr>
+	<br>
+	<input type="hidden" id="quiz-length" name="quiz[length]" value="0">
+
+	Quiz Length: <p id="length-counter">0</p>
 
 	<input type="submit" value="Create Quiz">
 
@@ -128,22 +126,37 @@ var resetPromptDiv = function ($div) {
 	});
 };
 
+var addToQuizLength= function (addend) {
+	var oldCount = parseInt($("#quiz-length").val());
+	$("#quiz-length").val(oldCount + addend);
+	$("#length-counter").text($("#quiz-length").val());
+};
+
 var dupPromptDiv = function ($dupButton) {
 	$dupButton.on("click", function (event) {
 		event.preventDefault();
 
 		var $lastDiv = $(".prompt-fields").last();
-		var $newDiv = $lastDiv.clone();
+		var pQuestionText = $.trim($lastDiv.find(".prompt-question").val());
+		var pAnswerText = $.trim($lastDiv.find(".prompt-answer").val());
 
+		if (!(pAnswerText.length <= 30 && pQuestionText.length >= 3 && pQuestionText.length <= 100)) {
+			$lastDiv.after("Invalid question or answer ")
+			return;
+		}
+
+		var $newDiv = $lastDiv.clone();
 		$newDiv.find("input").val("");
 		$newDiv.css("display", "none");
+		
 		//set all inner divs, no-class text fields to .opt-field-blank
 		resetPromptDiv($newDiv);
-
 		$lastDiv.after($newDiv);
 		$newDiv.slideToggle("fast", function () {
 			$("body").scrollTo({top:'+=350px', left: '0'}, 400);
 		});
+
+		addToQuizLength(1);
 	});			
 };
 
