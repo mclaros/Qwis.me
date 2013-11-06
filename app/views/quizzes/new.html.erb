@@ -56,7 +56,7 @@
 		<label>
 			Question (3-100 characters)
 			<br>
-			<input type="text" name="quiz_prompts[][question]">
+			<input type="text" class="prompt-question-field" name="quiz_prompts[][question]">
 		</label>
 
 		<br>
@@ -64,7 +64,7 @@
 		<label>
 			Answer (max 30 characters)
 			<br>
-			<input type="text" name="quiz_prompts[][correct_answer]">
+			<input type="text" class="prompt-answer-field" name="quiz_prompts[][correct_answer]">
 		</label>
 
 		<h4>Valid Answers</h4>
@@ -104,6 +104,30 @@
 <!-- TEMPORARY LOCATION -->
 <script type="text/javascript">
 
+var resetPromptDiv = function ($div) {
+	$div.find("div").each(function (idx, el) {
+		var $blankDiv = $("<div>");
+		$blankDiv.addClass("opt-field-blank");
+		$blankDiv.text("Add valid answer...");
+
+		$(el).replaceWith($blankDiv);
+		readOnlyToFieldListen($blankDiv);
+	});
+
+	$div.find("input").each(function (idx, el) {
+		var $el = $(el);
+		var isTarget = ($el.attr("class") === "opt-field-active" || $el.attr("class") === "opt-field-filled");
+		if (isTarget) {
+			$blankDiv = $("<div>");
+			$blankDiv.addClass("opt-field-blank");
+			$blankDiv.text("Add valid answer...");
+			
+			$(el).replaceWith($blankDiv);
+			readOnlyToFieldListen($blankDiv);
+		}
+	});
+};
+
 var dupPromptDiv = function ($dupButton) {
 	$dupButton.on("click", function (event) {
 		event.preventDefault();
@@ -113,6 +137,9 @@ var dupPromptDiv = function ($dupButton) {
 
 		$newDiv.find("input").val("");
 		$newDiv.css("display", "none");
+		//set all inner divs, no-class text fields to .opt-field-blank
+		resetPromptDiv($newDiv);
+
 		$lastDiv.after($newDiv);
 		$newDiv.slideToggle("fast", function () {
 			$("body").scrollTo({top:'+=350px', left: '0'}, 400);
@@ -179,7 +206,7 @@ var fieldToReadOnly = function ($field) {
 			readOnlyToFieldListen($readOnlyText);
 		}
 	});
-};
+}; 
 
 
 $(document).ready(function () {
