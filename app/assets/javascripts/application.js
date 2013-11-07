@@ -14,7 +14,9 @@
 //= require jquery_ujs
 //= require jquery.scrollTo.min
 //= require underscore
+//= require underscore.string.min
 //= require backbone
+//= require jquery.serializeJSON.min
 //= require qwisme
 //= require_tree ../templates
 //= require_tree ./models

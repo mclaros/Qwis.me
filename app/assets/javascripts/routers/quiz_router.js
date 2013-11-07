@@ -2,6 +2,7 @@ Qwisme.Routers.QuizRouter = Backbone.Router.extend({
 	routes: {
 		"": "renderQuizIndex",
 		"quizzes": "renderQuizIndex",
+		"quizzes/new": "renderQuizNew",
 		"quizzes/:id/play": "renderQuizPlay",
 		"quizzes/:id": "renderQuizShow"
 	},
@@ -16,6 +17,12 @@ Qwisme.Routers.QuizRouter = Backbone.Router.extend({
 			});
 
 		this._swapView(quizIndex);
+	},
+
+	renderQuizNew: function () {
+		var quizNew = new Qwisme.Views.QuizNew();
+
+		this._swapView(quizNew);
 	},
 
 	renderQuizShow: function (id) {
@@ -40,7 +47,8 @@ Qwisme.Routers.QuizRouter = Backbone.Router.extend({
 		if (!(_.isUndefined(this._currentView))) {
 			if (!(_.isUndefined(this._currentView.timer))) {
 				clearInterval(this._currentView.timer);	
-			} 
+			}
+			this._currentView.$el.remove(); //in case of zombie events
 			this._currentView.remove();
 		}
 

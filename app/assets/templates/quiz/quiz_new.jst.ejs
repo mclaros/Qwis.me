@@ -1,0 +1,101 @@
+<h1>New quiz</h1>
+
+<a href="#">Quizzes</a>
+
+<form id="quiz-form">
+	<label for="quiz-title">Title</label>
+	<br>
+	<input type="text" id="quiz-title" name="quiz[title]">
+	
+	<br><br>
+	
+	<label for="quiz-description">Description</label>
+	<br>
+	<textarea id="quiz-description" name="quiz[description]"></textarea>
+	
+	<br><br>
+	
+	<label for="quiz-categories">Categories</label>
+	<select id="quiz-categories" name="quiz[category]">
+		<option></option>
+		<% _.each(categories, function (cat) { %>
+			<option value="<%= cat %>"><%= _.str.capitalize(cat) %></option>
+		<% }) %>
+	</select>
+
+	&nbsp;&nbsp;
+	
+	<label for="quiz-scope">Scope</label>
+	<select id="quiz-scope" name="quiz[scope]">
+		<option></option>
+		<% _.each(scopes, function (scope) { %>
+			<option value="<%= scope %>"><%= _.str.capitalize(scope) %></option>
+		<% }) %>
+	</select>
+
+	<br><br>
+
+	<label for="quiz-time-limit">Time Limit</label>
+	<select id="quiz-time-limit" name="quiz[time_limit]">
+		<% for(var i = 1; i < 21; i++) { %>
+			<option value="<%= i %>"><%= i %>:00</option>
+		<% } %>
+	</select>
+
+	<br><br>
+
+	<label>
+		Question (3-100 characters)
+		<br>
+		<input type="text" class="prompt-question" name="quiz[question]">
+	</label>
+
+	<hr>
+	
+	<div class="prompt-fields">
+		<h3>Prompt</h3>
+		
+		<label>
+			Hint(TEMPORARY NAME) (max 30 characters)
+			<br>
+			<input type="text" class="prompt-prompt" name="quiz_prompts[][prompt]">
+		</label>
+
+		<br>
+
+		<label>
+			Answer (3-30 characters)
+			<br>
+			<input type="text" class="prompt-answer" name="quiz_prompts[][correct_answer]">
+		</label>
+
+		<h4>Valid Answers</h4>
+		Max: 30 characters
+		<br><br>
+		<div class="opt-field-blank">Add valid answer...</div>
+		<div class="opt-field-blank">Add valid answer...</div>
+		<div class="opt-field-blank">Add valid answer...</div>
+		<div class="opt-field-blank">Add valid answer...</div>
+		<div class="opt-field-blank">Add valid answer...</div>
+		<br><br>
+		Qwip: You can press ENTER, TAB, or click elsewhere to set answer
+		<br>
+		TODO: add tab-switching, check for uniqueness
+		<br>
+		------
+		
+	</div>
+	<br>
+	<button class="new-prompt-field">Add Prompt</button>
+
+	<hr>
+	<br>
+	<input type="hidden" id="quiz-length" name="quiz[length]" value="1">
+
+	Quiz Length: <span id="length-counter">1</span>
+
+	<input type="submit" id="submit-quiz-form" value="Create Quiz">
+
+</form>
+
+TODO: Add client-side validation

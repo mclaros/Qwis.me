@@ -2,15 +2,11 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 	template: JST["quiz/quiz_play"],
 
 	events: {
-		"click #start-game": "bindStartButton"
+		"click #start-game": "bindStartButton",
+		"click #reset-game": "render"
 	},
 
 	render: function () {
-		if (!!this.timer) {
-			alert("clearing timer")
-			clearInterval(this.timer);
-		}
-
 		var that = this;
 		var renderedTemp = this.template({
 			quiz: that.model,
@@ -125,6 +121,7 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 	timeOut: function () {
 		console.log("TIME UP");
 		$("#player-input").attr("disabled", true);
+		$("#restart-game").show();
 	},
 
 	bindStartButton: function (event) {
