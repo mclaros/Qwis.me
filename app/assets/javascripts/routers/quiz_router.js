@@ -1,6 +1,7 @@
 Qwisme.Routers.QuizRouter = Backbone.Router.extend({
 	routes: {
 		"": "renderQuizIndex",
+		"quizzes": "renderQuizIndex",
 		"quizzes/:id/play": "renderQuizPlay",
 		"quizzes/:id": "renderQuizShow"
 	},

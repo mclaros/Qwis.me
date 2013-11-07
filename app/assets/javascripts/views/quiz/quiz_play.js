@@ -19,9 +19,9 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 	},
 
 	launchQuiz: function (renderedView) {
-		console.log("launched")
 		var $ansContainer = renderedView.find("#answers-container");
 		this.listenToInput(renderedView);
+		this.runTimer();
 	},
 
 	listenToInput: function (renderedView) {
@@ -59,7 +59,6 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 
 	genAnswerDivs: function ($renderedView) {
 		this.gameData = this.model.get("game_data");
-		console.log(this.model)
 		this.quesToAns = this.gameData.ques_to_ans;
 		this.ansToQues = this.gameData.ans_to_ques;
 		this.remainingAnsrs = this.model.allPosAnswers();
@@ -97,13 +96,31 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 		$ansTextDiv.show();
 	},
 
-	runTimer: function (startTime) {
-		if (startTime) {
-			var time = startTime;
+	runTimer: function (startTimeSecs) {
+		var that = this;
+		this.timeLeft = (startTimeSecs || this.model.get("time_limit")*60);
+		this.timer = setInterval(that.updateTimer.bind(that), 1000);
+	},
+
+	updateTimer: function () {
+		this.timeLeft -= 1;
+		var that = this;
+		var mins = Math.floor(this.timeLeft/60);
+		
+		var secs = this.timeLeft % 60;
+		if (secs < 10) secs = "0" + secs;
+		$("#minutes").text(mins);
+		$("#seconds").text(secs);
+
+		if (this.timeLeft <= 0) {
+			clearInterval(that.timer);
+			that.timeOut();
 		}
-		else {
-			var time = parseInt(this.model.get("time_limit"));
-		}
+	},
+
+	timeOut: function () {
+		console.log("TIME UP");
+		$("#player-input").attr("disabled", true);
 	},
 
 	bindStartButton: function (event) {

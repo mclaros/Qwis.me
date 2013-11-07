@@ -37,9 +37,9 @@
 
 	<label for="quiz-time-limit">Time Limit</label>
 	<select id="quiz-time-limit" name="quiz[time_limit]">
-		<option value="1">1:00</option>
-		<option value="5">5:00</option>
-		<option value="10">10:00</option>
+		<% (1..20).each do |int| %>
+			<option value="<%= int %>"><%= int %>:00</option>
+		<% end %>
 	</select>
 
 	<hr>

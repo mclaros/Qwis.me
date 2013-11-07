@@ -11,7 +11,14 @@
 <br>
 <input type="text" id="player-input" disabled>
 
-<br><br>
+<br>
+<div id="timer">
+	<span id="minutes"><%= quiz.escape("time_limit") %></span>
+	:
+	<span id="seconds">00</span>
+</div>
+
+<br>
 
 # Correct answers:
 <div id="correct-count">1</div>

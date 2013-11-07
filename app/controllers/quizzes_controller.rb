@@ -37,7 +37,7 @@ class QuizzesController < ApplicationController
 		@quiz.author_id = 1
 
 		#reverse to set to user-created order
-		params[:quiz_prompts] = prompt_params.reverse
+		params[:quiz_prompts] = params[:quiz_prompts].reverse
 
 		#building quiz_prompts, and their valid_answers
 		params[:quiz_prompts].each do |prompt_vals|
