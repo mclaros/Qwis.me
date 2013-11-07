@@ -2,4 +2,13 @@
 	<%= @quizzes.to_json(:include => {:quiz_prompts => { :include=>:valid_answers}} ).html_safe %>
 </script>
 
+<script type="application/javascript">
+	$(document).ready(function () {
+		var quizData = JSON.parse($("#bootstrapped_quizzes").html());
+		var $rootEl = $("#root-main-div");
+
+		window.Qwisme.initialize($rootEl, quizData);
+	});
+</script>
+
 <div id="root-main-div"></div>

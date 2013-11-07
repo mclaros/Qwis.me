@@ -2,30 +2,11 @@
 
 <a href="#">Quiz Index</a>
 
-<h2><%= prompts.first.question %></h2>
+QUIZ STATS
+
+<h2><%= prompts.first().escape("question") %></h2>
 <input type="text" id="text-matcher-input">
 
 <br><br>
 
-<% @prompts.each do |prompt| %>
-	<div class="answer-div"></div>
-<% end %>
-
-<br><br>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<br><br>
+<button id="start-quiz">Start Quiz</button>

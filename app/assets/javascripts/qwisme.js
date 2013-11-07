@@ -3,17 +3,12 @@ window.Qwisme = {
   Collections: {},
   Views: {},
   Routers: {},
-  initialize: function() {
-    var quizData = $("#bootstrapped_quizzes").html();
+  initialize: function($rootEl, quizData) {
     Qwisme.QUIZZES = new Qwisme.Collections.Quizzes(quizData);
-
     new Qwisme.Routers.QuizRouter({
-    	$rootEl: $("#root-main-div")
+    	$rootEl: $rootEl
     });
+
     Backbone.history.start();
   }
 };
-
-$(document).ready(function(){
-	Qwisme.initialize();
-});

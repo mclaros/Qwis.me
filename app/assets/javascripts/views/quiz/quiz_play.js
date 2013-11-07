@@ -73,7 +73,7 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 	genAnswerDivs: function ($renderedView) {
 		//TEMP
 		console.log("generating divs");
-		$renderedView.find("#player-input").css("background-color", "gray");
+		// $renderedView.find("#player-input").css("background-color", "gray");
 		//END TEMP
 
 		this.gameData = this.model.get("game_data");
@@ -89,18 +89,33 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 		$answerDiv.addClass("answer-div");
 		$hidAnsText.hide();
 
-		var questions = _.keys(this.quesToAns);
-		_.each(questions, function (question) {
-			var correctAns = _.first(that.quesToAns[question]);
+		//ADDITION
+		var prompts = this.model.get("quiz_prompts");
+		prompts.each(function (prompt) {
+			var correctAns = prompt.get("correct_answer");
 			var $newAnswerDiv = $answerDiv.clone();
 			var $newHidAnsText = $hidAnsText.clone();
 
 			$newHidAnsText.text(correctAns);
 			$newAnswerDiv.append($newHidAnsText);
 			$container.append($newAnswerDiv);
-
 			that.ansDivs[correctAns] = $newAnswerDiv;
 		});
+		//END ADDITION
+	
+		//BELOW is obsolete
+		// var questions = _.keys(this.quesToAns);
+		// _.each(questions, function (question) {
+		// 	var correctAns = _.first(that.quesToAns[question]);
+		// 	var $newAnswerDiv = $answerDiv.clone();
+		// 	var $newHidAnsText = $hidAnsText.clone();
+
+		// 	$newHidAnsText.text(correctAns);
+		// 	$newAnswerDiv.append($newHidAnsText);
+		// 	$container.append($newAnswerDiv);
+
+		// 	that.ansDivs[correctAns] = $newAnswerDiv;
+		// });
 	},
 
 	isAnswer: function (trimmedInput) {

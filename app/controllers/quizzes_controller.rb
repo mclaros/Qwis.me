@@ -1,6 +1,6 @@
 class QuizzesController < ApplicationController
 	def index
-		@quizzes = Quiz.all
+		@quizzes = Quiz.includes(:quiz_prompts => :valid_answers)
 
 		# render "quizzes.rabl", handlers: [:rabl]
 		respond_to do |format|
@@ -35,6 +35,9 @@ class QuizzesController < ApplicationController
 		@quiz = Quiz.new(params[:quiz])
 		#TEMPORARY: will set to current_user later
 		@quiz.author_id = 1
+
+		#reverse to set to user-created order
+		params[:quiz_prompts] = prompt_params.reverse
 
 		#building quiz_prompts, and their valid_answers
 		params[:quiz_prompts].each do |prompt_vals|

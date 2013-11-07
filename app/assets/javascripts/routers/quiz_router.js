@@ -1,7 +1,8 @@
 Qwisme.Routers.QuizRouter = Backbone.Router.extend({
 	routes: {
 		"": "renderQuizIndex",
-		"quizzes/:id/play": "renderQuizPlay"
+		"quizzes/:id/play": "renderQuizPlay",
+		"quizzes/:id": "renderQuizShow"
 	},
 
 	initialize: function (options) {
@@ -23,13 +24,22 @@ Qwisme.Routers.QuizRouter = Backbone.Router.extend({
 		})
 	},
 
-	renderQuizPlay: function (id) {
+	renderQuizShow: function (id) {
 		var quiz = Qwisme.QUIZZES.get(id);
-		var quizShow = new Qwisme.Views.QuizPlay({
+		var quizShow = new Qwisme.Views.QuizShow({
 			model: quiz
-			});
+		});
 
 		this._swapView(quizShow);
+	},
+
+	renderQuizPlay: function (id) {
+		var quiz = Qwisme.QUIZZES.get(id);
+		var quizPlay = new Qwisme.Views.QuizPlay({
+			model: quiz
+		});
+
+		this._swapView(quizPlay);
 	},
 
 	_swapView: function (newView) {

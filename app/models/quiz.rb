@@ -33,7 +33,11 @@ class Quiz < ActiveRecord::Base
 		ans_to_ques = {}
 
 		prompts.each do |prompt|
-			ques_to_ans[prompt.question] = prompt.possible_answers
+			if ques_to_ans[prompt.question].nil?
+				ques_to_ans[prompt.question] = prompt.possible_answers
+			else
+				ques_to_ans[prompt.question].concat(prompt.possible_answers)
+			end
 			
 			prompt.possible_answers.each do |pos_ans|
 				ans_to_ques[pos_ans] = prompt.question
