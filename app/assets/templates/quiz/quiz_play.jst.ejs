@@ -3,7 +3,7 @@
 
 <a href="#">Quiz Index</a>
 
-<h2><%= prompts.first().escape("question") %></h2>
+<h3><%= prompts.first().escape("question") %></h3>
 
 <button id="start-game">Start Game</button>
 <br><br>
@@ -28,7 +28,7 @@ TEMPORARY:
 	<li>
 		<%= prompt.escape("question") %> ANSWERS:
 		<ul>
-		<% prompt.get("possible_answers").each(function (vAns) { %>
+		<% prompt.get("valid_answers").each(function (vAns) { %>
 		<li>
 			<%= vAns.escape("valid_answer") %>
 		</li>
@@ -39,32 +39,3 @@ TEMPORARY:
 </ul>
 
 <br><br>
-
-<!-- TEMPORARY LOCATION -->
-
-<%
-
-	$(document).ready(function () {
-
-
-		ansDivs = {};
-
-		genAnswerDivs($("#answers-container"));
-
-		$("#player-input").on("keyup keydown", function (event) {
-			var $inputField = $(event.target);
-			var input = $inputField.val();
-			input = $.trim(input);
-
-			if (isAnswer(input)) {
-				var guessQuestion = ansToQues[input];
-				var validAnswers = quesToAns[guessQuestion];
-				var correctAns = _.first(validAnswers);
-
-				revealAns(correctAns);
-				posAnswers = _.difference(posAnswers, validAnswers);
-			}
-		});
-	});
-
-%>

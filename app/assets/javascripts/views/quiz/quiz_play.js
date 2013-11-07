@@ -3,50 +3,54 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 
 	render: function () {
 		var that = this;
+
 		var renderedTemp = this.template({
-			quiz: this.model,
-			prompts: this.model.get("quiz_prompts")
+			quiz: that.model,
+			prompts: that.model.get("quiz_prompts")
 		});
 
-		genAnswerDivs(renderedTemp);
+		this.$el.html(renderedTemp);
 
-		renderedTemp.find("#start-game").on("click", function {
+
+		this.genAnswerDivs(this.$el);
+
+		var $startButton = $(this.$el.find("#start-game"));
+		$startButton.on("click", function (event) {
 			event.preventDefault();
 			var $button = $(event.target);
-
-			that.launchQuiz(renderedTemp);
-			renderedTemp.find("#player-input").attr("disabled", false);
+			var $inputField = that.$el.find("#player-input")
+			console.log("launching")
+			
+			that.launchQuiz(that.$el);
+			$inputField.attr("disabled", false);
+			$inputField.focus();
 			$button.attr("disabled", true);
 			$button.off();
-		})
+		});
 
-		this.$el.html(renderedTemp);
 		return this;
 	},
 
 	launchQuiz: function (renderedView) {
-		this.gameData = this.model.get("game_data");
-		this.quesToAns = gameData.ques_to_ans;
-		this.ansToQues = gameData.ans_to_ques;
-		this.remainingAnsrs = this.model.posAnswers();
-
+		console.log("launched")
 		var $ansContainer = renderedView.find("#answers-container");
-
-		listenToInput(renderedView);
+		this.listenToInput(renderedView);
 	},
 
 	listenToInput: function (renderedView) {
+		var that = this;
 		var $inputField = renderedView.find("#player-input");
 
 		$inputField.on("keyup keydown", function (event) {
 			var inputStr = $inputField.val();
 			inputStr = $.trim(inputStr);
 
-			if (isAnswer(inputStr)) {
+			if (that.isAnswer(inputStr)) {
+				console.log("is answer!");
 				$inputField.val("");
-				trackCorrectGuess(inputStr);
+				that.trackCorrectGuess(inputStr);
 
-				val $counterDiv = renderedView.find("#correct-count");
+				var $counterDiv = renderedView.find("#correct-count");
 				var newCount = 1 + parseInt($counterDiv.text());
 				$counterDiv.text(newCount);
 			}
@@ -62,11 +66,15 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 		var validAnswers = this.quesToAns[guessQuestion];
 		var correctAns = _.first(validAnswers);
 
-		revealAns(correctAns);
+		this.revealAns(correctAns);
 		this.remainingAnsrs = _.difference(this.remainingAnsrs, validAnswers);
 	},
 
 	genAnswerDivs: function ($renderedView) {
+		this.gameData = this.model.get("game_data");
+		this.quesToAns = this.gameData.ques_to_ans;
+		this.ansToQues = this.gameData.ans_to_ques;
+		this.remainingAnsrs = this.model.allPosAnswers();
 		this.ansDivs = {};
 
 		var that = this;
@@ -76,6 +84,7 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 		$answerDiv.addClass("answer-div");
 		$hidAnsText.hide();
 
+		console.log(this.quesToAns);
 		var questions = _.keys(this.quesToAns);
 		_.each(questions, function (question) {
 			var correctAns = _.first(that.quesToAns[question]);
@@ -91,10 +100,12 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 	},
 
 	isAnswer: function (trimmedInput) {
+		console.log(this.remainingAnsrs);
+		console.log(_.contains(this.remainingAnsrs, trimmedInput));
 		return _.contains(this.remainingAnsrs, trimmedInput);
 	},
 
-	var revealAns: function (correctAns) {
+	revealAns: function (correctAns) {
 		var $ansDiv = this.ansDivs[correctAns];
 		var $ansTextDiv = $($ansDiv.find("div"));
 		//animate reveal later

@@ -8,5 +8,16 @@ Qwisme.Models.Quiz = Backbone.Model.extend({
 		)
 
 		return data;
+	},
+
+	allPosAnswers: function () {
+		var posAnswers = [];
+		this.get("quiz_prompts").each(function (prompt) {
+			posAnswers.push(prompt.get("correct_answer"));
+			var otherAnswers = prompt.get("valid_answers").pluck("valid_answer");
+			posAnswers = posAnswers.concat(otherAnswers);
+		});
+
+		return posAnswers;
 	}
 });
