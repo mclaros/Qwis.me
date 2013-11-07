@@ -3,15 +3,12 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 
 	render: function () {
 		var that = this;
-
 		var renderedTemp = this.template({
 			quiz: that.model,
 			prompts: that.model.get("quiz_prompts")
 		});
 
 		this.$el.html(renderedTemp);
-
-
 		this.genAnswerDivs(this.$el);
 
 		var $startButton = $(this.$el.find("#start-game"));
@@ -19,7 +16,6 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 			event.preventDefault();
 			var $button = $(event.target);
 			var $inputField = that.$el.find("#player-input")
-			console.log("launching")
 			
 			that.launchQuiz(that.$el);
 			$inputField.attr("disabled", false);
@@ -71,12 +67,8 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 	},
 
 	genAnswerDivs: function ($renderedView) {
-		//TEMP
-		console.log("generating divs");
-		// $renderedView.find("#player-input").css("background-color", "gray");
-		//END TEMP
-
 		this.gameData = this.model.get("game_data");
+		console.log(this.model)
 		this.quesToAns = this.gameData.ques_to_ans;
 		this.ansToQues = this.gameData.ans_to_ques;
 		this.remainingAnsrs = this.model.allPosAnswers();
@@ -119,8 +111,6 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 	},
 
 	isAnswer: function (trimmedInput) {
-		console.log(this.remainingAnsrs);
-		console.log(_.contains(this.remainingAnsrs, trimmedInput));
 		return _.contains(this.remainingAnsrs, trimmedInput);
 	},
 

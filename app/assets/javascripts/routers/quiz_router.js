@@ -10,18 +10,11 @@ Qwisme.Routers.QuizRouter = Backbone.Router.extend({
 	},
 
 	renderQuizIndex: function () {
-		//avoid fetching later
-		var that = this;
+		var quizIndex = new Qwisme.Views.QuizIndex({
+				collection: Qwisme.QUIZZES
+			});
 
-		Qwisme.QUIZZES.fetch({
-			success: function () {
-				var quizIndex = new Qwisme.Views.QuizIndex({
-					collection: Qwisme.QUIZZES
-				});
-
-				that._swapView(quizIndex);
-			}
-		})
+		this._swapView(quizIndex);
 	},
 
 	renderQuizShow: function (id) {

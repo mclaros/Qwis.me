@@ -1,5 +1,5 @@
 <script type="application/json" id="bootstrapped_quizzes">
-	<%= @quizzes.to_json(:include => {:quiz_prompts => { :include=>:valid_answers}} ).html_safe %>
+	<%= @quizzes.to_json(:methods => :game_data, :include => {:quiz_prompts => { :include=>:valid_answers}} ).html_safe %>
 </script>
 
 <script type="application/javascript">
