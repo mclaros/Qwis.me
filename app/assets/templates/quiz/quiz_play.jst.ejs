@@ -5,9 +5,11 @@
 
 <h2><%= prompts.first().escape("question") %></h2>
 
+<button id="start-game">Start Game</button>
+<br><br>
 <label for="player-input">Enter text:</label>
 <br>
-<input type="text" id="player-input">
+<input type="text" id="player-input" disabled>
 
 <br><br>
 
@@ -58,10 +60,6 @@ TEMPORARY:
 				var guessQuestion = ansToQues[input];
 				var validAnswers = quesToAns[guessQuestion];
 				var correctAns = _.first(validAnswers);
-
-				$inputField.val("");
-				var newCount = 1 + parseInt($("#correct-count").text());
-				$("#correct-count").text(newCount);
 
 				revealAns(correctAns);
 				posAnswers = _.difference(posAnswers, validAnswers);
