@@ -71,6 +71,11 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 	},
 
 	genAnswerDivs: function ($renderedView) {
+		//TEMP
+		console.log("generating divs");
+		$renderedView.find("#player-input").css("background-color", "gray");
+		//END TEMP
+
 		this.gameData = this.model.get("game_data");
 		this.quesToAns = this.gameData.ques_to_ans;
 		this.ansToQues = this.gameData.ans_to_ques;
@@ -78,13 +83,12 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 		this.ansDivs = {};
 
 		var that = this;
-		var $container = $renderedView
+		var $container = $renderedView.find("#answers-container");
 		var $answerDiv = $("<div>");
 		var $hidAnsText = $("<div>");
 		$answerDiv.addClass("answer-div");
 		$hidAnsText.hide();
 
-		console.log(this.quesToAns);
 		var questions = _.keys(this.quesToAns);
 		_.each(questions, function (question) {
 			var correctAns = _.first(that.quesToAns[question]);

@@ -42,8 +42,10 @@ class QuizzesController < ApplicationController
 			prompt = @quiz.quiz_prompts.new(prompt_params)
 
 			#build prompt's valid_answers
-			prompt_vals["valid_answers"].each do |v_ans_vals|
-				prompt.valid_answers.new(v_ans_vals)
+			unless prompt_vals["valid_answers"].nil?
+				prompt_vals["valid_answers"].each do |v_ans_vals|
+					prompt.valid_answers.new(v_ans_vals)
+				end
 			end
 		end
 		

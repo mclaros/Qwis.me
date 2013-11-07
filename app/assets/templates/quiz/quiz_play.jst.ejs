@@ -14,7 +14,7 @@
 <br><br>
 
 # Correct answers:
-<div id="correct-count">0</div>
+<div id="correct-count">1</div>
 
 <br><br>
 
@@ -28,9 +28,9 @@ TEMPORARY:
 	<li>
 		<%= prompt.escape("question") %> ANSWERS:
 		<ul>
-		<% prompt.get("valid_answers").each(function (vAns) { %>
+		<% _.each(prompt.posAnswers(), function (vAns) { %>
 		<li>
-			<%= vAns.escape("valid_answer") %>
+			<%= vAns %>
 		</li>
 		<% }) %>
 		</ul>

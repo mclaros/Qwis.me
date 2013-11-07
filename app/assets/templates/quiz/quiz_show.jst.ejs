@@ -1,0 +1,31 @@
+<h1><%= quiz.escape("title") %></h1>
+
+<a href="#">Quiz Index</a>
+
+<h2><%= prompts.first.question %></h2>
+<input type="text" id="text-matcher-input">
+
+<br><br>
+
+<% @prompts.each do |prompt| %>
+	<div class="answer-div"></div>
+<% end %>
+
+<br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br><br>

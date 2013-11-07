@@ -13,7 +13,8 @@ Qwisme.Models.QuizPrompt = Backbone.Model.extend({
 	},
 
 	posAnswers: function () {
-		var posAnsrs = this.pluck("valid_answer");
-		return [this.get("correct_answer")].concat(posAnsrs);
+		var posAnswers = [this.get("correct_answer")];
+		var posAnswers = posAnswers.concat(this.get("valid_answers").pluck("valid_answer"));
+		return posAnswers;
 	}
 });
