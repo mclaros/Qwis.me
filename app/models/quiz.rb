@@ -30,24 +30,26 @@ class Quiz < ActiveRecord::Base
 
 	def game_data
 		prompts = self.quiz_prompts
-		ques_to_ans = {}
-		ans_to_ques = {}
+		# ques_to_ans = {}
+		# ans_to_ques = {}
+		prompt_id_to_ans = {}
+		ans_to_prompt_id = {}
 
 		prompts.each do |prompt|
-			if ques_to_ans[prompt.question].nil?
-				ques_to_ans[prompt.question] = prompt.possible_answers
+			if prompt_id_to_ans[prompt.id].nil?
+				prompt_id_to_ans[prompt.id] = prompt.possible_answers
 			else
-				ques_to_ans[prompt.question].concat(prompt.possible_answers)
+				prompt_id_to_ans[prompt.id].concat(prompt.possible_answers)
 			end
 			
 			prompt.possible_answers.each do |pos_ans|
-				ans_to_ques[pos_ans] = prompt.question
+				ans_to_prompt_id[pos_ans] = prompt.id
 			end
 		end
 
 		ans_data = {
-				"ques_to_ans" => ques_to_ans, 
-				"ans_to_ques" => ans_to_ques 
+				"prompt_id_to_ans" => prompt_id_to_ans, 
+				"ans_to_prompt_id" => ans_to_prompt_id 
 				}
 		return ans_data
 	end

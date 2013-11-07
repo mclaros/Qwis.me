@@ -42,21 +42,29 @@
 		<% end %>
 	</select>
 
+	<br><br>
+
+	<label>
+		Question (3-100 characters)
+		<br>
+		<input type="text" class="prompt-question" name="quiz[question]">
+	</label>
+
 	<hr>
 	
 	<div class="prompt-fields">
 		<h3>Prompt</h3>
 		
 		<label>
-			Question (3-100 characters)
+			Hint(TEMPORARY NAME) (max 30 characters)
 			<br>
-			<input type="text" class="prompt-question" name="quiz_prompts[][question]">
+			<input type="text" class="prompt-prompt" name="quiz_prompts[][prompt]">
 		</label>
 
 		<br>
 
 		<label>
-			Answer (max 30 characters)
+			Answer (3-30 characters)
 			<br>
 			<input type="text" class="prompt-answer" name="quiz_prompts[][correct_answer]">
 		</label>
@@ -82,9 +90,9 @@
 
 	<hr>
 	<br>
-	<input type="hidden" id="quiz-length" name="quiz[length]" value="0">
+	<input type="hidden" id="quiz-length" name="quiz[length]" value="1">
 
-	Quiz Length: <p id="length-counter">1</p>
+	Quiz Length: <p id="length-counter"></p>
 
 	<input type="submit" value="Create Quiz">
 
@@ -128,8 +136,9 @@ var resetPromptDiv = function ($div) {
 
 var addToQuizLength= function (addend) {
 	var oldCount = parseInt($("#quiz-length").val());
-	$("#quiz-length").val(oldCount + addend);
-	$("#length-counter").text($("#quiz-length").val());
+	var newCount = oldCount + addend;
+	$("#quiz-length").val(newCount);
+	$("#length-counter").text(newCount);
 };
 
 var dupPromptDiv = function ($dupButton) {
@@ -137,10 +146,9 @@ var dupPromptDiv = function ($dupButton) {
 		event.preventDefault();
 
 		var $lastDiv = $(".prompt-fields").last();
-		var pQuestionText = $.trim($lastDiv.find(".prompt-question").val());
 		var pAnswerText = $.trim($lastDiv.find(".prompt-answer").val());
 
-		if (!(pAnswerText.length <= 30 && pQuestionText.length >= 3 && pQuestionText.length <= 100)) {
+		if (!(pAnswerText.length >=3 && pAnswerText.length <= 30)) {
 			$lastDiv.after("Invalid question or answer ")
 			return;
 		}

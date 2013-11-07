@@ -37,7 +37,13 @@ Qwisme.Routers.QuizRouter = Backbone.Router.extend({
 	},
 
 	_swapView: function (newView) {
-		this._currentView && this._currentView.remove();
+		if (!(_.isUndefined(this._currentView))) {
+			if (!(_.isUndefined(this._currentView.timer))) {
+				clearInterval(this._currentView.timer);	
+			} 
+			this._currentView.remove();
+		}
+
 		this._currentView = newView;
 		this.$rootEl.html(newView.render().$el);
 	}

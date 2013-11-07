@@ -6,6 +6,11 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 	},
 
 	render: function () {
+		if (!!this.timer) {
+			alert("clearing timer")
+			clearInterval(this.timer);
+		}
+
 		var that = this;
 		var renderedTemp = this.template({
 			quiz: that.model,
@@ -33,7 +38,6 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 			inputStr = $.trim(inputStr);
 
 			if (that.isAnswer(inputStr)) {
-				console.log("is answer!");
 				$inputField.val("");
 				that.trackCorrectGuess(inputStr);
 
@@ -49,8 +53,8 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 	},
 
 	trackCorrectGuess: function (guess) {
-		var guessQuestion = this.ansToQues[guess];
-		var validAnswers = this.quesToAns[guessQuestion];
+		var guessQuestion = this.ansToPromptId[guess];
+		var validAnswers = this.promptIdToAns[guessQuestion];
 		var correctAns = _.first(validAnswers);
 
 		this.revealAns(correctAns);
@@ -59,8 +63,8 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 
 	genAnswerDivs: function ($renderedView) {
 		this.gameData = this.model.get("game_data");
-		this.quesToAns = this.gameData.ques_to_ans;
-		this.ansToQues = this.gameData.ans_to_ques;
+		this.promptIdToAns = this.gameData.prompt_id_to_ans;
+		this.ansToPromptId = this.gameData.ans_to_prompt_id;
 		this.remainingAnsrs = this.model.allPosAnswers();
 		this.ansDivs = {};
 
