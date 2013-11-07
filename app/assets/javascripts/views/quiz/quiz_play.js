@@ -1,6 +1,10 @@
 Qwisme.Views.QuizPlay = Backbone.View.extend({
 	template: JST["quiz/quiz_play"],
 
+	events: {
+		"click #start-game": "bindStartButton"
+	},
+
 	render: function () {
 		var that = this;
 		var renderedTemp = this.template({
@@ -10,19 +14,6 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 
 		this.$el.html(renderedTemp);
 		this.genAnswerDivs(this.$el);
-
-		var $startButton = $(this.$el.find("#start-game"));
-		$startButton.on("click", function (event) {
-			event.preventDefault();
-			var $button = $(event.target);
-			var $inputField = that.$el.find("#player-input")
-			
-			that.launchQuiz(that.$el);
-			$inputField.attr("disabled", false);
-			$inputField.focus();
-			$button.attr("disabled", true);
-			$button.off();
-		});
 
 		return this;
 	},
@@ -81,7 +72,6 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 		$answerDiv.addClass("answer-div");
 		$hidAnsText.hide();
 
-		//ADDITION
 		var prompts = this.model.get("quiz_prompts");
 		prompts.each(function (prompt) {
 			var correctAns = prompt.get("correct_answer");
@@ -93,21 +83,6 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 			$container.append($newAnswerDiv);
 			that.ansDivs[correctAns] = $newAnswerDiv;
 		});
-		//END ADDITION
-	
-		//BELOW is obsolete
-		// var questions = _.keys(this.quesToAns);
-		// _.each(questions, function (question) {
-		// 	var correctAns = _.first(that.quesToAns[question]);
-		// 	var $newAnswerDiv = $answerDiv.clone();
-		// 	var $newHidAnsText = $hidAnsText.clone();
-
-		// 	$newHidAnsText.text(correctAns);
-		// 	$newAnswerDiv.append($newHidAnsText);
-		// 	$container.append($newAnswerDiv);
-
-		// 	that.ansDivs[correctAns] = $newAnswerDiv;
-		// });
 	},
 
 	isAnswer: function (trimmedInput) {
@@ -120,8 +95,27 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 		//animate reveal later
 		$ansDiv.css("background-color", "yellow");
 		$ansTextDiv.show();
+	},
+
+	runTimer: function (startTime) {
+		if (startTime) {
+			var time = startTime;
+		}
+		else {
+			var time = parseInt(this.model.get("time_limit"));
+		}
+	},
+
+	bindStartButton: function (event) {
+		event.preventDefault();
+		var $button = $(event.target);
+		var $inputField = this.$el.find("#player-input")
+		
+		this.launchQuiz(this.$el);
+		$inputField.attr("disabled", false);
+		$inputField.focus();
+		$button.attr("disabled", true);
+		$button.off();
 	}
-
-
 
 });
