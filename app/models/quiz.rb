@@ -27,4 +27,24 @@ class Quiz < ActiveRecord::Base
 		return scopes
 	end
 
+	def game_data
+		prompts = self.quiz_prompts
+		ques_to_ans = {}
+		ans_to_ques = {}
+
+		prompts.each do |prompt|
+			ques_to_ans[prompt.question] = prompt.possible_answers
+			
+			prompt.possible_answers.each do |pos_ans|
+				ans_to_ques[pos_ans] = prompt.question
+			end
+		end
+
+		ans_data = {
+				"ques_to_ans" => ques_to_ans, 
+				"ans_to_ques" => ans_to_ques 
+				}
+		return ans_data
+	end
+
 end

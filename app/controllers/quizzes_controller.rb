@@ -2,7 +2,7 @@ class QuizzesController < ApplicationController
 	def index
 		@quizzes = Quiz.all
 
-		# render :json => @quizzes.to_json(:include => {:quiz_prompts => { :include=>:valid_answers}} )
+		# render "quizzes.rabl", handlers: [:rabl]
 		respond_to do |format|
 			format.html { render :index }
 			format.json { render "quizzes.rabl", handlers: [:rabl] }
@@ -19,26 +19,9 @@ class QuizzesController < ApplicationController
 		@quiz = Quiz.find(params[:id])
 		@prompts = @quiz.quiz_prompts
 		
-		#build answer data
-		@ques_to_ans = {}
-		@ans_to_ques = {}
-
-		@prompts.each do |prompt|
-			@ques_to_ans[prompt.question] = prompt.possible_answers
-			
-			prompt.possible_answers.each do |pos_ans|
-				@ans_to_ques[pos_ans] = prompt.question
-			end
-		end
-
-		@ans_data = { "ques_to_ans" => @ques_to_ans, "ans_to_ques" => @ans_to_ques }
-		@ans_data = @ans_data.to_json
-		#end build answer data
-
-		# render:json => @ans_data
 		respond_to do |format|
 			format.html { render :play }
-			format.json { render :json => @ans_data }
+			format.json { render :json => @quiz.game_data.to_json }
 		end
 	end
 

@@ -24,24 +24,14 @@ Qwisme.Routers.QuizRouter = Backbone.Router.extend({
 	},
 
 	renderQuizPlay: function (id) {
-		$.ajax({
-			url: "/quizzes/" + id + "/play",
-			type: "GET",
-			success: function (quizData)
-		})
-
-
-
-
-
-
-		var quiz = Qwisme.QUIZZES.get(id);
-		console.log(quiz);
-		var quizShow = new Qwisme.Views.QuizPlay({
+			var quiz = Qwisme.QUIZZES.get(id);
+			var quizShow = new Qwisme.Views.QuizPlay({
 			model: quiz
-		});
+			});
 
-		this._swapView(quizShow);
+			this._swapView(quizShow);
+		}
+
 	},
 
 	_swapView: function (newView) {

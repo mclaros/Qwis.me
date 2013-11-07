@@ -41,44 +41,10 @@ TEMPORARY:
 <!-- TEMPORARY LOCATION -->
 
 <%
-	var genAnswerDivs = function ($container) {
-		var $answerDiv = $("<div>");
-		var $hidAnsText = $("<div>");
-		$answerDiv.addClass("answer-div");
-		$hidAnsText.hide();
-
-		var questions = _.keys(quesToAns);
-		_.each(questions, function (question) {
-			var correctAns = _.first(quesToAns[question]);
-			var $newAnswerDiv = $answerDiv.clone();
-			var $newHidAnsText = $hidAnsText.clone();
-
-			$newHidAnsText.text(correctAns);
-			$newAnswerDiv.append($newHidAnsText);
-			$container.append($newAnswerDiv);
-
-			ansDivs[correctAns] = $newAnswerDiv;
-		});
-	};
-
-	var isAnswer = function (trimmedInput) {
-		return _.contains(posAnswers, trimmedInput);
-	};
-
-	var revealAns = function (correctAns) {
-		var $ansDiv = ansDivs[correctAns];
-		var $ansTextDiv = $($ansDiv.find("div"));
-		//animate reveal later
-		$ansDiv.css("background-color", "yellow");
-		$ansTextDiv.show();
-	};
 
 	$(document).ready(function () {
-		ansData = JSON.parse($("#bootstrapped_answers_json").html());
-		quesToAns = ansData.ques_to_ans;
-		ansToQues = ansData.ans_to_ques;
 
-		posAnswers = _.keys(ansToQues);
+
 		ansDivs = {};
 
 		genAnswerDivs($("#answers-container"));

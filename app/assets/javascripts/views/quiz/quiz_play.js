@@ -1,10 +1,6 @@
 Qwisme.Views.QuizPlay = Backbone.View.extend({
 	template: JST["quiz/quiz_play"],
 
-	initialize: function (options) {
-		this.quizData = options.quizData;
-	},
-
 	render: function () {
 		console.log("rendering play");
 		console.log("model is");
@@ -16,6 +12,9 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 		});
 
 		var posAnswers = this.model.posAnswers();
+		var gameData = this.model.get("game_data");
+		var quesToAns = gameData.ques_to_ans;
+		var ansToQues = gameData.ans_to_ques;
 		var $ansContainer = renderedTemp.find("#answers-container");
 
 		genAnswerDivs($ansContainer);
@@ -25,18 +24,15 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 		return this;
 	},
 
+	listenToInput: function ($inputField) {
+		$inputField.on("keyup keydown", function (event) {
 
-	// genQuesToAns: function () {
-	// 	var quiz_prompts = this.model.get("quiz_prompts");
-	// 	var quesToAns = {};
-	// 	quiz_prompts.each(function (prompt) {
-	// 		var validAnsCol = prompt.get("valid_answers");
-	// 		var validAnswers = validAnsCol.pluck("valid_answer");
-	// 		quesToAns[prompt.get("question")] = validAnswers;
-	// 	});
+		})
+	},
 
-	// 	return quesToAns;
-	// },
+	stopListeningEl: function ($el) {
+		$el.off();
+	},
 
 	genAnswerDivs: function ($container) {
 		var $answerDiv = $("<div>");
