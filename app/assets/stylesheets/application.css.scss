@@ -1,3 +1,4 @@
+@import "bootstrap";
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -13,7 +14,10 @@
  */
 
 
+
 /* temporary location, will movelater */
+
+
 div#main-div {
 	height: 100%;
 	width: 80%;
@@ -22,6 +26,7 @@ div#main-div {
 	padding: 10px 50px 10px 50px;
 	border: 3px dashed black;
 };
+
 
 div.notices {
 	height: 200px;
@@ -47,14 +52,8 @@ div.hidden-answer * {
 	visibility: hidden;
 }
 
-textarea {
-	color: black;
-	background-color: beige;
-	padding: 2px;
-	border: 1px solid darkslategray;
-}
 
-input[type=text], .opt-field-filled {
+.opt-field-filled {
 	height: 25px;
 	width: 150px;
 	color: black;
@@ -76,12 +75,21 @@ div.opt-field-blank {
 }
 
 .opt-field-filled {
+	height: 25px;
+	width: 150px;
 	background-color: palegreen;
 	border: 1px solid green;
 	float: left;
+	padding: 2px;
+	margin: 2px 2px 2px 0px;
 }
 
 input.opt-field-active {
-	border: 1px solid orange;
+	height: 25px;
+	width: 150px;
 	float: left;
+	padding: 2px;
+	border: 1px solid orange;
+	margin: 2px 2px 2px 0px;
 }
+

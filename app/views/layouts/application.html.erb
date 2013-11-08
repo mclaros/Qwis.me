@@ -7,8 +7,6 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-	<div id="main-div">
 		
 	<% if flash[:notices] %>
 		<% flash[:notices].each do |notice| %>
@@ -21,7 +19,7 @@
 	<%= yield %>
 
 
-	</div>
+
 
 </body>
 </html>
