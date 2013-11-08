@@ -1,4 +1,8 @@
 Qwisme::Application.routes.draw do
+  devise_for :users
+
+  devise_for :views
+
   # devise_for :installs
 
   resources :quizzes

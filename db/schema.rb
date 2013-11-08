@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131107200359) do
+ActiveRecord::Schema.define(:version => 20131108193751) do
 
   create_table "quiz_prompts", :force => true do |t|
     t.integer  "quiz_id",                      :null => false
@@ -48,6 +48,24 @@ ActiveRecord::Schema.define(:version => 20131107200359) do
     t.string   "question",        :limit => 100,                       :null => false
   end
 
+  create_table "users", :force => true do |t|
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0,  :null => false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+  end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
   create_table "valid_answers", :force => true do |t|
     t.integer  "quiz_prompt_id",               :null => false
     t.string   "valid_answer",   :limit => 30, :null => false
@@ -56,5 +74,23 @@ ActiveRecord::Schema.define(:version => 20131107200359) do
   end
 
   add_index "valid_answers", ["quiz_prompt_id"], :name => "index_valid_answers_on_quiz_prompt_id"
+
+  create_table "views", :force => true do |t|
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0,  :null => false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+  end
+
+  add_index "views", ["email"], :name => "index_views_on_email", :unique => true
+  add_index "views", ["reset_password_token"], :name => "index_views_on_reset_password_token", :unique => true
 
 end

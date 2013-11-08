@@ -32,6 +32,7 @@ gem 'backbone-on-rails'
 gem 'ejs'
 gem 'rabl'
 gem 'figaro'
+gem 'devise'
 
 
 # To use ActiveModel has_secure_password
