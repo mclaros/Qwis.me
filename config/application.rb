@@ -61,8 +61,6 @@ module Qwisme
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    # config.secret_key = 'd6ee61e10e92ace0f70da6cd6af53738e8b9bd2fc21c0722c97ef57d7902adcd63241721397c85c51d906427069edf42aa509c1ebcc11f4c178c04ae5e047dbc'
-
 
   end
 end
