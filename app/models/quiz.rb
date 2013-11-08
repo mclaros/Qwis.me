@@ -8,13 +8,16 @@ class Quiz < ActiveRecord::Base
 	validates_length_of :title, :within => 3..50
 	validates_length_of :category, :scope, :within => 3..20
 
-	#belongs_to :author
+	belongs_to :author,
+		:class_name => "User",
+		:foreign_key => :author_id,
+		:primary_key => :id
 	has_one :quiz_tracker, :dependent => :destroy, :inverse_of => :quiz
 	has_many :quiz_prompts, :dependent => :destroy, :inverse_of => :quiz
 	#has_one :quiz_perform_tracker
 
 	def self.categories
-		#obsolete if set i backbone
+		#obsolete if set in backbone
 		cats = [
 				"entertainment", "gaming", "geography", "history", "holiday", 
 				"just For Fun", "language", "literature", "movies", "music", 

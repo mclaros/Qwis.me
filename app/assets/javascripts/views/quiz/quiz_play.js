@@ -55,6 +55,10 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 
 		this.revealAns(correctAns);
 		this.remainingAnsrs = _.difference(this.remainingAnsrs, validAnswers);
+
+		if (this.remainingAnsrs.length === 0) {
+			this.winActions();
+		}
 	},
 
 	genAnswerDivs: function ($renderedView) {
@@ -120,8 +124,7 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 
 	timeOut: function () {
 		console.log("TIME UP");
-		$("#player-input").attr("disabled", true);
-		$("#restart-game").show();
+		this.loseActions();
 	},
 
 	bindStartButton: function (event) {
@@ -134,6 +137,20 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 		$inputField.focus();
 		$button.attr("disabled", true);
 		$button.off();
+	},
+
+	winActions: function () {
+		console.log("YOU WIN!");
+		var $input = $("#player-input");
+		
+		$input.attr("disabled", true);
+		$stopListeningEl($input);
+		if (!(_.isUndefined(this.timer)) clearInterval(this.timer);
+	},
+
+	loseActions: function () {
+		$("#player-input").attr("disabled", true);
+		$("#restart-game").show();
 	}
 
 });
