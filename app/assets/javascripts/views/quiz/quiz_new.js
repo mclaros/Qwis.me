@@ -24,10 +24,28 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 
 	submitForm: function (event) {
 		event.preventDefault();
-		console.log($("#quiz-form").serializeJSON());
+		var formData = $("#quiz-form").serialize();
 
-		var formData = $("#quiz-form").serializeJSON();
-		
+		$.ajax({
+			url: "/quizzes",
+			type: "POST",
+			data: formData,
+			success: function (resNewId) {
+				var newID = parseInt(resNewId);
+				Qwisme.QUIZZES.fetch({
+					success: function () {
+						Backbone.history.navigate(("/quizzes/" + newID), {
+							trigger: true
+						})
+					}
+				})
+			},
+
+			error: function (res) {
+				console.log(res);
+				$("#form-errors").text(res.responseText);
+			}
+		})
 	},
 
 	resetPromptDiv: function ($div) {
@@ -51,7 +69,7 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 				$blankDiv.text("Add valid answer...");
 				
 				$(el).replaceWith($blankDiv);
-				that.readOnlyToFieldListen($blankDiv);
+				// that.readOnlyToFieldListen($blankDiv);
 			}
 		});
 	},

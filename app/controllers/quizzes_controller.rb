@@ -53,10 +53,12 @@ class QuizzesController < ApplicationController
 		end
 		
 		if @quiz.save
-			redirect_to quiz_url(@quiz)
+			render :json => "#{@quiz.id}".to_json, :status => :ok
+			# redirect_to quiz_url(@quiz)
 		else
-			flash[:notices] = @quiz.errors.full_messages
-			redirect_to new_quiz_url
+			render :json => @quiz.errors.full_messages.to_json, :status => 422
+			# flash[:notices] = @quiz.errors.full_messages
+			# redirect_to new_quiz_url
 		end
 	end
 end

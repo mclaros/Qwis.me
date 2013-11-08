@@ -14,6 +14,7 @@ class Quiz < ActiveRecord::Base
 	#has_one :quiz_perform_tracker
 
 	def self.categories
+		#obsolete if set i backbone
 		cats = [
 				"entertainment", "gaming", "geography", "history", "holiday", 
 				"just For Fun", "language", "literature", "movies", "music", 
@@ -24,6 +25,7 @@ class Quiz < ActiveRecord::Base
 	end
 
 	def self.scopes
+		#obsolete if set in backbone
 		scopes = %w{common amateur expert}
 		return scopes
 	end
