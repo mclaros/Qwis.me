@@ -1,0 +1,13 @@
+<h1>Users Index BACKBONE</h1>
+
+<a href="#">Home</a>
+<br>
+<a href="#/quizzes">Quizzes</a>
+
+<ul>
+	<% users.each(function (user) { %>
+		<li>
+			<%= user.escape("username") %>
+		</li>
+	<% }) %>
+</ul>

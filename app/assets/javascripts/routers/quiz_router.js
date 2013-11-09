@@ -1,6 +1,8 @@
 Qwisme.Routers.QuizRouter = Backbone.Router.extend({
 	routes: {
-		"": "renderQuizIndex",
+		"": "renderRoot",
+		"users": "renderUserIndex",
+		"users/:id": "renderUserShow",
 		"quizzes": "renderQuizIndex",
 		"quizzes/new": "renderQuizNew",
 		"quizzes/:id/play": "renderQuizPlay",
@@ -9,6 +11,55 @@ Qwisme.Routers.QuizRouter = Backbone.Router.extend({
 
 	initialize: function (options) {
 		this.$rootEl = options.$rootEl;
+	},
+
+	renderRoot: function () {
+		var rootView = new Qwisme.Views.RootView();
+
+		this._swapView(rootView);
+	},
+
+	renderUserIndex: function () {
+		var that = this;
+		//TEMPORARY
+		Qwisme.USERS = Qwisme.USERS || new Qwisme.Collections.Users();
+		//END TEMP
+
+		Qwisme.USERS.fetch({
+			success: function () {
+				var userIndex = new Qwisme.Views.UserIndex({
+					collection: Qwisme.USERS
+				});
+
+			that._swapView(userIndex);
+			}
+		})
+
+	},
+
+	renderUserShow: function (id) {
+		var that = this;
+		//save current user as global?
+		var user = Qwisme.USERS.get(id);
+
+		if (_.isUndefined(user)) {
+			$.ajax({
+				url: "/users" + id,
+				type: "GET",
+				success: function (userData) {
+					user = Qwisme.USERS.create(userData);
+				},
+
+				error: function (data) {
+					console.log("USER DOES NOT EXIST?!");
+				}
+			});
+		}
+
+		var userShow = new Qwisme.Views.UserShow({
+			model: user
+		});
+		that._swapView(userShow);
 	},
 
 	renderQuizIndex: function () {

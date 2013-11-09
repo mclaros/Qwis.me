@@ -7,6 +7,13 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<% if user_signed_in? %>
+		Welcome, <%= current_user.username %>!
+		<form action="<%= destroy_user_session_url %>" method="POST">
+			<input type="hidden" name="_method" value="DELETE">
+			<input type="submit" value="Log Out">
+		</form>
+	<% end %>
 
    <p class="notice"><%= notice %></p>
    <p class="alert"><%= alert %></p>
