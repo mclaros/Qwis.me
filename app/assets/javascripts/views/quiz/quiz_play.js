@@ -144,7 +144,7 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 		var $input = $("#player-input");
 		
 		$input.attr("disabled", true);
-		$stopListeningEl($input);
+		this.stopListeningEl($input);
 		if (!(_.isUndefined(this.timer))) clearInterval(this.timer);
 	},
 
