@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131109012928) do
+ActiveRecord::Schema.define(:version => 20131109013800) do
 
   create_table "comments", :force => true do |t|
     t.integer  "author_id"
@@ -36,12 +36,10 @@ ActiveRecord::Schema.define(:version => 20131109012928) do
   add_index "quiz_prompts", ["quiz_id"], :name => "index_quiz_prompts_on_quiz_id"
 
   create_table "quiz_trackers", :force => true do |t|
-    t.integer  "quiz_id",                          :null => false
-    t.integer  "play_count",        :default => 0, :null => false
-    t.integer  "unique_play_count", :default => 0, :null => false
-    t.integer  "fav_count",         :default => 0, :null => false
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.integer  "quiz_id",                   :null => false
+    t.integer  "play_count", :default => 0, :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   add_index "quiz_trackers", ["quiz_id"], :name => "index_quiz_trackers_on_quiz_id"
