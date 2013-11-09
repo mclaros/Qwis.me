@@ -14,6 +14,7 @@ class Quiz < ActiveRecord::Base
 		:primary_key => :id
 	has_one :quiz_tracker, :dependent => :destroy, :inverse_of => :quiz
 	has_many :quiz_prompts, :dependent => :destroy, :inverse_of => :quiz
+	has_many :comments, :dependent => :destroy
 	#has_one :quiz_perform_tracker
 
 	def self.categories
