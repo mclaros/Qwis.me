@@ -12,10 +12,9 @@ class Quiz < ActiveRecord::Base
 		:class_name => "User",
 		:foreign_key => :author_id,
 		:primary_key => :id
-	has_one :quiz_tracker, :dependent => :destroy, :inverse_of => :quiz
 	has_many :quiz_prompts, :dependent => :destroy, :inverse_of => :quiz
 	has_many :comments, :dependent => :destroy
-	#has_one :quiz_perform_tracker
+	has_many :play_histories #:dependent => :nullify???
 
 	def self.categories
 		#obsolete if set in backbone
