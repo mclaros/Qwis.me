@@ -8,7 +8,7 @@
 </head>
 <body>
 
-	<nav class="navbar navbar-default" role="navigation">
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 	  <div class="navbar-header">
 	    <a class="navbar-brand" href="#">Qwis.me</a>
 	  </div>
@@ -23,8 +23,10 @@
 
 	  <div class="collapse navbar-collapse" id="extra-navbar-stuff">
 	    <ul class="nav navbar-nav">
-	      <li class="active"><a href="#/quizzes">Quizzes</a></li>
-	      <li><a href="#/users">Users</a></li>
+	    	<li><a href="#/quizzes">Quiz Index</a></li>
+	    	<li class="divider"></li>
+	    	<li><a href="#/quizzes/new">Create Quiz</a></li>
+		    <li><a href="#/users">Users</a></li>
 	    </ul>
 	    <form class="navbar-form navbar-right" role="search">
 	      <div class="form-group">
@@ -36,6 +38,8 @@
 	</nav>
 
 
+
+<br><br><br><br>
 
 	<% if user_signed_in? %>
 		Welcome, <%= current_user.username %>!

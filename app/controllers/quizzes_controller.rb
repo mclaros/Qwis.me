@@ -33,8 +33,7 @@ class QuizzesController < ApplicationController
 
 	def create
 		@quiz = Quiz.new(params[:quiz])
-		#TEMPORARY: will set to current_user later
-		@quiz.author_id = 1
+		@quiz.author_id = current_user.id
 
 		#reverse to set to user-created order
 		params[:quiz_prompts] = params[:quiz_prompts].reverse

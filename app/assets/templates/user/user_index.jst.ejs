@@ -1,13 +1,36 @@
+<div class="page-header">
 <h1>Users Index BACKBONE</h1>
+</div>
 
-<a href="#">Home</a>
-<br>
-<a href="#/quizzes">Quizzes</a>
+<% users.each(function(user) { %>
+	<div class="row" id="user-list-col">
+		<div class="col-xs-9 media">
+			<a class="pull-left" href="#/users/<%= user.id %>">
+				AUTHOR
+				<br>
+				AVATAR
+			</a>
+			<div class="media-body">
+				<h3 class="media-heading">
+					<a href="#/users/<%= user.id %>"><%= user.escape("username") %></a>
+				</h3>
+				<p>
+					<%= user.escape("description") || "NO DESCRIPTION" %>
+				</p>
+			</div>
+		</div>
+			<div class="col-xs-3">
+				<dl class="dl-horizontal">
+					<dt>Member since</dt>
+					<dd>DATE</dd>
 
-<ul>
-	<% users.each(function (user) { %>
-		<li>
-			<%= user.escape("username") %>
-		</li>
-	<% }) %>
-</ul>
+					<dt>Total quizzes played</dt>
+					<dd>NUM</dd>
+
+					<dt>Unique quizzes played</dt>
+					<dd>NUM</dd>
+				</dl>
+			</div>
+	</div>
+	<hr>
+<% }) %>
