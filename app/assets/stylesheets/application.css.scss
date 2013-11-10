@@ -18,13 +18,13 @@
 /* temporary location, will movelater */
 
 
-div#main-div {
+div.container {
 	height: 100%;
 	width: 80%;
 	margin-left: auto;
 	margin-right: auto;
 	padding: 10px 50px 10px 50px;
-	border: 3px dashed black;
+	border: 1px solid blue;
 };
 
 
@@ -44,23 +44,35 @@ div.answer-div {
 	height: 25px;
 	width: 150px;
 	border: 1px solid black;
-	margin: 5px;
+	margin: 5px auto 5px auto;
 	background-color: chocolate;
+	float: left;
+}
+
+div.answer-with-prompt {
+	width: 150px;
+	border: 1px solid black;
+	margin: 5px auto 5px auto;
+}
+
+div.answer-prompt-container {
+	border-bottom: 1px solid black;
+	font-weight: bold;
 }
 
 div.hidden-answer * {
 	visibility: hidden;
 }
 
-
 .opt-field-filled {
 	height: 25px;
 	width: 150px;
 	color: black;
-	background-color: beige;
+	background-color: palegreen;
 	padding: 2px;
-	border: 1px solid darkslategray;
-	margin: 2px 2px 2px 0px;
+	border: 1px solid green;
+	margin: 2px 0px 2px 0px;
+
 }
 
 div.opt-field-blank {
@@ -72,16 +84,6 @@ div.opt-field-blank {
 	border: 1px solid darkgray;
 	margin: 2px 2px 2px 0px;
 	float: left;
-}
-
-.opt-field-filled {
-	height: 25px;
-	width: 150px;
-	background-color: palegreen;
-	border: 1px solid green;
-	float: left;
-	padding: 2px;
-	margin: 2px 2px 2px 0px;
 }
 
 input.opt-field-active {

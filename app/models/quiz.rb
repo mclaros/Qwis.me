@@ -7,6 +7,7 @@ class Quiz < ActiveRecord::Base
 	validates_length_of :question, :within => 3..100
 	validates_length_of :title, :within => 3..50
 	validates_length_of :category, :scope, :within => 3..20
+	validates_uniqueness_of :title, :scope => [:author_id], :message => "has already been used"
 
 	belongs_to :author,
 		:class_name => "User",

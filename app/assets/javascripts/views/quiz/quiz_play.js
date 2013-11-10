@@ -15,6 +15,7 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 
 		this.$el.html(renderedTemp);
 		this.genAnswerDivs(this.$el);
+		this.showFilledAnswerContainers();
 
 		return this;
 	},
@@ -86,6 +87,10 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 			$container.append($newAnswerDiv);
 			that.ansDivs[correctAns] = $newAnswerDiv;
 		});
+	},
+
+	showFilledAnswerContainers: function () {
+		
 	},
 
 	isAnswer: function (trimmedInput) {

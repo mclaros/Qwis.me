@@ -1,13 +1,72 @@
-<h1><%= quiz.escape("title") %></h1>
+<div class="row">
+	<div class="page-header col-xs-8">
+	<h1>
+		<%= quiz.escape("title") %> 
+		<small> 
+			&nbsp;&nbsp; created by <a>AUTHOR NAME</a>
+		</small>
+	</h1>
+	wqrwrwq
+	</div>
 
-<a href="#">Quiz Index</a>
-<a href="#/quizzes/<%= quiz.id %>/play">Play!</a>
+	<div class="col-xs-4">
+		<br><br><br>
+		<button type="button" role="button" class="btn btn-default">
+			Favorite
+		</button>
+	</div>
+</div>
+
+<!-- http://bronxbanter.arneson.name/wordpress/wp-content/uploads/2009/07/mrt.jpg -->
+
+<div class="row" id="quiz-top-info">
+	<div class="col-xs-3">
+		<img src="http://i42.tinypic.com/68fmly.jpg" alt="Quiz image" class="img-thumbnail">
+	</div>
+
+	<div class="col-xs-9 col-md-6">
+		<h2>
+			<%= quiz.escape("question") %>
+			<small>
+				&nbsp;&nbsp; <%=quiz.get("length") %> prompts
+			</small>
+		</h2>
+
+		<p>
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur. Donec ut libero sed arcu vehicula ultricies a non tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut gravida lorem. Ut turpis felis, pulvinar a semper sed, adipiscing id dolor. Pellentesque auctor nisi id magna consequat sagittis. Curabitur dapibus enim sit amet elit pharetra tincidunt feugiat nisl imperdiet. Ut convallis libero in urna ultrices accumsan. Donec sed odio eros. Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In rutrum accumsan ultricies. Mauris vitae nisi at sem facilisis semper ac in est.
+		</p>
+	</div>
+	
+	<div class="col-xs-12 col-md-3">
+		<dl class="dl-horizontal">
+			<dt>Rating</dt>
+			<dd>NUM/5</dd>
+			
+			<dt>Favorites count</dt>
+			<dd>NUM</dd>
+			
+			<dt>Play count</dt>
+			<dd>NUM</dd>
+			
+			<dt>Unique play count</dt>
+			<dd>Num</dd>
+		</dl>
+	</div>
+
+</div>
+
+<hr>
+
+<div class="row">
+	<div class="col-xs-12">
+		<ul class="nav nav-tabs nav-justified">
+			<li class="active"><a>Play</a></li>
+			<li><a>Stats</a></li>
+		</ul>
+	</div>
+</div>
+<br>
+<div id="play-section"></div>
+
 
 QUIZ STATS
-
-<h2><%= prompts.first().escape("question") %></h2>
-<input type="text" id="text-matcher-input">
-
-<br><br>
-
-<button id="start-quiz">Start Quiz</button>

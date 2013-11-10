@@ -1,32 +1,58 @@
-<h1>Playing...</h1>
-<h2><%= quiz.escape("title") %></h2>
+<div class="row">
 
-<a href="#">Quiz Index</a>
+	<div class="col-xs-6">
+		<h2>
+			<small>Question:</small> 
+			<%= quiz.escape("question") %>
+		</h2>
+	</div>
 
-<h3><%= prompts.first().escape("question") %></h3>
+	<div class="col-xs-4">
+		<button type="button" id="start-game" class="btn btn-success btn-large" role="button">
+			Start Game
+		</button>
+		<button type="button" id="reset-game" style="display: none;" class="btn btn-default btn-large" role="button">
+			Reset
+		</button>
+	</div>
 
-<button id="start-game">Start Game</button>
-<button id="reset-game" style="display: none;">Reset</button>
-<br><br>
-<label for="player-input">Enter text:</label>
-<br>
-<input type="text" id="player-input" disabled>
+	<div class="panel col-xs-2" id="timer">
+		<h1>
+		<span id="minutes"><%= quiz.escape("time_limit") %></span>
+		:
+		<span id="seconds">00</span>
+		</h1>
+	</div>
 
-<br>
-<div id="timer">
-	<span id="minutes"><%= quiz.escape("time_limit") %></span>
-	:
-	<span id="seconds">00</span>
 </div>
 
-<br>
+<div class="row">
 
-# Correct answers:
-<div id="correct-count">1</div>
+	<div class="form-group col-xs-8" role="form">
+		<label for="player-input">Enter text:</label>
+		<input type="text" id="player-input" class="form-control" disabled>
+	</div>
 
-<br><br>
+	<div class="col-xs-4 panel">
+	<h3>
+			<small>Answered correctly:</small>
+			<span id="correct-count">0</span>
+		</h3>
+	</div>
+</div>
 
-<div id="answers-container"></div>
+<div class="row">
+	<div id="answers-container" class="well col-xs-6">
+	</div>
+
+	<div id="answers-container-titled" class="well col-xs-6">
+	</div>
+</div>
+
+<div class="row">
+	<div id="answers-container-images" class="well col-xs-12">
+	</div>
+</div>
 
 <br><br>
 
@@ -46,4 +72,13 @@ TEMPORARY:
 <% }) %>
 </ul>
 
-<br><br>
+</div>
+
+<div class="answer-with-prompt">
+	<div class="answer-prompt-container" style="height: 25px; border-bottom: 1px solid black;">
+		123456789012345 678901234567890
+	</div>
+	<div class="hidden-answer">
+		<span>some text here</span>
+	</div>
+</div>

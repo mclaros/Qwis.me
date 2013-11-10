@@ -6,21 +6,42 @@
 
 <br><br>
 
-<ul>
+<div class="row" id="quiz-list-row">
+
+<div class="col-xs-7" id="quiz-list-col">
+
+<ul class="media-list">
 	<% quizzes.each(function(quiz) { %>
-		<li>
-			<a href="#/quizzes/<%= quiz.id %>">
-			<%= quiz.escape("title") %>
+		<li class="media">
+			<a href="#/quizzes/<%= quiz.id %>" class="pull-left">
+				QUIZ PICTURE 
+				<br>
+				OR 
+				<br>
+				AUTHOR AVATAR
 			</a>
+			<div class="media-body">
+				<h4 class="media-heading">
+					<a href="#/quizzes/<%= quiz.id %>"><%= quiz.escape("title") %></a>
+				</h4>
 			<ul>
-				<li><a href="#/quizzes/<%= quiz.id %>/play">
-					Play!
-				</a></li>
+				<li><a href="#/quizzes/<%= quiz.id %>/play">Play!</a></li>
 				<li>Time limit: <%= quiz.escape("time_limit") %></li>
 				<li>Description: <%= quiz.escape("description") || "NONE" %></li>
 				<li>Category: <%= quiz.escape("category") %></li>
 				<li>Scope: <%= quiz.escape("scope") %></li>
 			</ul>
+			</div>
 		</li>
 	<% }) %>
 </ul>
+
+</div>
+
+<div class="col-xs-3">
+	<div class="well" id="qwiver">
+		QWIVER
+	</div> 
+</div>
+
+</div>

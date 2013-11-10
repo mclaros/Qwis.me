@@ -6,7 +6,13 @@ Qwisme.Routers.QuizRouter = Backbone.Router.extend({
 		"quizzes": "renderQuizIndex",
 		"quizzes/new": "renderQuizNew",
 		"quizzes/:id/play": "renderQuizPlay",
-		"quizzes/:id": "renderQuizShow"
+		"quizzes/:id": "renderQuizShow",
+		"excomment": "renderExampleComment"
+	},
+
+	renderExampleComment: function () {
+		var template = JST["comment/nested_comments"];
+		this.$rootEl.html(template());
 	},
 
 	initialize: function (options) {
@@ -33,8 +39,7 @@ Qwisme.Routers.QuizRouter = Backbone.Router.extend({
 
 			that._swapView(userIndex);
 			}
-		})
-
+		});
 	},
 
 	renderUserShow: function (id) {
