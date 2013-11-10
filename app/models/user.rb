@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
 
 	#has_many :favoritings** and has favorite through
   	has_many :play_histories #:dependent => :nullify???
+  	has_many :favoritings, :dependent => :destroy
 	has_many :comments,
 		:class_name => "User",
 		:foreign_key => :author_id,
@@ -22,4 +23,6 @@ class User < ActiveRecord::Base
 		:primary_key => :id,
 		:inverse_of => :author,
 		:dependent => :nullify
+
+	has_many :favorite_quizzes, :through => :favoritings, :source => :quiz
 end

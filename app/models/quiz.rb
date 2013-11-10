@@ -16,6 +16,7 @@ class Quiz < ActiveRecord::Base
 	has_many :quiz_prompts, :dependent => :destroy, :inverse_of => :quiz
 	has_many :comments, :dependent => :destroy
 	has_many :play_histories #:dependent => :nullify???
+	has_many :favoritings, :dependet => :destroy
 
 	def self.categories
 		#obsolete if set in backbone
