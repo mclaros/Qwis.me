@@ -34,6 +34,13 @@
 	      </div>
 	      <button type="submit" class="btn btn-default">Submit</button>
 	    </form>
+
+	    <p class="navbar-text navbar-right">
+	    	Logged in as
+	    	<a href="#/users/<%= current_user.id %>">
+		    	<%= current_user.username %>
+		    </a>
+	    </p>
 	  </div>
 	</nav>
 

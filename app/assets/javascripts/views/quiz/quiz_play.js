@@ -109,9 +109,8 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 	},
 
 	runTimer: function (startTimeSecs) {
-		var that = this;
 		this.timeLeft = (startTimeSecs || this.model.get("time_limit")*60);
-		window.quizTimer = setInterval(that.updateTimer.bind(that), 1000);
+		window.quizTimer = setInterval(this.updateTimer.bind(this), 1000);
 	},
 
 	updateTimer: function () {
@@ -162,7 +161,7 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 
 	loseActions: function () {
 		$("#player-input").attr("disabled", true);
-		$("#reset-game").show();
+		$("#reset-game").attr("disabled", false);
 		//this.revealAllAnswers();
 	}
 

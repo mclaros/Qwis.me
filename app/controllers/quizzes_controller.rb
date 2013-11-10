@@ -5,7 +5,7 @@ class QuizzesController < ApplicationController
 		# render "quizzes.rabl", handlers: [:rabl]
 		respond_to do |format|
 			format.html { render :index }
-			format.json { render "quizzes.rabl", handlers: [:rabl] }
+			format.json { render "quizzes.rabl", :handlers => [:rabl] }
 		end
 	end
 
