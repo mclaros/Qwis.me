@@ -1,0 +1,2 @@
+module PlayHistoriesHelper
+end

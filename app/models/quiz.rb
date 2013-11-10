@@ -61,4 +61,12 @@ class Quiz < ActiveRecord::Base
 		return ans_data
 	end
 
+	def has_favorited
+		self.favoritings.exists?(:user_id => current_user.id)
+	end
+
+	def has_played
+		self.play_histories.exists?(:user_id => current_user.id)
+	end
+
 end

@@ -1,0 +1,2 @@
+class PlayHistoriesController < ApplicationController
+end

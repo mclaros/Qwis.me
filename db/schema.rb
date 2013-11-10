@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131110014102) do
+ActiveRecord::Schema.define(:version => 20131110062220) do
 
   create_table "comments", :force => true do |t|
     t.integer  "author_id"
@@ -64,16 +64,15 @@ ActiveRecord::Schema.define(:version => 20131110014102) do
 
   create_table "quizzes", :force => true do |t|
     t.integer  "author_id"
-    t.string   "title",           :limit => 50,                        :null => false
-    t.string   "description",     :limit => 150
-    t.string   "category",        :limit => 20,                        :null => false
-    t.string   "scope",           :limit => 20,  :default => "common", :null => false
-    t.boolean  "reviewed_by_mod",                :default => false
-    t.integer  "length",                                               :null => false
-    t.integer  "time_limit",                                           :null => false
-    t.datetime "created_at",                                           :null => false
-    t.datetime "updated_at",                                           :null => false
-    t.string   "question",        :limit => 100,                       :null => false
+    t.string   "title",       :limit => 50,                        :null => false
+    t.string   "description", :limit => 150
+    t.string   "category",    :limit => 20,                        :null => false
+    t.string   "scope",       :limit => 20,  :default => "common", :null => false
+    t.integer  "length",                                           :null => false
+    t.integer  "time_limit",                                       :null => false
+    t.datetime "created_at",                                       :null => false
+    t.datetime "updated_at",                                       :null => false
+    t.string   "question",    :limit => 100,                       :null => false
   end
 
   create_table "users", :force => true do |t|

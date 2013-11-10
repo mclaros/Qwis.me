@@ -1,4 +1,4 @@
-class Favoriting < ActiveRecord::Base
+class Favoriting	 < ActiveRecord::Base
 	attr_accessible :quiz_id, :user_id
 
 	validates_presence_of :quiz_id, :user_id
