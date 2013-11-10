@@ -42,7 +42,7 @@ div.notices {
 
 div.answer-div {
 	height: 25px;
-	width: 150px;
+	width: 200px;
 	border: 1px solid black;
 	margin: 5px auto 5px auto;
 	background-color: chocolate;
@@ -50,7 +50,7 @@ div.answer-div {
 }
 
 div.answer-with-prompt {
-	width: 150px;
+	width: 200px;
 	border: 1px solid black;
 	margin: 5px auto 5px auto;
 }
@@ -66,18 +66,19 @@ div.hidden-answer * {
 
 .opt-field-filled {
 	height: 25px;
-	width: 150px;
+	width: 200px;
 	color: black;
+	text-overflow: ellipsis;
 	background-color: palegreen;
 	padding: 2px;
 	border: 1px solid green;
-	margin: 2px 0px 2px 0px;
-
+	margin: 2px 2px 2px 0px;
+	float: left;
 }
 
 div.opt-field-blank {
 	height: 25px;
-	width: 150px;
+	width: 200px;
 	color: dimgray;
 	background-color: ghostwhite;
 	padding: 2px;
@@ -88,10 +89,11 @@ div.opt-field-blank {
 
 input.opt-field-active {
 	height: 25px;
-	width: 150px;
+	width: 200px;
 	float: left;
 	padding: 2px;
 	border: 1px solid orange;
 	margin: 2px 2px 2px 0px;
+	float: left;
 }
 

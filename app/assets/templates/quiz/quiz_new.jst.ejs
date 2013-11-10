@@ -1,108 +1,110 @@
-<h1>New quiz</h1>
-
-<a href="#">Quizzes</a>
+<div class="page-header">
+	<h1>Qwizard <small>Create new quiz</small></h1>
+</div>
 
 
 <div class="row">
 
 <div class="col-md-6">
 
-<form id="quiz-form">
-	<div class="form-group">
-	<label for="quiz-title">Title</label>
-	<input type="text" id="quiz-title" class="form-control" name="quiz[title]">
-	</div>
-	
-	<div class="form-group">
-	<label for="quiz-description">Description</label>
-	<textarea id="quiz-description" class="form-control" name="quiz[description]" rows="3"></textarea>
-	</div>
+	<form id="quiz-form" role="form form-inline" class="form-inline">
+		<div class="form-group">
+			<label for="quiz-title">Title</label>
+			<input type="text" id="quiz-title" class="form-control" name="quiz[title]">
 
+			<label for="quiz-description">Description</label>
+			<textarea id="quiz-description" class="form-control" name="quiz[description]" rows="3"></textarea>
+		</div>
 
-
-	<div class="form-group">	
-	<label for="quiz-categories">Categories</label>
-	<select id="quiz-categories" class="form-control" name="quiz[category]">
-		<option></option>
-		<% _.each(categories, function (cat) { %>
-			<option value="<%= cat %>"><%= _.str.capitalize(cat) %></option>
-		<% }) %>
-	</select>
-
-	<label for="quiz-scope">Scope</label>
-	<select id="quiz-scope" class="form-control" name="quiz[scope]">
-		<option></option>
-		<% _.each(scopes, function (scope) { %>
-			<option value="<%= scope %>"><%= _.str.capitalize(scope) %></option>
-		<% }) %>
-	</select>	
-
-	<label for="quiz-time-limit">Time Limit</label>
-	<select id="quiz-time-limit" class="form-control" name="quiz[time_limit]">
-		<% for(var i = 1; i < 21; i++) { %>
-			<option value="<%= i %>"><%= i %>:00</option>
-		<% } %>
-	</select>
-
-	</div>
-
-
-	<div class="form-group">
-	<label>
-		Question (3-100 characters)
-		<input type="text" class="prompt-question form-control" name="quiz[question]">
-	</label>
-	</div>
-
-	<hr>
-	
-	<div class="prompt-fields form-group">
-		<h3>Prompt</h3>
-		<label>
-			Hint(TEMPORARY NAME) (max 30 characters)
-			<input type="text" class="prompt-prompt form-control" name="quiz_prompts[][prompt]">
-		</label>
-
-		<label>
-			Answer (3-30 characters)
-			<br>
-			<input type="text" class="prompt-answer form-control" name="quiz_prompts[][correct_answer]">
-		</label>
-
-		<h4>Valid Answers</h4>
-		Max: 30 characters
-		<br><br>
-		<div class="opt-field-blank">Add valid answer</div>
-		<div class="opt-field-blank">Add valid answer</div>
-		<div class="opt-field-blank">Add valid answer</div>
-		<div class="opt-field-blank">Add valid answer</div>
-		<br><br><br>
-		Qwip: You can press ENTER, TAB, or click elsewhere to set answer
 		<br>
-		TODO: add tab-switching, check for uniqueness
+
+		<div class="form-group">	
+			<label for="quiz-categories">Categories</label>
+			<select id="quiz-categories" class="form-control" name="quiz[category]" style="width: 150px;">
+				<option></option>
+				<% _.each(categories, function (cat) { %>
+					<option value="<%= cat %>"><%= _.str.capitalize(cat) %></option>
+				<% }) %>
+			</select>
+
+			<label for="quiz-scope">Scope</label>
+			<select id="quiz-scope" class="form-control" name="quiz[scope]" style="width: 150px;">
+				<option></option>
+				<% _.each(scopes, function (scope) { %>
+					<option value="<%= scope %>"><%= _.str.capitalize(scope) %></option>
+				<% }) %>
+			</select>	
+
+			<label for="quiz-time-limit">Time Limit</label>
+			<select id="quiz-time-limit" class="form-control" name="quiz[time_limit]" style="width: 150px;">
+				<% for(var i = 1; i < 21; i++) { %>
+					<option value="<%= i %>"><%= i %>:00</option>
+				<% } %>
+			</select>
+
+		</div>
+
+
+		<div class="form-group">
+		<label>
+			Question (3-100 characters)
+			<input type="text" class="prompt-question form-control" name="quiz[question]">
+		</label>
+		</div>
+
+		<hr>
+		
+		<div class="prompt-fields form-group">
+			<h3>Prompt</h3>
+			<label>
+				<span class="h4">
+					Answer header <small>Optional</small>
+					<br>
+					<small>Ex. "Name of athlete", "In years" | Max. 30 characters</small>
+				</span>
+				<input type="text" class="prompt-prompt form-control" name="quiz_prompts[][prompt]">
+			</label>
+
+			<label>
+				Answer (3-30 characters)
+				<br>
+				<input type="text" class="prompt-answer form-control" name="quiz_prompts[][correct_answer]">
+			</label>
+
+			<h4>Alternate Answers <small>Optional</small></h4>
+			<span class="text-muted">Max. 30 characters</span>
+			<br>
+			<div class="opt-field-blank">Add valid answer</div>
+			<div class="opt-field-blank">Add valid answer</div>
+			<div class="opt-field-blank">Add valid answer</div>
+			<div class="opt-field-blank">Add valid answer</div>
+			<br><br><br>
+			Qwip: You can press ENTER, TAB, or click elsewhere to set answer
+			<br>
+			TODO: add tab-switching, check for uniqueness
+		</div>
+
+		<button class="new-prompt-field btn btn-sm btn-success">Add Prompt</button>
+
+		<hr>
+		<input type="hidden" id="quiz-length" name="quiz[length]" value="1">
+
+		Quiz Length: <span id="length-counter">1</span>
+		<br><br>
+
+		<input type="submit" id="submit-quiz-form" class="btn btn-primary" value="Create Quiz">
+
+	</form>
+
+
+	<div id="form-errors"></div>
+
+
+	<br><br>
+	TODO: Add client-side validation
 	</div>
 
-	<button class="new-prompt-field btn btn-sm btn-success">Add Prompt</button>
-
-	<hr>
-	<input type="hidden" id="quiz-length" name="quiz[length]" value="1">
-
-	Quiz Length: <span id="length-counter">1</span>
-	<br><br>
-
-	<input type="submit" id="submit-quiz-form" class="btn btn-primary" value="Create Quiz">
-
-</form>
-
-
-<div id="form-errors"></div>
-
-
-<br><br>
-TODO: Add client-side validation
-</div>
-
-<div class="col-md-4">
-</div>
+	<div class="col-md-4">
+	</div>
 
 </div>

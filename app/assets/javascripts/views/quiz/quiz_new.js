@@ -123,7 +123,7 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 		//Assume if .val() returns empty string, it is DIV
 		if ($origEl.val() === "") {
 			var text = $origEl.text();
-			text = (text === "Add valid answer..." ? "" : text);
+			text = (text === "Add valid answer" ? "" : text);
 			$fieldInput.val(text);
 		}
 		else {
@@ -135,67 +135,6 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 		this.fieldToReadOnlyListen($fieldInput);
 	},
 
-
-	// readOnlyToFieldListen: function ($div) {
-	// 	$div.on("click", function (event) {
-	// 		var $origEl = $(event.target);
-	// 		var $fieldInput = $("<input>");
-			
-	// 		$fieldInput.attr({
-	// 			type: "text",
-	// 			class: "opt-field-active",
-	// 			name: "quiz_prompts[][valid_answers][][valid_answer]"
-	// 		});
-
-	// 		//Assume if .val() returns empty string, it is DIV
-	// 		if ($origEl.val() === "") {
-	// 			var text = $origEl.text();
-	// 			text = (text === "Add valid answer..." ? "" : text);
-	// 			$fieldInput.val(text);
-	// 		}
-	// 		else {
-	// 			$fieldInput.val($origEl.val());
-	// 		}
-
-	// 		$origEl.replaceWith($fieldInput);
-	// 		$fieldInput.focus();
-	// 		this.fieldToReadOnly($fieldInput);		
-	// 	});
-	// },
-
-	// fieldToReadOnly: function (event) {
-	// 	event.preventDefault();
-	// 	var that = this;
-	// 	var $field = $(event.target);
-
-	// 	//ENTER or TAB
-	// 	var validTrigger = (event.type === "blur" || (event.which === 13 || event.which === 9)); 
-
-	// 	if (validTrigger) {
-	// 		var valText = $field.val();
-	// 		//trim whitespace
-	// 		valText = $.trim(valText);
-	// 		var valEmpty = (valText === "");
-	// 		var $readOnlyText;
-
-	// 		if (valEmpty) {
-	// 			$readOnlyText = $("<div>");
-	// 			$readOnlyText.addClass("opt-field-blank");
-	// 			$readOnlyText.text("Add valid answer...");
-	// 		}
-	// 		else {
-	// 			$readOnlyText = $("<input>");
-	// 			$readOnlyText.attr({
-	// 				class: "opt-field-filled",
-	// 				name: "quiz_prompts[][valid_answers][][valid_answer]",
-	// 				readonly: true,
-	// 				value: valText
-	// 			});
-	// 		}
-
-	// 		$field.replaceWith($readOnlyText);
-	// 	}
-	// }
 
 	fieldToReadOnlyListen: function ($field) {
 		var that = this;
@@ -215,7 +154,7 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 				if (valEmpty) {
 					$readOnlyText = $("<div>");
 					$readOnlyText.addClass("opt-field-blank");
-					$readOnlyText.text("Add valid answer...");
+					$readOnlyText.text("Add valid answer");
 				}
 				else {
 					$readOnlyText = $("<input>");
