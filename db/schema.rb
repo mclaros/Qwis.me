@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131110062220) do
+ActiveRecord::Schema.define(:version => 20131110073705) do
 
   create_table "comments", :force => true do |t|
     t.integer  "author_id"
@@ -35,10 +35,12 @@ ActiveRecord::Schema.define(:version => 20131110062220) do
   add_index "favoritings", ["user_id", "quiz_id"], :name => "index_favoritings_on_user_id_and_quiz_id", :unique => true
 
   create_table "play_histories", :force => true do |t|
-    t.integer  "user_id",    :null => false
-    t.integer  "quiz_id",    :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "user_id",     :null => false
+    t.integer  "quiz_id",     :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.boolean  "finished",    :null => false
+    t.integer  "finish_time", :null => false
   end
 
   add_index "play_histories", ["user_id", "quiz_id"], :name => "index_play_histories_on_user_id_and_quiz_id"

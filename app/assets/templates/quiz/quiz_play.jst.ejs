@@ -2,28 +2,30 @@
 
 	<div class="col-xs-5">
 		<h2>
-			<small>Question:</small> 
+			<small>Question:</small>
+			<br>
 			<%= quiz.escape("question") %>
 		</h2>
 	</div>
 
 	<div class="col-xs-4">
-		<button type="button" id="start-game" class="btn btn-success btn-large" role="button">
+		<br>
+		<button type="button" id="start-game" class="btn btn-success btn-large btn-block" role="button">
 			Start Game
 		</button>
-		<button type="button" id="reset-game" style="display: none;" class="btn btn-default btn-large" role="button">
+		<button type="button" id="reset-game" style="display: none;" class="btn btn-warning btn-large btn-block" role="button">
 			Reset
 		</button>
 	</div>
 
 	<div class="panel col-xs-3" id="timer">
-		<h1>
+		<h2>
 			<small>Time left:</small>
 			<br>
 			<span id="minutes"><%= quiz.escape("time_limit") %></span>
 			:
 			<span id="seconds">00</span>
-		</h1>
+		</h2>
 	</div>
 
 </div>
@@ -44,6 +46,8 @@
 		</h3>
 	</div>
 </div>
+
+<hr>
 
 <div class="row">
 	<div id="answers-container" class="well col-xs-6">

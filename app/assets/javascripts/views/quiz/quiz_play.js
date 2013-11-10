@@ -162,7 +162,7 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 
 	loseActions: function () {
 		$("#player-input").attr("disabled", true);
-		$("#restart-game").show();
+		$("#reset-game").show();
 		//this.revealAllAnswers();
 	}
 
