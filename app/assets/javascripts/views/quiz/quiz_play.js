@@ -7,6 +7,9 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 	},
 
 	render: function () {
+		window.quizTimer && clearInterval(window.quizTimer);
+		console.log("rendering play")
+
 		var that = this;
 		var renderedTemp = this.template({
 			quiz: that.model,
@@ -108,7 +111,7 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 	runTimer: function (startTimeSecs) {
 		var that = this;
 		this.timeLeft = (startTimeSecs || this.model.get("time_limit")*60);
-		this.timer = setInterval(that.updateTimer.bind(that), 1000);
+		window.quizTimer = setInterval(that.updateTimer.bind(that), 1000);
 	},
 
 	updateTimer: function () {
@@ -122,7 +125,7 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 		$("#seconds").text(secs);
 
 		if (this.timeLeft <= 0) {
-			clearInterval(that.timer);
+			clearInterval(window.quizTimer);
 			that.timeOut();
 		}
 	},
@@ -130,6 +133,10 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 	timeOut: function () {
 		console.log("TIME UP");
 		this.loseActions();
+	},
+
+	revealAllAns: function () {
+		//show all answers
 	},
 
 	bindStartButton: function (event) {
@@ -150,12 +157,13 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 		
 		$input.attr("disabled", true);
 		this.stopListeningEl($input);
-		if (!(_.isUndefined(this.timer))) clearInterval(this.timer);
+		window.quizTimer && clearInterval(window.quizTimer);
 	},
 
 	loseActions: function () {
 		$("#player-input").attr("disabled", true);
 		$("#restart-game").show();
+		//this.revealAllAnswers();
 	}
 
 });

@@ -100,10 +100,7 @@ Qwisme.Routers.QuizRouter = Backbone.Router.extend({
 	},
 
 	_swapView: function (newView) {
-		if (!(_.isUndefined(this._currentView))) {
-			if (!(_.isUndefined(this._currentView.timer))) {
-				clearInterval(this._currentView.timer);	
-			}
+		if ( !(_.isUndefined(this._currentView)) ) {
 			this._currentView.$el.remove(); //in case of zombie events
 			this._currentView.remove();
 		}

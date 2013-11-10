@@ -14,11 +14,11 @@ Qwisme.Views.QuizShow = Backbone.View.extend({
 
 		this.$el.html(renderedTemp);
 
-		var quizPlay = new Qwisme.Views.QuizPlay({
+		this.quizPlay = new Qwisme.Views.QuizPlay({
 			model: this.model
 		});
-		quizPlay.render();
-		this.$el.find("#play-section").html(quizPlay.$el);
+		this.quizPlay.render();
+		this.$el.find("#play-section").html(this.quizPlay.$el);
 
 		return this;
 	}
