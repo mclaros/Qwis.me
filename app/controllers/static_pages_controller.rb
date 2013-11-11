@@ -1,4 +1,6 @@
 class StaticPagesController < ApplicationController
+	before_filter :authenticate_user!
+
 	def root
 		if user_signed_in?
 			@quizzes = Quiz.includes(:quiz_prompts => :valid_answers)
