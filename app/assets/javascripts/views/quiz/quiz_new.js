@@ -7,7 +7,8 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 		"click .new-prompt-field": "dupPromptDiv",
 		"click .opt-field-blank": "readOnlyToField",
 		"click .opt-field-filled": "readOnlyToField",
-		"keyup form": "updatePreview"
+		"keyup form": "updatePreview",
+		"click form": "updatePreview"
 	},
 
 
@@ -207,7 +208,7 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 			this.throttledUpdtatePreview = _.throttle(function () {
 				var formData = $("#quiz-form").serializeJSON();
 				that.formPreview.render(formData);
-			}, 500, {leading: false})
+			}, 400, {leading: false})
 		}
 		
 		this.throttledUpdtatePreview();

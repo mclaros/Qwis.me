@@ -4,26 +4,27 @@
 	<small>Index</small>
 </h4>
 <hr>
-
-<h5><%= quizTitle %></h5>
-<div class="media" style="float:left; width:70%;">
+<h6>
+	<%= quizTitle %>
+</h6>
+<div class="media" style="float:left; width:60%;margin-top:0;">
 	<a class="pull-left">
 		QUIZ 
 		<br>
 		PICTURE
 	</a>
 	<div class="media-body">
-		<h6 id="prev-quiz-question">
+		<strong>
 			<%= quizQuestion %>
-		</h6>
+		</strong>
 		<p>
-			<%= quizDescrip %>
+			<%= quizDescription %>
 		</p>
 	</div>
 </div>
 
-<div style="float:left; padding:0;width: 30%;margin-top:15px">
-	<div id="prev-stats-headers" class="text-right" style="width: 45%; margin-right:5px; display:inline-block;">
+<div style="float:left; padding:0;width: 40%;margin-top:15px">
+	<div id="prev-stats-headers" class="text-right" style="width: 30%; margin-right:5px; display:inline-block;">
 		<strong>
 			Time limit
 			<br>
@@ -33,13 +34,13 @@
 		</strong>
 	</div>
 
-	<div id="prev-stats-data" class="text-left" style="width:45%;margin-left:5px;display:inline-block;">
+	<div id="prev-stats-data" class="text-left" style="width:60%;margin-left:5px;display:inline-block;">
 		<div id="prev-time-limit">
-			TIME
+			<%= quizTimeLimit %>:00
 		</div>
 
 		<div id="prev-category">
-			CATEGORY
+			<%= quizCategory %>
 		</div>
 
 		<div id="prev-scope">
