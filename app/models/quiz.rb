@@ -1,6 +1,6 @@
 class Quiz < ActiveRecord::Base
 	attr_accessible :author_id, :title, :description, :category,
-					:scope, :length, :time_limit, :question
+					:scope, :length, :time_limit, :question, :quiz_img_url
 
 	validates_presence_of :author_id, :title, :category, :scope, :length, :time_limit, :question
 	validates_length_of :description, :maximum => 150, :allow_blank => true

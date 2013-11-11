@@ -33,6 +33,7 @@ gem 'ejs'
 gem 'rabl'
 gem 'figaro'
 gem 'devise'
+gem 'filepicker-rails'
 
 
 # To use ActiveModel has_secure_password

@@ -5,9 +5,10 @@ class User < ActiveRecord::Base
 	    :recoverable, :rememberable, :trackable, :validatable
 
 	attr_accessible :email, :password, :password_confirmation, :remember_me, 
-		:username # :tagline, :avtar**
-  
+		:username, :avatar_url, :description
+
   	validates_length_of :username, :within => 3..15
+  	validates_length_of :description, :maximum => 150
 
 	#has_many :favoritings** and has favorite through
   	has_many :play_histories #:dependent => :nullify???
