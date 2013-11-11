@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131111213259) do
+ActiveRecord::Schema.define(:version => 20131111231439) do
 
   create_table "comments", :force => true do |t|
     t.integer  "author_id"
@@ -66,16 +66,15 @@ ActiveRecord::Schema.define(:version => 20131111213259) do
 
   create_table "quizzes", :force => true do |t|
     t.integer  "author_id"
-    t.string   "title",        :limit => 50,                        :null => false
-    t.string   "description",  :limit => 150
-    t.string   "category",     :limit => 20,                        :null => false
-    t.string   "scope",        :limit => 20,  :default => "common", :null => false
-    t.integer  "length",                                            :null => false
-    t.integer  "time_limit",                                        :null => false
-    t.datetime "created_at",                                        :null => false
-    t.datetime "updated_at",                                        :null => false
-    t.string   "question",     :limit => 100,                       :null => false
-    t.string   "quiz_img_url"
+    t.string   "title",       :limit => 50,                        :null => false
+    t.string   "description", :limit => 150
+    t.string   "category",    :limit => 20,                        :null => false
+    t.string   "scope",       :limit => 20,  :default => "common", :null => false
+    t.integer  "length",                                           :null => false
+    t.integer  "time_limit",                                       :null => false
+    t.datetime "created_at",                                       :null => false
+    t.datetime "updated_at",                                       :null => false
+    t.string   "question",    :limit => 100,                       :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -92,8 +91,11 @@ ActiveRecord::Schema.define(:version => 20131111213259) do
     t.datetime "created_at",                                            :null => false
     t.datetime "updated_at",                                            :null => false
     t.string   "username",               :limit => 15,                  :null => false
-    t.string   "avatar_url"
     t.string   "description",            :limit => 150
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

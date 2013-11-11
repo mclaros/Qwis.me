@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
 	    :recoverable, :rememberable, :trackable, :validatable
 
 	attr_accessible :email, :password, :password_confirmation, :remember_me, 
-		:username, :avatar_url, :description
+		:username, :description, :avatar
 
   	validates_length_of :username, :within => 3..15
   	validates_length_of :description, :maximum => 150
@@ -26,4 +26,9 @@ class User < ActiveRecord::Base
 		:dependent => :nullify
 
 	has_many :favorite_quizzes, :through => :favoritings, :source => :quiz
+
+	has_attached_file :avatar, :styles => {
+		:big => "200x200>",
+		:small => "65x65>"
+	}
 end
