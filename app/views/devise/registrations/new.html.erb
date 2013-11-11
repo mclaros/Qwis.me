@@ -11,7 +11,7 @@
       <%= devise_error_messages! %>
 
       <div class="form-group">
-        <form action="<%= user_registration_url %>" method="POST">
+        <form action="<%= user_registration_url %>" method="POST" enctype="multipart/form-data">
           <label for="user-username">
             <span class="h4">
               Username
@@ -28,12 +28,17 @@
               <small>Optional</small>
             </span>
           </label>
-          <input type="file" id="avatar-field">
+          <input type="file" id="avatar-field" name="user[avatar]">
 
+          <br>
 
-
-
-
+          <label for="user-description">
+            <span class="h4">
+              Bio
+              <small>Optional, max. 150 characters</small>
+            </span>
+          </label>
+          <textarea name="user[description]" class="form-control" rows="3"></textarea>
 
           <br>
 
@@ -78,5 +83,3 @@
 </div>
 
 
-
-<input type="file" class="dropzone">
