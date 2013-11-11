@@ -9,33 +9,59 @@
 
 	<form id="quiz-form" role="form" class="form-inline">
 		<div class="form-group">
-			<label for="quiz-title">Title</label>
-			<span class="text-muted">3 - 50 characters</span>
+			<label for="quiz-title">
+				<span class="h4">
+					Title
+					<small>3 - 50 characters</small>
+				</span>
+			</label>
 			<input type="text" id="quiz-title" class="form-control" name="quiz[title]">
+			
 			<br><br>
-			<label for="quiz-description">Description</label>
-			<span class="text-muted">Max. 150 characters</span>
+
+			<label for="quiz-description">
+				<span class="h4">
+					Description
+					<small>Max. 150 characters</small>
+				</span>
+			</label>
 			<textarea id="quiz-description" class="form-control" name="quiz[description]" rows="3"></textarea>
 		</div>
 
 		<div class="form-group">	
-			<label for="quiz-categories">Categories</label>
+			<label for="quiz-categories">
+				<span class="h4">
+					Categories
+				</span>
+			</label>
 			<select id="quiz-categories" class="form-control" name="quiz[category]" style="width: 150px; margin: 3px;">
 				<option></option>
 				<% _.each(categories, function (cat) { %>
 					<option value="<%= cat %>"><%= _.str.capitalize(cat) %></option>
 				<% }) %>
 			</select>
+
 			<br>
-			<label for="quiz-scope">Scope</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+			<label for="quiz-scope">
+				<span class="h4">
+					Scope
+				</span>
+			</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<select id="quiz-scope" class="form-control" name="quiz[scope]" style="width: 150px; margin: 3px;">
 				<option></option>
 				<% _.each(scopes, function (scope) { %>
 					<option value="<%= scope %>"><%= _.str.capitalize(scope) %></option>
 				<% }) %>
 			</select>	
+
 			<br>
-			<label for="quiz-time-limit">Time Limit</label>
+
+			<label for="quiz-time-limit">
+				<span class="h4">
+					Time Limit
+				</span>
+			</label>
 			<select id="quiz-time-limit" class="form-control" name="quiz[time_limit]" style="width: 150px;margin: 3px;">
 				<% for(var i = 1; i < 21; i++) { %>
 					<option value="<%= i %>"><%= i %>:00</option>
@@ -46,16 +72,19 @@
 
 		<div class="form-group">
 			<label for="quiz-question">
-				Question
+				<span class="h4">
+					Question
+					<small>3 - 100 characters</small>
+				</span>
 			</label>
-			<span class="text-muted">3 - 100 characters</span>
 			<input type="text" id="quiz-question" class="prompt-question form-control" name="quiz[question]">
 		</div>
 
+		<h3>Prompts</h3>
+
 		<hr>
-		
+
 		<div class="prompt-fields form-group">
-			<h3>Prompt</h3>
 			<label>
 				<span class="h4">
 					Answer header <small>Optional</small>
@@ -66,7 +95,10 @@
 			</label>
 
 			<label>
-				Answer (3-30 characters)
+				<span class="h4">
+					Correct Answer
+					<small>3 - 30 characters</small>
+				</span>
 				<br>
 				<input type="text" class="prompt-answer form-control" name="quiz_prompts[][correct_answer]">
 			</label>
@@ -79,17 +111,21 @@
 			<div class="opt-field-blank">Add valid answer</div>
 			<div class="opt-field-blank">Add valid answer</div>
 			<br><br><br>
-			Qwip: You can press ENTER, TAB, or click elsewhere to set answer
-			<br>
-			TODO: add tab-switching, check for uniqueness
+			<strong>Qwip:</strong>
+			You can press ENTER, TAB, or click elsewhere to set answer
 		</div>
 
-		<br>
-		<button class="new-prompt-field btn btn-sm btn-success">Add Prompt</button>
 		<br><br>
-		<div id="add-prompt-error" class="text-danger"></div>
+
+		<div>
+			<button class="new-prompt-field btn btn-sm btn-success">Add Prompt</button>
+			<button class="remove-prompt btn btn-sm btn-danger" disabled>Remove Previous</button>
+		</div>
+		<br>
+		<span id="add-prompt-error" class="text-danger"></span>
 
 		<hr>
+
 		<input type="hidden" id="quiz-length" name="quiz[length]" value="1">
 
 		<h2>
@@ -98,17 +134,15 @@
 		</h2>
 		<br><br>
 
-		<input type="submit" id="submit-quiz-form" class="btn btn-primary" value="Create Quiz">
+		<input type="submit" id="submit-quiz-form" class="btn btn-primary btn-lg" value="Create Quiz">
 
 	</form>
 
+	<br>
 
 	<div id="form-errors"></div>
-
-
-	<br><br>
-	TODO: Add client-side validation
 	</div>
+
 
 	<div class="col-md-6">
 		<div id="live-preview" style="font-size:0.8em">

@@ -5,11 +5,11 @@ Qwisme.Views.QuizFormPreview = Backbone.View.extend({
 		this.quizData = quizFormData.quiz || {};
 		this.quizPromptsDataArr = quizFormData.quiz_prompts || {};
 
-		console.log("rendering preview");
-		console.log("quizData");
-		console.log(this.quizData);
-		console.log("quizPromptsDataArr");
-		console.log(this.quizPromptsDataArr);
+		// console.log("rendering preview");
+		// console.log("quizData");
+		// console.log(this.quizData);
+		// console.log("quizPromptsDataArr");
+		// console.log(this.quizPromptsDataArr);
 
 		var renderedTemp = this.template({
 			quizTitle: this.validate(this.quizData, "title", 3, 50),
@@ -29,7 +29,7 @@ Qwisme.Views.QuizFormPreview = Backbone.View.extend({
 		console.log(source)
 		var str = _.str.capitalize(_.escape(source[type]));
 		
-		if (minChars === 0 && str.length === 0) {
+		if (minChars === 0 && _.isBlank(str)) {
 			var includeType = !_.contains(["category", "scope"], type);
 			return this.dangerize("MISSING" + (includeType ? " " + type.toUpperCase() : ""));
 		}

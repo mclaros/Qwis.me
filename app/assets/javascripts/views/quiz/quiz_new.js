@@ -5,10 +5,11 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 	events: {
 		"click #submit-quiz-form": "submitForm",
 		"click .new-prompt-field": "dupPromptDiv",
+		"click .remove-prompt": "removePromptDiv",
 		"click .opt-field-blank": "readOnlyToField",
 		"click .opt-field-filled": "readOnlyToField",
-		"keyup form": "updatePreview",
-		"click form": "updatePreview"
+		"click form": "updatePreview",
+		"keyup form": "updatePreview"
 	},
 
 
@@ -23,9 +24,7 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 		});
 
 		this.$el.html(renderedTemp);
-		this.formPreview = new Qwisme.Views.QuizFormPreview();
-		this.formPreview.render({});
-		$(document).ready(this.livePreviewFollow.bind(this));
+		this.prevRendTimer = setTimeout(this.livePreviewFollow.bind(this), 200);
 
 		return this;
 	},
@@ -51,8 +50,15 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 			},
 
 			error: function (res) {
-				console.log(res);
-				$("#form-errors").text(res.responseText);
+				var errorsArr = res.responseText;
+				var errorsList = $("<ul>");
+				console.log(typeof errorsArr);
+				// _.each(errorsArr, function (error) {
+				// 	errorsList.append($("<li>" + error + "</li>"));
+				// });
+
+				$("#form-errors").text("The following errors occurred:");
+				$("#form-errors").append(errorsList);
 			}
 		})
 	},
@@ -100,7 +106,7 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 		var pAnswerText = $.trim($lastDiv.find(".prompt-answer").val());
 
 		if (!(pAnswerText.length >=3 && pAnswerText.length <= 30)) {
-			$("#add-prompt-error").text("Question or answer does not meet length requirements");
+			$("#add-prompt-error").text("Correct answer does not meet length requirements");
 			return;
 		}
 
@@ -113,16 +119,31 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 		this.resetPromptDiv($newDiv);
 		$lastDiv.after($newDiv);
 		$newDiv.slideToggle("fast", function () {
-			$("body").scrollTo({top:'+=350px', left: '0'}, 400);
+			$("body").scrollTo({top:'+=350px', left: '0'}, 300);
 		});
 
 		this.addToQuizLength(1);
-		
+		this.validateRemoveButton();
 	},
 
 
-	promptValidations: function () {
+	removePromptDiv: function (event) {
+		if ($(".prompt-fields").length > 1) {
+			$(".prompt-fields").last().slideUp();
+			$(".prompt-fields").last().remove();
+			this.addToQuizLength(-1);
+			this.validateRemoveButton();
+		}
+	},
 
+
+	validateRemoveButton: function () {
+		if( $(".prompt-fields").length > 1 ) {
+			$(".remove-prompt").attr("disabled", false);
+		}
+		else {
+			$(".remove-prompt").attr("disabled", true);	
+		}
 	},
 
 
@@ -189,11 +210,16 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 
 
 	livePreviewFollow: function () {
-		$("#live-preview").html(this.formPreview.$el);
-		$("#live-preview").sticky({
+		var $previewContainer = $("#live-preview");
+		this.formPreview = new Qwisme.Views.QuizFormPreview();
+		$previewContainer.hide();
+		$previewContainer.html(this.formPreview.render({}).$el);
+		$previewContainer.sticky({
 			topSpacing: 60
 		});
-	},
+		$previewContainer.fadeIn(300);
+		clearTimeout(this.prevRendTimer);
+;	},
 
 
 	updatePreview: function () {
