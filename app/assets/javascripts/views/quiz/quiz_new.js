@@ -33,11 +33,6 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 
 	submitForm: function (event) {
 		event.preventDefault();
-
-		//temp
-		console.log($("#quiz-form").serializeJSON())
-		//end temp
-
 		var formData = $("#quiz-form").serialize();
 
 		$.ajax({
@@ -208,7 +203,7 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 			this.throttledUpdtatePreview = _.throttle(function () {
 				var formData = $("#quiz-form").serializeJSON();
 				that.formPreview.render(formData);
-			}, 400, {leading: false})
+			}, 200, {leading: false})
 		}
 		
 		this.throttledUpdtatePreview();

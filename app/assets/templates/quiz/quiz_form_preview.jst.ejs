@@ -1,12 +1,11 @@
-<h4>
+<span class="h4 well well-sm">
 	Quiz preview
-	<br>
-	<small>Index</small>
-</h4>
-<hr>
-<h6>
+</span>
+<br><br>
+<h5>
 	<%= quizTitle %>
-</h6>
+	<small>&nbsp;&nbsp; created by <a>AUTHOR NAME</a></small>
+</h5>
 <div class="media" style="float:left; width:60%;margin-top:0;">
 	<a class="pull-left">
 		QUIZ 
@@ -17,13 +16,14 @@
 		<strong>
 			<%= quizQuestion %>
 		</strong>
+			<span class="text-muted">&nbsp;&nbsp; <%= quizLength %> prompts</span>
 		<p>
 			<%= quizDescription %>
 		</p>
 	</div>
 </div>
 
-<div style="float:left; padding:0;width: 40%;margin-top:15px">
+<div style="float:left; padding:0;width: 40%;margin-top:10px">
 	<div id="prev-stats-headers" class="text-right" style="width: 30%; margin-right:5px; display:inline-block;">
 		<strong>
 			Time limit
@@ -50,10 +50,6 @@
 </div>
 
 <div style="width:100%;border:1px solid green;float:left">
-	<hr>
-	<h4>
-		<small>Quiz page</small>
-	</h4>
 	<hr>
 	wqewqwqtqw
 </div>

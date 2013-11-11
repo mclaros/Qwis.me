@@ -10,9 +10,11 @@
 	<form id="quiz-form" role="form" class="form-inline">
 		<div class="form-group">
 			<label for="quiz-title">Title</label>
+			<span class="text-muted">3 - 50 characters</span>
 			<input type="text" id="quiz-title" class="form-control" name="quiz[title]">
 			<br><br>
 			<label for="quiz-description">Description</label>
+			<span class="text-muted">Max. 150 characters</span>
 			<textarea id="quiz-description" class="form-control" name="quiz[description]" rows="3"></textarea>
 		</div>
 
@@ -43,10 +45,11 @@
 		</div>
 
 		<div class="form-group">
-		<label>
-			Question (3-100 characters)
-			<input type="text" class="prompt-question form-control" name="quiz[question]">
-		</label>
+			<label for="quiz-question">
+				Question
+			</label>
+			<span class="text-muted">3 - 100 characters</span>
+			<input type="text" id="quiz-question" class="prompt-question form-control" name="quiz[question]">
 		</div>
 
 		<hr>
