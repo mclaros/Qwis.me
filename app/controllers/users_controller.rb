@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
 		respond_to do |format|
 			format.html { render :index }
-			format.json { render :json => @users }
+			format.json { render "users.rabl", :handlers => [:rabl] }
 		end
 	end
 

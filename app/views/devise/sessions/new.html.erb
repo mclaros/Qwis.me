@@ -25,12 +25,7 @@
             </label>
             <input type="text" class="form-control" autofocus="autofocus" id="user-username" name="user[username]">
 
-            <label for="user-email">
-              <span class="h4">
-                Email
-              </span>
-            </label>
-            <input type="email" id="user-email" name="user[email]" class="form-control" value="">
+            <br>
 
             <label for="user-password">
               <span class="h4">
@@ -39,6 +34,8 @@
             </label>
             <input type="password" id="user-password" name="user[password]" class="form-control">
 
+            <br>
+
             <div>
               <input type="hidden" name="user[remember_me]" value="0">
               <input type="checkbox" id="user-remember-me" name="user[remember_me]" value="1">
@@ -46,10 +43,9 @@
             </div>
 
             <br>
-            <a href="<%= new_user_password_url %>">Forgot you password?</a>
-            <br>
-
+            
             <input type="submit" name="commit" value="Log in" class="btn btn-primary">
+            <a href="<%= new_user_password_url %>" class="btn btn-default">Forgot you password?</a>
           </form>
         </div>
 

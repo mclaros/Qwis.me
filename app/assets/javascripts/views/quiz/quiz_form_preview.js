@@ -37,7 +37,7 @@ Qwisme.Views.QuizFormPreview = Backbone.View.extend({
 			return this.dangerize("TOO LONG");
 		}
 		else if (str.length < minChars) {
-			return this.dangerize("TOO SHORT");
+			return this.dangerize(type.toUpperCase() + " TOO SHORT");
 		}
 		else {
 			return str;
