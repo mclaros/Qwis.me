@@ -15,9 +15,27 @@
           <label for="user-username">
             <span class="h4">
               Username
+              <small>3 - 15 characters</small>
             </span>
           </label>
           <input autofocus="autofocus" id="user-username" name="user[username]" type="text" class="form-control">
+
+          <br>
+
+          <label for="avatar-field">
+            <span class="h4">
+              Upload your avatar
+              <small>Optional</small>
+            </span>
+          </label>
+          <input type="file" id="avatar-field">
+
+
+
+
+
+
+          <br>
 
           <label for="user-email">
             <span class="h4">
@@ -26,12 +44,16 @@
           </label>
           <input id="user-email" name="user[email]" type="email" value="" class="form-control">
 
+          <br>
+
           <label for="user-password">
             <span class="h4">
               Password
             </span>
           </label>
           <input id="user-password" name="user[password]" type="password" class="form-control">
+
+          <br>
 
           <label for="user-password-confirmation">
             <span class="h4">
@@ -56,4 +78,5 @@
 </div>
 
 
-      <%= render "users/shared/links" %>
+
+<input type="file" class="dropzone">

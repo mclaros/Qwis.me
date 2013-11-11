@@ -33,8 +33,9 @@ gem 'ejs'
 gem 'rabl'
 gem 'figaro'
 gem 'devise'
-gem 'filepicker-rails'
-
+gem 'paperclip'
+gem 'aws-sdk'
+gem 'rmagick', :require => "RMagick"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
