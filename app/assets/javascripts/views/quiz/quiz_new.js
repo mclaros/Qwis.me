@@ -1,12 +1,15 @@
 Qwisme.Views.QuizNew = Backbone.View.extend({
 	template: JST["quiz/quiz_new"],
 
+
 	events: {
 		"click #submit-quiz-form": "submitForm",
 		"click .new-prompt-field": "dupPromptDiv",
 		"click .opt-field-blank": "readOnlyToField",
-		"click .opt-field-filled": "readOnlyToField"
+		"click .opt-field-filled": "readOnlyToField",
+		"keyup form": "updatePreview"
 	},
+
 
 	render: function () {
 		var that = this;
@@ -19,10 +22,13 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 		});
 
 		this.$el.html(renderedTemp);
+		this.formPreview = new Qwisme.Views.QuizFormPreview();
+		this.formPreview.render({});
 		$(document).ready(this.livePreviewFollow.bind(this));
 
 		return this;
 	},
+
 
 	submitForm: function (event) {
 		event.preventDefault();
@@ -54,6 +60,7 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 			}
 		})
 	},
+
 
 	resetPromptDiv: function ($div) {
 		var that = this;
@@ -89,6 +96,7 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 		$("#length-counter").text(newCount);
 	},
 
+
 	dupPromptDiv: function (event) {
 		event.preventDefault();
 
@@ -116,13 +124,14 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 		
 	},
 
+
 	promptValidations: function () {
 
 	},
 
+
 	readOnlyToField: function(event) {
 		event.preventDefault();
-
 		var $origEl = $(event.target);
 		var $fieldInput = $("<input>");
 		
@@ -150,7 +159,6 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 
 	fieldToReadOnlyListen: function ($field) {
 		var that = this;
-
 		$field.on("blur keypress", function (event) {
 			//ENTER or TAB
 			var validTrigger = (event.type === "blur" || (event.which === 13 || event.which === 9)); 
@@ -183,10 +191,26 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 		});
 	},
 
+
 	livePreviewFollow: function () {
+		$("#live-preview").html(this.formPreview.$el);
 		$("#live-preview").sticky({
 			topSpacing: 60
 		});
+	},
+
+
+	updatePreview: function () {
+		var that = this;
+
+		if (_.isUndefined(this.throttledUpdtatePreview)) {
+			this.throttledUpdtatePreview = _.throttle(function () {
+				var formData = $("#quiz-form").serializeJSON();
+				that.formPreview.render(formData);
+			}, 500, {leading: false})
+		}
+		
+		this.throttledUpdtatePreview();
 	}
 
 });
