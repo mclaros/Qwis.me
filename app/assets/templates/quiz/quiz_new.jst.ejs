@@ -5,22 +5,20 @@
 
 <div class="row">
 
-<div class="col-md-6">
+<div class="col-md-6" id="quiz-form-container">
 
 	<form id="quiz-form" role="form form-inline" class="form-inline">
 		<div class="form-group">
 			<label for="quiz-title">Title</label>
 			<input type="text" id="quiz-title" class="form-control" name="quiz[title]">
-
+			<br><br>
 			<label for="quiz-description">Description</label>
 			<textarea id="quiz-description" class="form-control" name="quiz[description]" rows="3"></textarea>
 		</div>
 
-		<br>
-
 		<div class="form-group">	
 			<label for="quiz-categories">Categories</label>
-			<select id="quiz-categories" class="form-control" name="quiz[category]" style="width: 150px;">
+			<select id="quiz-categories" class="form-control" name="quiz[category]" style="width: 150px; margin: 5px 0 5px 0;">
 				<option></option>
 				<% _.each(categories, function (cat) { %>
 					<option value="<%= cat %>"><%= _.str.capitalize(cat) %></option>
@@ -84,12 +82,18 @@
 			TODO: add tab-switching, check for uniqueness
 		</div>
 
+		<br>
 		<button class="new-prompt-field btn btn-sm btn-success">Add Prompt</button>
+		<br><br>
+		<div id="add-prompt-error" class="text-danger"></div>
 
 		<hr>
 		<input type="hidden" id="quiz-length" name="quiz[length]" value="1">
 
-		Quiz Length: <span id="length-counter">1</span>
+		<h2>
+			<small>Quiz Length:</small>
+			<span id="length-counter">1</span>
+		</h2>
 		<br><br>
 
 		<input type="submit" id="submit-quiz-form" class="btn btn-primary" value="Create Quiz">
@@ -104,7 +108,70 @@
 	TODO: Add client-side validation
 	</div>
 
-	<div class="col-md-4">
+	<div class="col-md-6">
+		<div id="live-preview" style="font-size:0.8em">
+			<h4>
+				Quiz preview
+				<br>
+				<small>Index</small>
+			</h4>
+			<hr>
+
+			<div class="media" style="float:left; width:70%;">
+				<a class="pull-left">
+					QUIZ 
+					<br>
+					PICTURE
+				</a>
+				<div class="media-body">
+					<h5>
+						TITLE
+					</h5>
+					<p>
+						DESCRIPTION
+						qwewqqqqqqqqqqq qqqqqqqqqqqqwtewe ryreuryrereur eureureyuer
+					</p>
+				</div>
+			</div>
+
+			<div style="float:left; padding:0;width: 30%;margin-top:15px">
+				<div id="prev-stats-headers" class="text-right" style="width: 45%; margin-right:5px; display:inline-block;">
+					<strong>
+						Time limit
+						<br>
+						Category
+						<br>
+						Scope
+					</strong>
+				</div>
+
+				<div id="prev-stats-data" class="text-left" style="width:45%;margin-left:5px;display:inline-block;">
+					<div id="prev-time-limit">
+						TIME
+					</div>
+
+					<div id="prev-category">
+						CATEGORY
+					</div>
+
+					<div id="prev-scope">
+						scope level
+					</div>
+				</div>
+			</div>
+
+			<div style="width:100%;border:1px solid green;float:left">
+				<hr>
+				<h4>
+					<small>Quiz page</small>
+				</h4>
+				<hr>
+				wqewqwqtqw
+			</div>
+
+
+		</div>
+
 	</div>
 
 </div>

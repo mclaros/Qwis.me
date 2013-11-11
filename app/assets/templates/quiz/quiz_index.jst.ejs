@@ -1,53 +1,38 @@
-<div class="row">
-	<div class="col-xs-9">
-
-	<div class="page-header">
-		<h1>BACKBONE: Quizzes</h1>
-	</div>
-		<% quizzes.each(function(quiz) { %>
-			<div class="row" id="quiz-list-col">
-				<div class="col-xs-7 media">
-					<a class="pull-left" href="#/quizzes/<%= quiz.id %>">
-						QUIZ PICTURE
-						<br>
-						OR
-						<br>
-						AUTHOR AVATAR
-					</a>
-					<div class="media-body">
-						<h3 class="media-heading">
-							<a href="#/quizzes/<%= quiz.id %>"><%= quiz.escape("title") %></a>
-						</h3>
-						<p>
-							<%= quiz.escape("description") || "NO DESCRIPTION" %>
-						</p>
-					</div>
-				</div>
-				<div class="col-xs-2">
-					<dl class="dl-horizontal">
-						<dt>Time limit</dt>
-						<dd><%= quiz.escape("time_limit") %>:00</dd>
-
-						<dt>Category</dt>
-						<dd><%= quiz.escape("category") %></dd>
-
-						<dt>Scope</dt>
-						<dd><%= quiz.escape("scope") %></dd>
-					</dl>
+<div class="page-header">
+	<h1>BACKBONE: Quizzes</h1>
+</div>
+	<% quizzes.each(function(quiz) { %>
+		<div class="row" id="quiz-list-col">
+			<div class="col-xs-7 media">
+				<a class="pull-left" href="#/quizzes/<%= quiz.id %>">
+					QUIZ PICTURE
+					<br>
+					OR
+					<br>
+					AUTHOR AVATAR
+				</a>
+				<div class="media-body">
+					<h3 class="media-heading">
+						<a href="#/quizzes/<%= quiz.id %>"><%= quiz.escape("title") %></a>
+					</h3>
+					<p>
+						<%= quiz.escape("description") || "NO DESCRIPTION" %>
+					</p>
 				</div>
 			</div>
-			<hr>
-		<% }) %>
-	</div>
-	<div class="col-xs-3">
-		<div class="well" id="qwiver" style="width: 200px; height: 400px; margin-top:20px; margin-right: 0; position: fixed;">
-			QWIVER
-			<br>
-			bam
-			<br>
-			bam
-			<br>
-			bam
-		</div> 
-	</div>
+			<div class="col-xs-2">
+				<dl class="dl-horizontal">
+					<dt>Time limit</dt>
+					<dd><%= quiz.escape("time_limit") %>:00</dd>
+
+					<dt>Category</dt>
+					<dd><%= quiz.escape("category") %></dd>
+
+					<dt>Scope</dt>
+					<dd><%= quiz.escape("scope") %></dd>
+				</dl>
+			</div>
+		</div>
+		<hr>
+	<% }) %>
 </div>

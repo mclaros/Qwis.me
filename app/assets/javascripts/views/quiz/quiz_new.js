@@ -5,6 +5,7 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 		"click #submit-quiz-form": "submitForm",
 		"click .new-prompt-field": "dupPromptDiv",
 		"click .opt-field-blank": "readOnlyToField",
+		"click .opt-field-filled": "readOnlyToField"
 	},
 
 	render: function () {
@@ -18,12 +19,18 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 		});
 
 		this.$el.html(renderedTemp);
+		$(document).ready(this.livePreviewFollow.bind(this));
 
 		return this;
 	},
 
 	submitForm: function (event) {
 		event.preventDefault();
+
+		//temp
+		console.log($("#quiz-form").serializeJSON())
+		//end temp
+
 		var formData = $("#quiz-form").serialize();
 
 		$.ajax({
@@ -89,10 +96,11 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 		var pAnswerText = $.trim($lastDiv.find(".prompt-answer").val());
 
 		if (!(pAnswerText.length >=3 && pAnswerText.length <= 30)) {
-			$lastDiv.after("Invalid question or answer ")
+			$("#add-prompt-error").text("Question or answer does not meet length requirements");
 			return;
 		}
 
+		$("#add-prompt-error").text("");
 		var $newDiv = $lastDiv.clone();
 		$newDiv.find("input").val("");
 		$newDiv.css("display", "none");
@@ -106,6 +114,10 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 
 		this.addToQuizLength(1);
 		
+	},
+
+	promptValidations: function () {
+
 	},
 
 	readOnlyToField: function(event) {
@@ -146,7 +158,6 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 			if (validTrigger) {
 				var field = event.target;
 				var valText = $(field).val();
-				//trim whitespace
 				valText = $.trim(valText);
 				var valEmpty = (valText === "");
 				var $readOnlyText;
@@ -169,6 +180,12 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 				$(field).replaceWith($readOnlyText);
 				// that.readOnlyToFieldListen($readOnlyText);
 			}
+		});
+	},
+
+	livePreviewFollow: function () {
+		$("#live-preview").sticky({
+			topSpacing: 60
 		});
 	}
 

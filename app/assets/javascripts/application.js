@@ -18,6 +18,7 @@
 //= require backbone
 
 //= require jquery.serializeJSON.min
+//= require jquery.sticky
 //= require qwisme
 
 //= require bootstrap
