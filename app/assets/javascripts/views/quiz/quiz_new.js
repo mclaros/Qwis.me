@@ -15,7 +15,7 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 
 	render: function () {
 		var that = this;
-		var scopes = ["common", "amateur", "expert"];
+	var scopes = ["common", "amateur", "expert"];
 		var categories = ["entertainment", "gaming", "geography", "history", "holiday", "just For Fun", "language", "literature", "movies", "music", "odd Qwirks (Misc.)", "religion", "science", "sports", "television"];
 
 		var renderedTemp = this.template({
@@ -32,6 +32,7 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 
 	submitForm: function (event) {
 		event.preventDefault();
+		var that = this;
 		var formData = $("#quiz-form").serialize();
 
 		$.ajax({
@@ -51,17 +52,23 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 			},
 
 			error: function (res) {
-				var errorsArr = res.responseText;
+				var errorsArr = JSON.parse(res.responseText);
 				var errorsList = $("<ul>");
-				console.log(typeof errorsArr);
-				// _.each(errorsArr, function (error) {
-				// 	errorsList.append($("<li>" + error + "</li>"));
-				// });
+				_.each(errorsArr, function (errorStr) {
+					errorsList.append($("<li>" + errorStr + "</li>"));
+				});
 
-				$("#form-errors").text("The following errors occurred:");
-				$("#form-errors").append(errorsList);
+				that.showErrorsModal(errorsList);
 			}
 		})
+	},
+
+
+	showErrorsModal: function (errorList) {
+		$("#notice").html("");
+		$("#notice").text("The following errors occurred:");
+		$("#notice").append(errorList);
+		$("#noticeModal").modal();
 	},
 
 
@@ -105,7 +112,7 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 
 		var $lastDiv = $(".prompt-fields").last();
 		var pAnswerText = $.trim($lastDiv.find(".prompt-answer").val());
-		console.log(pAnswerText);
+
 		if (!(pAnswerText.length >=3 && pAnswerText.length <= 30)) {
 			$("#add-prompt-error").text("Correct answer does not meet length requirements");
 			return;
