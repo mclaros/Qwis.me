@@ -5,39 +5,45 @@ Qwisme.Views.QuizComments = Backbone.View.extend({
 		"click #add-comment": "submitComment"
 	},
 
-	initialize: function (options) {
-		this.commentData = options.commentData
-	},
 
 	render: function () {
 		var that = this;
-		console.log(this.commentData)
 		var renderedTemp = this.template({
-			commentData: that.commentData
+			comments: that.collection
 		});
 
 		this.$el.html(renderedTemp);
 		return this;
 	},
 
+
 	submitComment: function (event) {
 		event.preventDefault();
 		var that = this;
+		var trimmedComment = $.trim($("#new-comment-field").val());
+		$("#new-comment-field").val(trimmedComment);
 
+		if (trimmedComment.length === 0) {
+			return;
+		}
+
+		var formData = $("#new-comment-form").serialize();
 		$.ajax({
 			url: "quizzes/" + that.model.id + "/comments",
-			
+			data: formData,
 			type: "POST",
 			
 			success: function (response) {
-				that.showNoticeModal(response);
+				console.log(response)
+				that.render();
 			},
 
-			error: function (resposne) {
-				that.showNoticeModal(resposne);
+			error: function (response) {
+				console.log(response)
 			}
 		});
 	},
+
 
 	showNoticeModal: function (notice) {
 		$("#notice").text(notice);

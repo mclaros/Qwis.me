@@ -34,8 +34,7 @@ Qwisme.Views.QuizShow = Backbone.View.extend({
 			type: "GET",
 			success: function (commentData) {
 				that.quizComments = new Qwisme.Views.QuizComments({
-					model: that.model,
-					commentData: commentData
+					collection: that.model.get("comments")
 				});
 				that.quizComments.render();
 

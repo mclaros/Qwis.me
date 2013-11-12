@@ -2,10 +2,21 @@ Qwisme.Models.Quiz = Backbone.Model.extend({
 	urlRoot: "/quizzes",
 
 	parse: function (data) {
+		var that = this;
 		data.quiz_prompts = new Qwisme.Collections.QuizPrompts(
 			data.quiz_prompts,
 			{ parse: true }
-		)
+			)
+
+
+		var comments = new Qwisme.Collections.Comments({
+			quizID: data.id
+		});
+		comments.add(data.comments);
+		data.comments = comments;
+	
+		console.log("data.comments parsed is")
+		console.log(data.comments)
 
 		return data;
 	},

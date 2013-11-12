@@ -11,11 +11,13 @@
 <div id="temp-comments" class="row">
 	<div class="col-xs-6">
 		<ul id="temp-comment-list">
-
+			<% comments.each(function (comment) { %>
+				<li>
+					<%= comment.escape("body") %>
+				</li>
+			<% }) %>
 		</ul>
 
-		COMMENT DATA:
-		<%= commentData %>
 	</div>
 </div>
 
@@ -91,14 +93,14 @@
 <div class="row">
 	<div class="col-xs-6">
 		<hr>
-		<form>
+	<form id="new-comment-form">
 			<label for="new-comment-field">
 				<h4>
 					New comment
 					<small>Max. 200 characters</small>
 				</h4>
 			</label>
-			<textarea id="new-comment-field" rows="3" class="form-control"></textarea>
+			<textarea id="new-comment-field" rows="3" class="form-control" name="comment[body]"></textarea>
 			<br>
 			<button type="button" id="add-comment" class="btn btn-primary">Add comment</button>
 		</form>

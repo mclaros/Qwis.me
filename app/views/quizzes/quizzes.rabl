@@ -1,6 +1,6 @@
 collection @quizzes
 attributes :id, :author_id, :author_username, :title, :question, :description, :category,
-		   :scope, :length, :time_limit, :game_data
+		   :scope, :length, :time_limit, :game_data, :comments
 node(:has_favorited) { |quiz| quiz.favoritings.exists?(:user_id => current_user.id) }
 node(:has_played) { |quiz| quiz.play_histories.exists?(:user_id => current_user.id) }
 child(:quiz_prompts) do 
