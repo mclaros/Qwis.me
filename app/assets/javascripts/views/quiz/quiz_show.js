@@ -13,13 +13,35 @@ Qwisme.Views.QuizShow = Backbone.View.extend({
 		});
 
 		this.$el.html(renderedTemp);
+		this.renderPlayView();
+		this.renderCommentsView();
 
+		return this;
+	},
+
+	renderPlayView: function () {
 		this.quizPlay = new Qwisme.Views.QuizPlay({
 			model: this.model
 		});
 		this.quizPlay.render();
 		this.$el.find("#play-section").html(this.quizPlay.$el);
+	},
 
-		return this;
+	renderCommentsView: function () {
+		var that = this;
+		$.ajax({
+			url: "/quizzes/" + that.model.id + "comments",
+			type: "GET",
+			success: function (commentData) {
+				console.log(commentData);
+
+				that.quizComments = new Qwisme.Views.QuizComments({
+					model: that.model
+				});
+				that.quizComments.render();
+
+				that.$el.find("#comments-section").html(that.quizComments.$el);
+			}
+		});	
 	}
 });

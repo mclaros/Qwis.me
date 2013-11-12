@@ -16,7 +16,7 @@
 						<a href="#/quizzes/<%= quiz.id %>"><%= quiz.escape("title") %></a>
 					</h3>
 					<p>
-						<%= quiz.escape("description") || "NO DESCRIPTION" %>
+						<%= quiz.escape("description") || "<span class='text-muted'>NO DESCRIPTION</span>" %>
 					</p>
 				</div>
 			</div>

@@ -1,6 +1,6 @@
 class Quiz < ActiveRecord::Base
 	attr_accessible :author_id, :title, :description, :category,
-					:scope, :length, :time_limit, :question, :quiz_img_url
+					:scope, :length, :time_limit, :question, :quiz_img
 
 	validates_presence_of :author_id, :title, :category, :scope, :length, :time_limit, :question
 	validates_length_of :description, :maximum => 150, :allow_blank => true
@@ -37,8 +37,6 @@ class Quiz < ActiveRecord::Base
 
 	def game_data
 		prompts = self.quiz_prompts
-		# ques_to_ans = {}
-		# ans_to_ques = {}
 		prompt_id_to_ans = {}
 		ans_to_prompt_id = {}
 
