@@ -17,12 +17,17 @@
 
 /* temporary location, will movelater */
 
+body {
+	background-image:url(https://s3-us-west-1.amazonaws.com/qwisme-development/geometry.png);
+}
 
 div.container {
 	height: 100%;
 	width: 80%;
-	margin: 55px auto 0 auto;
+	margin: 50px auto 0 auto;
 	padding: 10px 50px 10px 50px;
+	border: 1px solid lightgray;
+	background-color: rgba(255,255,255,0.6);
 };
 
 

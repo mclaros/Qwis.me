@@ -1,57 +1,91 @@
-EXAMPLE:
-<hr>
-
-<ul class="media-list">
-	<li class="media">
-		<a class="pull-left">
-			left stuff
-		</a>
-		<div class="media-body">
-			<h4 class="media-heading">Author name?</h4>
-			COMMENT BODY GOES HERE
-			<br>
-			YEAH!
-			<ul class="media-list">
-	<li class="media">
-		<a class="pull-left">
-			left stuff
-		</a>
-		<div class="media-body">
-			<h4 class="media-heading">Author name?</h4>
-			COMMENT BODY GOES HERE
-			<br>
-			YEAH!
-		</div>
-	</li>
-</ul>
-		</div>
-	</li>
-</ul>
-
-<hr>
-Now with divs!
-<hr>
-
-<div class="media">
-  <a class="pull-left" href="#">
-    LEFT STUFF GOES HERE
-  </a>
-  <div class="media-body">
-    <h4 class="media-heading">erewrqweqw<br>wqewqerwqrqw</h4>
-
-
-    
-    <div class="media">
-  <a class="pull-left" href="#">
-    LEFT STUFF GOES HERE
-  </a>
-  <div class="media-body">
-    <h4 class="media-heading">erewrqweqw<br>wqewqerwqrqw</h4>
-    ...
-  </div>
+<div class="row">
+	<div class="col-xs-12">
+		<h3>
+			Comments
+		</h3>
+	</div>
 </div>
 
+<div class="row">
+	<div class="col-xs-6">
+		EXAMPLE:
+		<hr>
+
+		<ul class="media-list">
+			<li class="media">
+				<a class="pull-left">
+					<img src="http://s3-us-west-1.amazonaws.com/qwis-me-development/users/avatars/000/000/001/small/mrt.jpg?1384226707" class="img-rounded">
+				</a>
+				<div class="media-body">
+					<h4 class="media-heading">Author name?</h4>
+					<p>
+						COMMENT BODY GOES HERE
+						<br>
+						YEAH!
+					</p>
 
 
-  </div>
+
+					<div class="panel-group" id="reply-boxID">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<span class="panel-title">
+									<a data-toggle="collapse" data-parent="#reply-boxID" href="#collapseOne">
+										Reply to this comment
+									</a>
+								</span>
+							</div>
+							<div id="collapseOne" class="panel-collapse collapse">
+								<div class="panel-body">
+									<form>
+										<textarea class="form-control" rows="3"></textarea>
+									</form>
+								</div>
+								<br>
+							</div>
+						</div>
+					</div>
+
+
+
+
+
+
+
+		<ul class="media-list">
+			<li class="media">
+				<a class="pull-left">
+					<img src="http://s3-us-west-1.amazonaws.com/qwis-me-development/users/avatars/000/000/001/small/mrt.jpg?1384226707" class="img-rounded">
+				</a>
+				<div class="media-body">
+					<h4 class="media-heading">Author name?</h4>
+					<p>
+						COMMENT BODY GOES HERE
+						<br>
+						YEAH!
+					</p>
+				</div>
+			</li>
+		</ul>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-xs-6">
+		<hr>
+		<form>
+			<label for="new-comment-field">
+				<h4>
+					New comment
+					<small>Max. 200 characters</small>
+				</h4>
+			</label>
+			<textarea id="new-comment-field" rows="3" class="form-control"></textarea>
+			<br>
+			<button type="button" class="btn btn-primary">Add comment</button>
+		</form>
+	</div>
 </div>
