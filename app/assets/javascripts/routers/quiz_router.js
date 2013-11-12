@@ -46,25 +46,32 @@ Qwisme.Routers.QuizRouter = Backbone.Router.extend({
 		var that = this;
 		//save current user as global?
 		var user = Qwisme.USERS.get(id);
-
+		
 		if (_.isUndefined(user)) {
 			$.ajax({
-				url: "/users" + id,
+				url: "/users/" + id,
 				type: "GET",
 				success: function (userData) {
-					user = Qwisme.USERS.create(userData);
+					user = Qwisme.USERS.add(userData);
+					var userShow = new Qwisme.Views.UserShow({
+						model: user
+					});
+					
+					that._swapView(userShow);
 				},
 
 				error: function (data) {
-					console.log("USER DOES NOT EXIST?!");
+					$(".alert").text("User does not exist!");
 				}
 			});
 		}
-
-		var userShow = new Qwisme.Views.UserShow({
-			model: user
-		});
-		that._swapView(userShow);
+		else {
+			var userShow = new Qwisme.Views.UserShow({
+				model: user
+			});
+			
+			that._swapView(userShow);
+		}
 	},
 
 	renderQuizIndex: function () {

@@ -1,16 +1,24 @@
 <script type="application/json" id="bootstrapped_quizzes">
-	<%= @quizzes.to_json(:methods => :game_data, :include => {:quiz_prompts => { :include=>:valid_answers}} ).html_safe %>
+	{	"quizData": <%= @quizzes.to_json(:methods => :game_data, :include => {:quiz_prompts => { :include=>:valid_answers}} ).html_safe %>,
+		"userData": <%= current_user.to_json(:methods => :avatar ).html_safe %>
+	}
+
 </script>
 
 <script type="application/javascript">
 	$(document).ready(function () {
-		var quizData = JSON.parse($("#bootstrapped_quizzes").html());
+		var data = JSON.parse($("#bootstrapped_quizzes").html());
+		var quizData = data.quizData;
+		var userData = data.userData;
+		console.log(data)
 		var $rootEl = $("#root-main-div");
 
-		window.Qwisme.initialize($rootEl, quizData);
+		window.Qwisme.initialize($rootEl, quizData, userData);
 	});
 </script>
 
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
 
 
 <div id="root-main-div" class="container">

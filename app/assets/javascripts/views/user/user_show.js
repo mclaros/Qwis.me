@@ -1,7 +1,9 @@
 Qwisme.Views.UserShow = Backbone.View.extend({
 	template: JST["user/user_show"],
 
-	render: function () {
+	render: function (user) {
+
+		
 		var renderedTemp = this.template({
 			user: this.model
 		});
