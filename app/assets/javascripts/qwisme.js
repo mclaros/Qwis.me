@@ -3,13 +3,13 @@ window.Qwisme = {
   Collections: {},
   Views: {},
   Routers: {},
-  initialize: function($rootEl, quizData, userData) {
-    Qwisme.QUIZZES = new Qwisme.Collections.Quizzes(quizData, { parse: true });
+  initialize: function(options) {
+    Qwisme.QUIZZES = new Qwisme.Collections.Quizzes(options.quizData, { parse: true });
     Qwisme.USERS = new Qwisme.Collections.Users();
-    Qwisme.USERS.add(userData);
+    Qwisme.CURRENT_USER = Qwisme.USERS.add(options.currentUserData);
 
     new Qwisme.Routers.QuizRouter({
-    	$rootEl: $rootEl
+    	$rootEl: options.$rootEl
     });
 
     Backbone.history.start();
