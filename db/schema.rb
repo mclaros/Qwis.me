@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131111231439) do
+ActiveRecord::Schema.define(:version => 20131112032028) do
 
   create_table "comments", :force => true do |t|
     t.integer  "author_id"
@@ -26,13 +26,13 @@ ActiveRecord::Schema.define(:version => 20131111231439) do
   add_index "comments", ["parent_comment_id"], :name => "index_comments_on_parent_comment_id"
 
   create_table "favoritings", :force => true do |t|
-    t.integer  "user_id",    :null => false
-    t.string   "quiz_id",    :null => false
+    t.integer  "quiz_id"
+    t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  add_index "favoritings", ["user_id", "quiz_id"], :name => "index_favoritings_on_user_id_and_quiz_id", :unique => true
+  add_index "favoritings", ["quiz_id", "user_id"], :name => "index_favoritings_on_quiz_id_and_user_id", :unique => true
 
   create_table "play_histories", :force => true do |t|
     t.integer  "user_id",     :null => false
@@ -54,15 +54,6 @@ ActiveRecord::Schema.define(:version => 20131111231439) do
   end
 
   add_index "quiz_prompts", ["quiz_id"], :name => "index_quiz_prompts_on_quiz_id"
-
-  create_table "quiz_trackers", :force => true do |t|
-    t.integer  "quiz_id",                   :null => false
-    t.integer  "play_count", :default => 0, :null => false
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-  end
-
-  add_index "quiz_trackers", ["quiz_id"], :name => "index_quiz_trackers_on_quiz_id"
 
   create_table "quizzes", :force => true do |t|
     t.integer  "author_id"

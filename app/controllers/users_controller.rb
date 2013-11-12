@@ -2,10 +2,11 @@ class UsersController < ApplicationController
 	def index
 		@users = User.all
 
-		respond_to do |format|
-			format.html { render :index }
-			format.json { render "users.rabl", :handlers => [:rabl] }
-		end
+		render "users.rabl", :handlers => [:rabl]
+		# respond_to do |format|
+		# 	format.html { render :index }
+		# 	format.json { render "users.rabl", :handlers => [:rabl] }
+		# end
 	end
 
 	def show

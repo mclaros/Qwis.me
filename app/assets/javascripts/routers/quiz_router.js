@@ -61,7 +61,8 @@ Qwisme.Routers.QuizRouter = Backbone.Router.extend({
 				},
 
 				error: function (data) {
-					$(".alert").text("User does not exist!");
+					that.showNoticeModal("User does not exist!")
+					return;
 				}
 			});
 		}
@@ -90,6 +91,12 @@ Qwisme.Routers.QuizRouter = Backbone.Router.extend({
 
 	renderQuizShow: function (id) {
 		var quiz = Qwisme.QUIZZES.get(id);
+
+		if (_.isUndefined(quiz)) {
+			this.showNoticeModal("Quiz does not exist!");
+			return;
+		}
+
 		var quizShow = new Qwisme.Views.QuizShow({
 			model: quiz
 		});
@@ -114,6 +121,11 @@ Qwisme.Routers.QuizRouter = Backbone.Router.extend({
 
 		this._currentView = newView;
 		this.$rootEl.html(newView.render().$el);
+	},
+
+	showNoticeModal: function (notice) {
+		$("#notice").text(notice);
+		$("#noticeModal").modal();
 	}
 
 });

@@ -1,13 +1,15 @@
 <script type="application/json" id="bootstrapped_quizzes">
-	{	"quizData": <%= @quizzes.to_json(:methods => :game_data, :include => {:quiz_prompts => { :include=>:valid_answers}} ).html_safe %>,
-		"userData": <%= current_user.to_json(:methods => :avatar ).html_safe %>
-	}
+		{	"quizData": <%= (render(:file => 'quizzes/quizzes.rabl')).html_safe %>,
+			"userData": <%= (render(:file => 'users/users.rabl')).html_safe %>
+		}
+
 
 </script>
 
 <script type="application/javascript">
 	$(document).ready(function () {
 		var data = JSON.parse($("#bootstrapped_quizzes").html());
+		console.log(data);
 		var quizData = data.quizData;
 		var userData = data.userData;
 		console.log(data)
@@ -17,9 +19,26 @@
 	});
 </script>
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-
 
 <div id="root-main-div" class="container">
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="noticeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Notice</h4>
+      </div>
+      <div class="modal-body" id="notice">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+

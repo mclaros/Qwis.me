@@ -42,7 +42,8 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 				var newID = parseInt(resNewId);
 				Qwisme.QUIZZES.fetch({
 					success: function () {
-						Backbone.history.navigate(("/quizzes/" + newID), {
+						console.log("going created and fetched")
+						Backbone.history.navigate(("#/quizzes/" + newID), {
 							trigger: true
 						})
 					}
