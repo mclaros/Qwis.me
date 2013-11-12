@@ -32,6 +32,11 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 
 	submitForm: function (event) {
 		event.preventDefault();
+		$(event.target).attr({
+			disabled: true,
+			value: "Creating quiz..."
+		})
+
 		var that = this;
 		var formData = $("#quiz-form").serialize();
 
@@ -59,6 +64,10 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 				});
 
 				that.showErrorsModal(errorsList);
+				$(event.target).attr({
+					disabled: false,
+					value: "Create Quiz"
+				})
 			}
 		})
 	},
@@ -142,8 +151,8 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 			var targetDiv = $(".prompt-fields").last();
 			targetDiv.slideUp(400, function () {
 				that.addToQuizLength(-1);
-				that.validateRemoveButton();
 				targetDiv.remove();
+				that.validateRemoveButton();
 			});
 		}
 	},

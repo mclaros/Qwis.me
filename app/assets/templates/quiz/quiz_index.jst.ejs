@@ -14,8 +14,14 @@
 				<div class="media-body">
 					<h3 class="media-heading">
 						<a href="#/quizzes/<%= quiz.id %>"><%= quiz.escape("title") %></a>
+						<small> 
+							&nbsp;&nbsp; created by <a href="#/users/<%= quiz.get('author_id') %>">
+								<%= quiz.escape("author_username") %>
+							</a>
+						</small>
 					</h3>
 					<p>
+						<strong>Description</strong><br>
 						<%= quiz.escape("description") || "<span class='text-muted'>NO DESCRIPTION</span>" %>
 					</p>
 				</div>
@@ -26,10 +32,10 @@
 					<dd><%= quiz.escape("time_limit") %>:00</dd>
 
 					<dt>Category</dt>
-					<dd><%= quiz.escape("category") %></dd>
+					<dd><%= _.str.capitalize(quiz.escape("category")) %></dd>
 
 					<dt>Scope</dt>
-					<dd><%= quiz.escape("scope") %></dd>
+					<dd><%= _.str.capitalize(quiz.escape("scope")) %></dd>
 				</dl>
 			</div>
 		</div>

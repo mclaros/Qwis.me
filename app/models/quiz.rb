@@ -35,6 +35,10 @@ class Quiz < ActiveRecord::Base
 		return scopes
 	end
 
+	def author_username
+		User.find(self.author_id).username
+	end
+
 	def game_data
 		prompts = self.quiz_prompts
 		prompt_id_to_ans = {}

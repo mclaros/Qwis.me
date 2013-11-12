@@ -3,7 +3,9 @@
 	<h1>
 		<%= quiz.escape("title") %> 
 		<small> 
-			&nbsp;&nbsp; created by <a>AUTHOR NAME</a>
+			&nbsp;&nbsp; created by <a href="#/users/<%= quiz.get('author_id') %>">
+				<%= quiz.escape("author_username") %>
+			</a>
 		</small>
 	</h1>
 	wqrwrwq

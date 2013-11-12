@@ -30,13 +30,12 @@ Qwisme.Views.QuizShow = Backbone.View.extend({
 	renderCommentsView: function () {
 		var that = this;
 		$.ajax({
-			url: "/quizzes/" + that.model.id + "comments",
+			url: "/quizzes/" + that.model.id + "/comments",
 			type: "GET",
 			success: function (commentData) {
-				console.log(commentData);
-
 				that.quizComments = new Qwisme.Views.QuizComments({
-					model: that.model
+					model: that.model,
+					commentData: commentData
 				});
 				that.quizComments.render();
 
