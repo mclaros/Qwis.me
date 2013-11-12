@@ -34,12 +34,17 @@
 		    	<input type="hidden" name="_method" value="DELETE">
 		    	<button type="submit" class="btn btn-default">Log out</button>
 		    </form>
-		    <p class="navbar-text navbar-right">
+		    <span class="navbar-right" style="margin-top: 3px;">
+		    	<a href="#/users/<%= current_user.id %>">
+			    	<%= image_tag current_user.avatar(:small), :style => "max-height: 40px; max-width: 40px;", :class => "img-thumbnail" %>
+			    </a>
+			</span>
+		    <span class="navbar-text navbar-right">
 		    	Logged in as
 		    	<a href="#/users/<%= current_user.id %>">
 			    	<%= current_user.username %>
 			    </a>
-		    </p>
+		    </span>
 	    <% else %>
 	    	<p class="navbar-text navbar-right">
 	    		Greetings, guest
