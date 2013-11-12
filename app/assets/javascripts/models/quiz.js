@@ -12,7 +12,6 @@ Qwisme.Models.Quiz = Backbone.Model.extend({
 			quizID: data.id
 		});
 	
-
 		return data;
 	},
 

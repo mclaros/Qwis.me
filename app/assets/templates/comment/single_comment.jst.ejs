@@ -1,0 +1,38 @@
+<!-- <ul class="media-list"> -->
+	<li class="media">
+		<a class="pull-left">
+			<img src="http://s3-us-west-1.amazonaws.com/qwis-me-development/users/avatars/000/000/001/small/mrt.jpg?1384226707" class="img-rounded">
+		</a>
+
+		<div class="media-body">
+			<h4 class="media-heading">
+				Author Name
+				<small>on DATE</small>
+			</h4>
+			<p>
+				<%= comment.escape("body") %>
+			</p>
+
+			<button type="button" class="btn btn-default btm-sm pull-right expand-reply">Reply</button>
+			<br>
+			<div id="reply-box-<%= comment.id %>" class="form-group" style="display: none;">
+				<span class="h5">
+					<small>Max. 200 characters</small>
+				</span>
+				<form>
+					<textarea class="form-control" rows="3"></textarea>
+					<br>
+					<input type="submit" class="btn btn-primary btn-sm" value="Add reply">
+				</form>
+			</div>
+
+			REPLIES LIST GOES BELOW HERE
+			<ul id="reply-list-<%= comment.id %>" class="media-list">
+				
+			</ul>
+
+		<br>
+		</div>
+
+	</li>
+<!-- </ul> -->
