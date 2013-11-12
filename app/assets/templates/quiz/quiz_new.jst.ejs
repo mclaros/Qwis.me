@@ -5,140 +5,141 @@
 
 <div class="row">
 
-<div class="col-md-6" id="quiz-form-container">
+	<div class="col-md-6" id="quiz-form-container">
 
-	<form id="quiz-form" role="form" class="form-inline">
-		<div class="form-group">
-			<label for="quiz-title">
-				<span class="h4">
-					Title
-					<small>3 - 50 characters</small>
-				</span>
-			</label>
-			<input type="text" id="quiz-title" class="form-control" name="quiz[title]">
-			
-			<br><br>
+		<form id="quiz-form" role="form" class="form-inline">
+			<div class="form-group">
+				<label for="quiz-title">
+					<span class="h4">
+						Title
+						<small>3 - 50 characters</small>
+					</span>
+				</label>
+				<input type="text" id="quiz-title" class="form-control" name="quiz[title]">
+				
+				<br><br>
 
-			<label for="quiz-description">
-				<span class="h4">
-					Description
-					<small>Max. 150 characters</small>
-				</span>
-			</label>
-			<textarea id="quiz-description" class="form-control" name="quiz[description]" rows="3"></textarea>
-		</div>
+				<label for="quiz-description">
+					<span class="h4">
+						Description
+						<small>Max. 150 characters</small>
+					</span>
+				</label>
+				<textarea id="quiz-description" class="form-control" name="quiz[description]" rows="3"></textarea>
+			</div>
 
-		<div class="form-group">	
-			<label for="quiz-categories">
-				<span class="h4">
-					Categories
-				</span>
-			</label>
-			<select id="quiz-categories" class="form-control" name="quiz[category]" style="width: 150px; margin: 3px;">
-				<option></option>
-				<% _.each(categories, function (cat) { %>
-					<option value="<%= cat %>"><%= _.str.capitalize(cat) %></option>
-				<% }) %>
-			</select>
+			<div class="form-group">	
+				<label for="quiz-categories">
+					<span class="h4">
+						Categories
+					</span>
+				</label>
+				<select id="quiz-categories" class="form-control" name="quiz[category]" style="width: 150px; margin: 3px;">
+					<option></option>
+					<% _.each(categories, function (cat) { %>
+						<option value="<%= cat %>"><%= _.str.capitalize(cat) %></option>
+					<% }) %>
+				</select>
 
-			<br>
-
-			<label for="quiz-scope">
-				<span class="h4">
-					Scope
-				</span>
-			</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<select id="quiz-scope" class="form-control" name="quiz[scope]" style="width: 150px; margin: 3px;">
-				<option></option>
-				<% _.each(scopes, function (scope) { %>
-					<option value="<%= scope %>"><%= _.str.capitalize(scope) %></option>
-				<% }) %>
-			</select>	
-
-			<br>
-
-			<label for="quiz-time-limit">
-				<span class="h4">
-					Time Limit
-				</span>
-			</label>
-			<select id="quiz-time-limit" class="form-control" name="quiz[time_limit]" style="width: 150px;margin: 3px;">
-				<% for(var i = 1; i < 21; i++) { %>
-					<option value="<%= i %>"><%= i %>:00</option>
-				<% } %>
-			</select>
-
-		</div>
-
-		<div class="form-group">
-			<label for="quiz-question">
-				<span class="h4">
-					Question
-					<small>3 - 100 characters</small>
-				</span>
-			</label>
-			<input type="text" id="quiz-question" class="prompt-question form-control" name="quiz[question]">
-		</div
-ht>
-		<h3>Prompts</h3>
-
-		<hr>
-
-		<div class="prompt-fields form-group">
-			<label>
-				<span class="h4">
-					Answer header <small>Optional</small>
-					<br>
-					<small>Ex. "Name of athlete", "In years" | Max. 30 characters</small>
-				</span>
-				<input type="text" class="prompt-prompt form-control" name="quiz_prompts[][prompt]">
-			</label>
-
-			<label>
-				<span class="h4">
-					Correct Answer
-					<small>3 - 30 characters, not case-sensitive</small>
-				</span>
 				<br>
-				<input type="text" class="prompt-answer form-control" name="quiz_prompts[][correct_answer]">
-			</label>
 
-			<h4>Alternate Answers <small>Optional</small></h4>
-			<span class="text-muted">Max. 30 characters</span>
-			<br>
-			<div class="opt-field-blank">Add valid answer</div>
-			<div class="opt-field-blank">Add valid answer</div>
-			<div class="opt-field-blank">Add valid answer</div>
-			<div class="opt-field-blank">Add valid answer</div>
+				<label for="quiz-scope">
+					<span class="h4">
+						Scope
+					</span>
+				</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<select id="quiz-scope" class="form-control" name="quiz[scope]" style="width: 150px; margin: 3px;">
+					<option></option>
+					<% _.each(scopes, function (scope) { %>
+						<option value="<%= scope %>"><%= _.str.capitalize(scope) %></option>
+					<% }) %>
+				</select>	
+
+				<br>
+
+				<label for="quiz-time-limit">
+					<span class="h4">
+						Time Limit
+					</span>
+				</label>
+				<select id="quiz-time-limit" class="form-control" name="quiz[time_limit]" style="width: 150px;margin: 3px;">
+					<% for(var i = 1; i < 21; i++) { %>
+						<option value="<%= i %>"><%= i %>:00</option>
+					<% } %>
+				</select>
+
+			</div>
+
+			<div class="form-group">
+				<label for="quiz-question">
+					<span class="h4">
+						Question
+						<small>3 - 100 characters</small>
+					</span>
+				</label>
+				<input type="text" id="quiz-question" class="prompt-question form-control" name="quiz[question]">
+			</div
+	ht>
+			<h3>Prompts</h3>
+
+			<hr>
+
+			<div class="prompt-fields form-group">
+				<label>
+					<span class="h4">
+						Answer header <small>Optional</small>
+						<br>
+						<small>Ex. "Name of athlete", "In years" | Max. 30 characters</small>
+					</span>
+					<input type="text" class="prompt-prompt form-control" name="quiz_prompts[][prompt]">
+				</label>
+
+				<label>
+					<span class="h4">
+						Correct Answer
+						<small>3 - 30 characters, not case-sensitive</small>
+					</span>
+					<br>
+					<input type="text" class="prompt-answer form-control" name="quiz_prompts[][correct_answer]">
+				</label>
+
+				<h4>Alternate Answers <small>Optional</small></h4>
+				<span class="text-muted">Max. 30 characters</span>
+				<br>
+				<div class="opt-field-blank">Add valid answer</div>
+				<div class="opt-field-blank">Add valid answer</div>
+				<div class="opt-field-blank">Add valid answer</div>
+				<div class="opt-field-blank">Add valid answer</div>
+				<br><br>
+				<p>
+					<strong>Qwip:</strong>
+					You can press ENTER, TAB, or click elsewhere to set answer
+				</p>
+			</div>
+
 			<br><br>
-			<p>
-				<strong>Qwip:</strong>
-				You can press ENTER, TAB, or click elsewhere to set answer
-			</p>
-		</div>
 
-		<br><br>
+			<div>
+				<button class="new-prompt-field btn btn-sm btn-success">Add Prompt</button>
+				<button class="remove-prompt btn btn-sm btn-danger" disabled>Remove Previous</button>
+			</div>
+			<br>
+			<span id="add-prompt-error" class="text-danger"></span>
 
-		<div>
-			<button class="new-prompt-field btn btn-sm btn-success">Add Prompt</button>
-			<button class="remove-prompt btn btn-sm btn-danger" disabled>Remove Previous</button>
-		</div>
-		<br>
-		<span id="add-prompt-error" class="text-danger"></span>
+			<hr>
 
-		<hr>
+			<input type="hidden" id="quiz-length" name="quiz[length]" value="1">
 
-		<input type="hidden" id="quiz-length" name="quiz[length]" value="1">
+			<h2>
+				<small>Quiz Length:</small>
+				<span id="length-counter">1</span>
+			</h2>
+			<br><br>
 
-		<h2>
-			<small>Quiz Length:</small>
-			<span id="length-counter">1</span>
-		</h2>
-		<br><br>
+			<input type="submit" id="submit-quiz-form" class="btn btn-primary btn-lg" value="Create Quiz">
 
-		<input type="submit" id="submit-quiz-form" class="btn btn-primary btn-lg" value="Create Quiz">
-
-	</form>
+		</form>
+	</div>
 
 	<div class="col-md-6">
 		<div id="live-preview" style="font-size:0.8em">

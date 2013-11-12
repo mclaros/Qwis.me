@@ -27,20 +27,25 @@ Qwisme.Views.QuizFormPreview = Backbone.View.extend({
 
 	validate: function (source, type, minChars, maxChars) {
 		console.log(source)
-		var str = _.str.capitalize(_.escape(source[type]));
+		var specialFormat = ["category","scope"];
+		var string = _.escape(source[type]);
+		console.log(string)
+		if ( _.contains(specialFormat, type) ) {
+			string = _.str.capitalize(string);
+		}
 		
-		if (minChars === 0 && _.isBlank(str)) {
-			var includeType = !_.contains(["category", "scope"], type);
+		if (minChars === 0 && _.isBlank(string)) {
+			var includeType = !_.contains(specialFormat, type);
 			return this.dangerize("MISSING" + (includeType ? " " + type.toUpperCase() : ""));
 		}
-		else if (str.length > maxChars) {
+		else if (string.length > maxChars) {
 			return this.dangerize("TOO LONG");
 		}
-		else if (str.length < minChars) {
+		else if (string.length < minChars) {
 			return this.dangerize(type.toUpperCase() + " TOO SHORT");
 		}
 		else {
-			return str;
+			return string;
 		}
 	},
 
