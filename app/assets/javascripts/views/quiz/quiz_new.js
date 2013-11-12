@@ -71,7 +71,7 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 		$div.find("div").each(function (idx, el) {
 			var $blankDiv = $("<div>");
 			$blankDiv.addClass("opt-field-blank");
-			$blankDiv.text("Add valid answer...");
+			$blankDiv.text("Add valid answer");
 
 			$(el).replaceWith($blankDiv);
 			// that.readOnlyToFieldListen($blankDiv);
@@ -83,7 +83,7 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 			if (isTarget) {
 				$blankDiv = $("<div>");
 				$blankDiv.addClass("opt-field-blank");
-				$blankDiv.text("Add valid answer...");
+				$blankDiv.text("Add valid answer");
 				
 				$(el).replaceWith($blankDiv);
 				// that.readOnlyToFieldListen($blankDiv);
@@ -105,7 +105,7 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 
 		var $lastDiv = $(".prompt-fields").last();
 		var pAnswerText = $.trim($lastDiv.find(".prompt-answer").val());
-
+		console.log(pAnswerText);
 		if (!(pAnswerText.length >=3 && pAnswerText.length <= 30)) {
 			$("#add-prompt-error").text("Correct answer does not meet length requirements");
 			return;
@@ -129,11 +129,15 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 
 
 	removePromptDiv: function (event) {
+		event.preventDefault();
+		var that = this;
 		if ($(".prompt-fields").length > 1) {
-			$(".prompt-fields").last().slideUp();
-			$(".prompt-fields").last().remove();
-			this.addToQuizLength(-1);
-			this.validateRemoveButton();
+			var targetDiv = $(".prompt-fields").last();
+			targetDiv.slideUp(400, function () {
+				that.addToQuizLength(-1);
+				that.validateRemoveButton();
+				targetDiv.remove();
+			});
 		}
 	},
 

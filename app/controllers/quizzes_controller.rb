@@ -35,12 +35,10 @@ class QuizzesController < ApplicationController
 		@quiz = Quiz.new(params[:quiz])
 		@quiz.author_id = current_user.id
 
-		#reverse to set to user-created order
-		params[:quiz_prompts] = params[:quiz_prompts].reverse
-
 		#building quiz_prompts, and their valid_answers
 		params[:quiz_prompts].each do |prompt_vals|
 			prompt_params = prompt_vals.reject {|k| k == "valid_answers"}
+			prompt_params[correct_answer] = prompt_params[correct_answer].downcase
 			prompt = @quiz.quiz_prompts.new(prompt_params)
 
 			#build prompt's valid_answers
