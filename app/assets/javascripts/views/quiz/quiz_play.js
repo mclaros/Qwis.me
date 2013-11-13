@@ -156,12 +156,44 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 		$input.attr("disabled", true);
 		this.stopListeningEl($input);
 		window.quizTimer && clearInterval(window.quizTimer);
+		$("#reset-game").attr("disabled", false);
+
+		$("#notice").html("<img src='" + this.getWinPic() + "' style='max-height: 400px; max-width: 400px;'>");
+		$("#notice").append($("<p>Congratulations, you win!</p>"));
+		$("#noticeModal").modal();
 	},
 
 	loseActions: function () {
 		$("#player-input").attr("disabled", true);
 		$("#reset-game").attr("disabled", false);
 		//this.revealAllAnswers();
+	},
+
+	getWinPic: function () {
+		var randomnumber = Math.floor(Math.random() * (20 - 0 + 1)) + 0;
+		var imgs = ["https://s3-us-west-1.amazonaws.com/qwisme-development/thumbs-up-1.jpg",
+				"https://s3-us-west-1.amazonaws.com/qwisme-development/thumbs-up-2.jpg",
+				"https://s3-us-west-1.amazonaws.com/qwisme-development/thumbs-up-3.jpg",
+				"https://s3-us-west-1.amazonaws.com/qwisme-development/thumbs-up-4.jpg",
+				"https://s3-us-west-1.amazonaws.com/qwisme-development/thumbs-up-5.jpg",
+				"https://s3-us-west-1.amazonaws.com/qwisme-development/thumbs-up-6.jpg",
+				"https://s3-us-west-1.amazonaws.com/qwisme-development/thumbs-up-7.jpg",
+				"https://s3-us-west-1.amazonaws.com/qwisme-development/thumbs-up-8.jpg",
+				"https://s3-us-west-1.amazonaws.com/qwisme-development/thumbs-up-9.jpg",
+				"https://s3-us-west-1.amazonaws.com/qwisme-development/thumbs-up-10.jpg",
+				"https://s3-us-west-1.amazonaws.com/qwisme-development/thumbs-up-11.jpg",
+				"https://s3-us-west-1.amazonaws.com/qwisme-development/thumbs-up-12.jpg",
+				"https://s3-us-west-1.amazonaws.com/qwisme-development/thumbs-up-14.jpg",
+				"https://s3-us-west-1.amazonaws.com/qwisme-development/thumbs-up-16.jpg",
+				"https://s3-us-west-1.amazonaws.com/qwisme-development/thumbs-up-17.jpg",
+				"https://s3-us-west-1.amazonaws.com/qwisme-development/thumbs-up-18.jpg",
+				"https://s3-us-west-1.amazonaws.com/qwisme-development/thumbs-up-19.jpg",
+				"https://s3-us-west-1.amazonaws.com/qwisme-development/thumbs-up-20.jpg",
+				"https://s3-us-west-1.amazonaws.com/qwisme-development/thumbs-up-21.jpg",
+				"https://s3-us-west-1.amazonaws.com/qwisme-development/thumbs-up-22.jpg",
+				"https://s3-us-west-1.amazonaws.com/qwisme-development/thumbs-up-23.jpg"];
+
+		return imgs[randomnumber];
 	}
 
 });

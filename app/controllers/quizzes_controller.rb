@@ -42,6 +42,7 @@ class QuizzesController < ApplicationController
 
 			unless prompt_vals["valid_answers"].nil?
 				prompt_vals["valid_answers"].each do |v_ans_vals|
+					p v_ans_vals
 					prompt.valid_answers.new(v_ans_vals)
 				end
 			end
