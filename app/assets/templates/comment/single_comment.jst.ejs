@@ -12,15 +12,14 @@
 			<p>
 				<%= comment.escape("body") %>
 			</p>
-
 			<button type="button" class="btn btn-default btm-sm pull-right expand-reply">Reply</button>
 			<br>
 			<div id="reply-box-<%= comment.id %>" class="form-group" style="display: none;">
 				<span class="h5">
 					<small>Max. 200 characters</small>
 				</span>
-				<form>
-					<textarea class="form-control" rows="3"></textarea>
+				<form data-parent-id="<%= comment.id %>">
+					<textarea class="form-control" rows="3" name="comment[body]"></textarea>
 					<br>
 					<input type="submit" class="btn btn-primary btn-sm" value="Add reply">
 				</form>
@@ -31,7 +30,7 @@
 				
 			</ul>
 
-		<br>
+		<hr>
 		</div>
 
 	</li>

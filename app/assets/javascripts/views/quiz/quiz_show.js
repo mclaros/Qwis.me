@@ -13,8 +13,8 @@ Qwisme.Views.QuizShow = Backbone.View.extend({
 		});
 
 		this.$el.html(renderedTemp);
-		this.renderPlayView();
-		this.renderCommentsView();
+		this.playViewTimer = setTimeout(this.renderPlayView.bind(this), 50);
+		this.commentsViewTimer = setTimeout(this.renderCommentsView.bind(this), 50);
 
 		return this;
 	},
@@ -25,6 +25,7 @@ Qwisme.Views.QuizShow = Backbone.View.extend({
 		});
 		this.quizPlay.render();
 		this.$el.find("#play-section").html(this.quizPlay.$el);
+		clearTimeout(this.playViewTimer);
 	},
 
 	renderCommentsView: function () {
@@ -39,6 +40,7 @@ Qwisme.Views.QuizShow = Backbone.View.extend({
 				that.quizComments.render();
 
 				that.$el.find("#comments-section").html(that.quizComments.$el);
+				clearTimeout(that.commentsViewTimer);
 			}
 		});	
 	}

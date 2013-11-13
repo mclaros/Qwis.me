@@ -8,7 +8,6 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 
 	render: function () {
 		window.quizTimer && clearInterval(window.quizTimer);
-		console.log("rendering play")
 
 		var that = this;
 		var renderedTemp = this.template({

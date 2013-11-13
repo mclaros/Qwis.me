@@ -50,10 +50,12 @@ Qwisme.Views.QuizComments = Backbone.View.extend({
 
 	generateCommentsList: function () {
 		this.collection.each(function (comment) {
-			var commentView = new Qwisme.Views.SingleComment({
-				model: comment
-			})
-			$("#temp-comments-list2").append(commentView.render().$el);
+			if ( _.isNull(comment.get("parent_comment_id")) ) {
+				var commentView = new Qwisme.Views.SingleComment({
+					model: comment
+				})
+				$("#temp-comments-list2").append(commentView.render().$el);
+			}
 		});
 		clearTimeout(this.commentTimer);
 	}

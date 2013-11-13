@@ -10,11 +10,9 @@
 <script type="application/javascript">
 	$(document).ready(function () {
 		var data = JSON.parse($("#bootstrapped_quizzes").html());
-		console.log(data);
 		var quizData = data.quizData;
 		var usersData = data.usersData;
     var currentUserData = data.currentUserData;
-		console.log(data)
 		var $rootEl = $("#root-main-div");
 
 		window.Qwisme.initialize({
