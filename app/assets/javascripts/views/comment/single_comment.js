@@ -11,7 +11,6 @@ Qwisme.Views.SingleComment = Backbone.View.extend({
 	},
 
 	render: function () {
-		console.log("rendering view for comment " + this.model.id);
 		var renderedTemp = this.template({
 			comment: this.model
 		});
@@ -34,14 +33,11 @@ Qwisme.Views.SingleComment = Backbone.View.extend({
 
 		var that = this;
 		var parentId = $form.data("parent-id");
-
-		console.log(parentId);
-		console.log(replyBody);
-
 		var newReply = new Qwisme.Models.Comment({
 			parent_comment_id: parentId,
 			body: replyBody
 		});
+
 		newReply.save({}, {
 			success: function () {
 				$form.find("textarea").val("")
@@ -56,8 +52,16 @@ Qwisme.Views.SingleComment = Backbone.View.extend({
 	},
 
 	generateReplyViews: function () {
-		// this.model.get("replies")
-		// $("#reply-list-" + this.model.id).append("<li>success</li>");
+		var $replyList = this.$el.find("#reply-list-" + this.model.id);
+		this.model.get("comments").each(function (reply) {
+			console.log("generating reply view")
+
+			var replyView = new Qwisme.Views.SingleComment({
+				model: reply
+			});
+			replyView.render();
+			$replyList.append(replyView.$el);
+		});
 	},
 
 	showNoticeModal: function (notice) {

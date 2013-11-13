@@ -8,9 +8,11 @@ Qwisme.Models.Quiz = Backbone.Model.extend({
 			{ parse: true }
 			)
 
-		data.comments = new Qwisme.Collections.Comments(data.comments, {
-			quizID: data.id
-		});
+		data.comments = new Qwisme.Collections.Comments(
+			data.comments, {
+				quizID: data.id,
+				parse: true
+			});
 	
 		return data;
 	},
