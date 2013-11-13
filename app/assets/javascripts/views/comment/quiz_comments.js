@@ -7,7 +7,7 @@ Qwisme.Views.QuizComments = Backbone.View.extend({
 
 
 	initialize: function () {
-		this.listenTo(this.collection, "sync create add", this.render.bind(this))
+		this.listenTo(this.collection, "add sync", this.render.bind(this))
 	},
 
 
@@ -37,7 +37,13 @@ Qwisme.Views.QuizComments = Backbone.View.extend({
 
 		this.collection.create({
 			body: trimmedComment,
-			quiz_id: that.collection.quizID
+			quiz_id: that.collection.quizID,
+			author_id: Qwisme.CURRENT_USER.id
+		}, {
+			success: function (data) {
+				console.log("submit comment reply:")
+				console.log(data)
+			}
 		});
 	},
 
@@ -50,7 +56,8 @@ Qwisme.Views.QuizComments = Backbone.View.extend({
 	generateCommentsList: function () {
 		var that = this;
 		
-		this.collection.each(function (comment) {
+		var orderedComments = this.collection.models.reverse();
+		_.each(orderedComments, function (comment) {
 			console.log("iterating comment")
 			
 			if ( _.isNull(comment.get("parent_comment_id")) ) {

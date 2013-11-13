@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131113213153) do
+ActiveRecord::Schema.define(:version => 20131112032028) do
 
   create_table "comments", :force => true do |t|
     t.integer  "author_id"
@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(:version => 20131113213153) do
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
     t.integer  "quiz_id",                          :null => false
-    t.string   "author_username",   :limit => 15,  :null => false
   end
 
   add_index "comments", ["author_id"], :name => "index_comments_on_author_id"

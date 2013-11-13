@@ -71,4 +71,5 @@ class Quiz < ActiveRecord::Base
 		self.play_histories.exists?(:user_id => current_user.id)
 	end
 
+
 end

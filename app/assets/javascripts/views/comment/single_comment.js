@@ -6,7 +6,7 @@ Qwisme.Views.SingleComment = Backbone.View.extend({
 	},
 
 	initialize: function () {
-		this.listenTo(this.collection, "sync add", this.render.bind(this))
+		// this.listenTo(this.collection, "sync", this.render.bind(this))
 	},
 
 	render: function () {
@@ -34,11 +34,12 @@ Qwisme.Views.SingleComment = Backbone.View.extend({
 		var that = this;
 		var parentId = $form.data("parent-id");
 
-		this.collection.create({
+		this.model.get("comments").add(this.collection.create({
 			parent_comment_id: parentId,
 			quiz_id: that.collection.quizID,
-			body: replyBody
-		});
+			body: replyBody,
+			author_id: Qwisme.CURRENT_USER.id
+		}));
 	},
 
 	toggleReplyBox: function (event) {
@@ -49,7 +50,8 @@ Qwisme.Views.SingleComment = Backbone.View.extend({
 	generateReplyViews: function () {
 		var that = this;
 		var $replyList = this.$el.find("#reply-list-" + this.model.id);
-		this.model.get("comments").each(function (reply) {
+		var orderedReplies = this.model.get("comments").models.reverse();
+		_.each(orderedReplies, function (reply) {
 			var replyView = new Qwisme.Views.SingleComment({
 				model: that.collection.get(reply),
 				collection: that.collection

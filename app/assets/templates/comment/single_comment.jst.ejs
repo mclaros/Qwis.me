@@ -2,15 +2,19 @@
 <hr>
 	<li class="media">
 		<a class="pull-left">
-			<img src="http://s3-us-west-1.amazonaws.com/qwis-me-development/users/avatars/000/000/001/small/mrt.jpg?1384226707" class="img-rounded">
+			<% if (_.isNull(comment.get('author').avatar_small) || _.isUndefined(comment.get('author').avatar_small)) { %>
+				<img src="https://s3-us-west-1.amazonaws.com/qwisme-development/blank_avatar_resized.png" class="img-rounded" style="max-height: 65px; max-width: 65px;">
+			<% } else { %>
+				<img src="<%= comment.get('author').avatar_small %>" class="img-rounded">
+			<% } %>
 		</a>
 
 		<div class="media-body">
 			<h4 class="media-heading">
 				<a href="#/users/<%= comment.escape('author_id') %>">
-					user ID# <%= comment.escape("author_id") %>
+					<%= _.escape(comment.get("author").username) || "[DELETED USER]" %>
 				</a>
-				<small>posted on DATE</small>
+				<small>posted on <%= comment.escape("created_at") %></small>
 			</h4>
 			<p>
 				<%= comment.escape("body") %>
