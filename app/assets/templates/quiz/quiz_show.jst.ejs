@@ -12,9 +12,11 @@
 
 	<div class="col-xs-4 text-right">
 		<br><br><br>
-		<button type="button" role="button" class="btn btn-default">
-			Favorite
-		</button>
+		<% if (quiz.get("has_favorited")) { %>
+			<button type="button" role="button" class="btn btn-info">Favorite</button>
+		<% } else { %>
+			<button type="button" role="button" class="btn btn-success active">Favorited</button>
+		<% } %>
 	</div>
 </div>
 

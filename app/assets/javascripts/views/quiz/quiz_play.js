@@ -134,7 +134,10 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 	},
 
 	revealAllAns: function () {
-		//show all answers
+		$(".answer-div").each(function (idx, answerDiv) {
+			$(this).find("div").css("background-color", "yellow");
+			$(this).find("div").show();
+		});
 	},
 
 	bindStartButton: function (event) {
@@ -166,7 +169,7 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 	loseActions: function () {
 		$("#player-input").attr("disabled", true);
 		$("#reset-game").attr("disabled", false);
-		//this.revealAllAnswers();
+		this.revealAllAns();
 	},
 
 	getWinPic: function () {
