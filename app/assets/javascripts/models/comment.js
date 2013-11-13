@@ -11,5 +11,14 @@ Qwisme.Models.Comment = Backbone.Model.extend({
 			});
 
 		return data;
+	},
+
+	parse: function (data) {
+		data.comments = new Qwisme.Collections.Comments(data.comments, {
+			quizID: this.quizID,
+			parse: true
+		});
+		
+		return data;
 	}
 });

@@ -8,7 +8,6 @@
 			</a>
 		</small>
 	</h1>
-	wqrwrwq
 	</div>
 
 	<div class="col-xs-4 text-right">
@@ -60,19 +59,28 @@
 
 </div>
 
+<hr>
+
 <div class="row">
 	<div class="col-xs-12">
-		<ul class="nav nav-tabs nav-justified">
-			<li class="active"><a>Play</a></li>
-			<li><a>Stats</a></li>
+		<ul id="quiz-tabs" class="nav nav-pills nav-justified">
+			<li class="active"><a href="#play-section-tab" data-toggle="tab">
+				<span class="h5">Quiz</span>
+			</a></li>
+			<li><a id="comments-tab-link" href="#comments-section-tab" data-toggle="tab">
+				<span class="h5">Comments</span>
+			</a></li>
 		</ul>
 	</div>
 </div>
 
+<div class="tab-content">
+	<div class="tab-pane fade in active" id="play-section-tab">
+		<div id="play-section"></div>
+	</div>
 
-<div id="play-section"></div>
 
-
-QUIZ STATS
-
-<div id="comments-section"></div>
+	<div class="tab-pane fade" id="comments-section-tab" style="min-height: 400px;">
+		<div id="comments-section"></div>
+	</div>
+</div>

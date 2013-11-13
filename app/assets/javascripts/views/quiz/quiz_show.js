@@ -2,7 +2,7 @@ Qwisme.Views.QuizShow = Backbone.View.extend({
 	template: JST["quiz/quiz_show"],
 
 	events: {
-
+		"click #comments-tab-link": "initCommentsView"
 	},
 
 	render: function () {
@@ -13,8 +13,12 @@ Qwisme.Views.QuizShow = Backbone.View.extend({
 		});
 
 		this.$el.html(renderedTemp);
+		this.$el.find("#quiz-tabs a").click(function (e) {
+			e.preventDefault();
+			$(this).tab("show");
+		})
+
 		this.playViewTimer = setTimeout(this.renderPlayView.bind(this), 50);
-		this.commentsViewTimer = setTimeout(this.renderCommentsView.bind(this), 50);
 
 		return this;
 	},
@@ -28,20 +32,28 @@ Qwisme.Views.QuizShow = Backbone.View.extend({
 		clearTimeout(this.playViewTimer);
 	},
 
-	renderCommentsView: function () {
+	renderCommentsView: function (commentsCollection) {
 		var that = this;
-		$.ajax({
-			url: "/quizzes/" + that.model.id + "/comments",
-			type: "GET",
-			success: function (commentData) {
-				that.quizComments = new Qwisme.Views.QuizComments({
-					collection: that.model.get("comments")
-				});
-				that.quizComments.render();
+		this.commentsView = new Qwisme.Views.QuizComments({
+			model: that.model,
+			collection: commentsCollection
+		});
+		this.commentsView.render();
+		this.$el.find("#comments-section").html(this.commentsView.$el);	
+	},
 
-				that.$el.find("#comments-section").html(that.quizComments.$el);
-				clearTimeout(that.commentsViewTimer);
-			}
-		});	
+	initCommentsView: function (event) {
+		event.preventDefault();
+		var that = this;
+		
+		if ( _.isUndefined(this.commentsView) ) {
+			var comments = this.model.get("comments");
+			comments.fetch({
+				success: function () {
+					that.renderCommentsView(comments);
+				}
+			});
+		}
 	}
+
 });

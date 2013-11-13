@@ -10,7 +10,6 @@ class User < ActiveRecord::Base
   	validates_length_of :username, :within => 3..15
   	validates_length_of :description, :maximum => 150
 
-	#has_many :favoritings** and has favorite through
   	has_many :play_histories #:dependent => :nullify???
   	has_many :favoritings, :dependent => :destroy
 	has_many :comments,

@@ -7,20 +7,19 @@ Qwisme.Views.QuizComments = Backbone.View.extend({
 
 
 	initialize: function () {
-		this.listenTo(this.collection, "sync", this.render)
+		this.listenTo(this.collection, "sync create add", this.render.bind(this))
 	},
 
 
 	render: function () {
 		var that = this;
+
 		var renderedTemp = this.template({
-			comments: that.collection
+			comments: this.collection
 		});
 
 		this.$el.html(renderedTemp);
-
-		this.commentTimer = setTimeout(this.generateCommentsList.bind(this), 50);
-
+		this.generateCommentsList();
 		return this;
 	},
 
@@ -37,9 +36,9 @@ Qwisme.Views.QuizComments = Backbone.View.extend({
 		}
 
 		this.collection.create({
-			body: trimmedComment
+			body: trimmedComment,
+			quiz_id: that.collection.quizID
 		});
-		// var formData = $("#new-comment-form").serialize();
 	},
 
 
@@ -49,14 +48,20 @@ Qwisme.Views.QuizComments = Backbone.View.extend({
 	},
 
 	generateCommentsList: function () {
+		var that = this;
+		
 		this.collection.each(function (comment) {
+			console.log("iterating comment")
+			
 			if ( _.isNull(comment.get("parent_comment_id")) ) {
 				var commentView = new Qwisme.Views.SingleComment({
-					model: comment
-				})
-				$("#temp-comments-list2").append(commentView.render().$el);
+					model: comment,
+					collection: that.collection
+				});
+				commentView.render();
+				that.$el.find("#temp-comments-list2").append(commentView.$el);
 			}
 		});
-		clearTimeout(this.commentTimer);
 	}
+
 });

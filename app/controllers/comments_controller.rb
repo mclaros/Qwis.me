@@ -6,7 +6,6 @@ class CommentsController < ApplicationController
 
 	def create
 		@quiz_comment = Comment.new(params[:comment])
-		@quiz_comment.quiz_id = params[:quiz_id]
 		@quiz_comment.author_id = current_user.id
 
 		if @quiz_comment.save

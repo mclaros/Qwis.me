@@ -1,4 +1,5 @@
 <!-- <ul class="media-list"> -->
+<hr>
 	<li class="media">
 		<a class="pull-left">
 			<img src="http://s3-us-west-1.amazonaws.com/qwis-me-development/users/avatars/000/000/001/small/mrt.jpg?1384226707" class="img-rounded">
@@ -6,13 +7,15 @@
 
 		<div class="media-body">
 			<h4 class="media-heading">
-				Author Name
-				<small>on DATE</small>
+				<a href="#/users/<%= comment.escape('author_id') %>">
+					user ID# <%= comment.escape("author_id") %>
+				</a>
+				<small>posted on DATE</small>
 			</h4>
 			<p>
 				<%= comment.escape("body") %>
 			</p>
-			<button type="button" class="btn btn-default btm-sm pull-right expand-reply">Reply</button>
+			<button type="button" id="expand-reply-<%= comment.id %>" class="btn btn-default btm-sm pull-right">Reply</button>
 			<br>
 			<div id="reply-box-<%= comment.id %>" class="form-group" style="display: none;">
 				<span class="h5">
@@ -25,13 +28,9 @@
 				</form>
 			</div>
 
-
-			REPLIES LIST GOES BELOW HERE
 			<ul id="reply-list-<%= comment.id %>" class="media-list">
-				
 			</ul>
 
-		<hr>
 		</div>
 
 	</li>

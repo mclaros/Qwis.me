@@ -2,12 +2,11 @@ Qwisme.Views.SingleComment = Backbone.View.extend({
 	template: JST["comment/single_comment"],
 
 	events: {
-		"click .expand-reply": "toggleReplyBox",
 		"submit form": "submitReply"
 	},
 
 	initialize: function () {
-		this.listenTo(this.model, "sync change", this.render.bind(this));
+		this.listenTo(this.collection, "sync add", this.render.bind(this))
 	},
 
 	render: function () {
@@ -15,6 +14,7 @@ Qwisme.Views.SingleComment = Backbone.View.extend({
 			comment: this.model
 		});
 		this.$el.html(renderedTemp);
+		this.$el.find("#expand-reply-" + this.model.id).on("click", this.toggleReplyBox.bind(this));
 		this.generateReplyViews();
 
 		return this;
@@ -33,16 +33,11 @@ Qwisme.Views.SingleComment = Backbone.View.extend({
 
 		var that = this;
 		var parentId = $form.data("parent-id");
-		var newReply = new Qwisme.Models.Comment({
-			parent_comment_id: parentId,
-			body: replyBody
-		});
 
-		newReply.save({}, {
-			success: function () {
-				$form.find("textarea").val("")
-				$("#reply-list-" + that.model.id).append("<li>success</li>");
-			}
+		this.collection.create({
+			parent_comment_id: parentId,
+			quiz_id: that.collection.quizID,
+			body: replyBody
 		});
 	},
 
@@ -52,12 +47,12 @@ Qwisme.Views.SingleComment = Backbone.View.extend({
 	},
 
 	generateReplyViews: function () {
+		var that = this;
 		var $replyList = this.$el.find("#reply-list-" + this.model.id);
 		this.model.get("comments").each(function (reply) {
-			console.log("generating reply view")
-
 			var replyView = new Qwisme.Views.SingleComment({
-				model: reply
+				model: that.collection.get(reply),
+				collection: that.collection
 			});
 			replyView.render();
 			$replyList.append(replyView.$el);

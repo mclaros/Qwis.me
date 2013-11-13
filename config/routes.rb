@@ -3,9 +3,12 @@ Qwisme::Application.routes.draw do
 
   resource :static_pages, :only => []
 
-  resources :users, :only => [:index, :show]
+  resources :users, :only => [:index, :show] do
+    resources :play_histories, :only => [:index]
+  end
 
   resources :quizzes do
+    resources :play_histories, :only => [:create]
   	resources :comments, :only => [:index, :create, :update, :destroy]
   end
 
