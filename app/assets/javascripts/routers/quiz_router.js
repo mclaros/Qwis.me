@@ -120,8 +120,10 @@ Qwisme.Routers.QuizRouter = Backbone.Router.extend({
 		}
 
 		this._currentView = newView;
-		this.$rootEl.html(newView.render().$el);
-	},
+		this._currentView.render().$el.hide();
+		this.$rootEl.html(newView.$el);
+		this._currentView.$el.fadeIn()
+;	},
 
 	showNoticeModal: function (notice) {
 		$("#notice").text(notice);

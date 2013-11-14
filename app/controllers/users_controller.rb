@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 	def index
-		@users = User.includes(:favorite_quizzes, :play_histories)
+		@users = User.includes(:quizzes => [:play_histories, :favoritings], :favorite_quizzes, :play_histories, :played_quizzes)
 
 		render "users.rabl", :handlers => [:rabl]
 		# respond_to do |format|
@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		@user = User.where(:id => params[:id]).includes(:favorite_quizzes)
+		@user = User.where(:id => params[:id]).includes(:quizzes => [:play_histories, :favoritings], :favorite_quizzes, :play_histories, :played_quizzes)
 		render "user.rabl", :handlers => [:rabl]
 		# respond_to do |format|
 		# 	format.html { render :show }

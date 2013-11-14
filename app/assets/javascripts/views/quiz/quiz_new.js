@@ -238,7 +238,7 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 		$previewContainer.sticky({
 			topSpacing: 60
 		});
-		$previewContainer.fadeIn(300);
+		$previewContainer.fadeIn(400);
 		clearTimeout(this.prevRendTimer);
 ;	},
 

@@ -40,7 +40,7 @@ class Quiz < ActiveRecord::Base
 	end
 
 	def game_data
-		prompts = self.quiz_prompts
+		prompts = self.quiz_prompts.includes(:valid_answers)
 		prompt_id_to_ans = {}
 		ans_to_prompt_id = {}
 
