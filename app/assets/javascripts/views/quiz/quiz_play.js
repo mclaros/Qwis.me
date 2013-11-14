@@ -4,7 +4,7 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 	events: {
 		"click #start-game": "bindStartButton",
 		"click #reset-game": "render",
-		"click #test-play-history": "submitPlayRecord"
+		"click #quit-game": "quitGame"
 	},
 
 	render: function () {
@@ -25,6 +25,7 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 
 	launchQuiz: function (renderedView) {
 		var $ansContainer = renderedView.find("#answers-container");
+		$("#quit-game").attr("disabled", false);
 		this.listenToInput(renderedView);
 		this.runTimer();
 	},
@@ -158,6 +159,15 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 		$button.off();
 	},
 
+	quitGame: function () {
+		$("#player-input").attr("disabled", true);
+		$("#quit-game").attr("disabled", true);
+		$("#reset-game").attr("disabled", false);
+		this.revealAllAns();
+		
+		clearInterval(window.quizTimer);
+	},
+
 	winActions: function () {
 		console.log("YOU WIN!");
 		var $input = $("#player-input");
@@ -166,6 +176,7 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 		this.stopListeningEl($input);
 		window.quizTimer && clearInterval(window.quizTimer);
 		$("#reset-game").attr("disabled", false);
+		$("#quit-game").attr("disabled", true);
 
 		this.submitPlayRecord({win: true});
 
@@ -176,6 +187,7 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 
 	loseActions: function () {
 		$("#player-input").attr("disabled", true);
+		$("#quit-game").attr("disabled", true);
 		$("#reset-game").attr("disabled", false);
 		this.revealAllAns();
 		this.submitPlayRecord({win: false});

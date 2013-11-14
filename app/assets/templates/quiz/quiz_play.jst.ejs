@@ -2,19 +2,21 @@
 
 	<div class="col-xs-5">
 		<h2 class="text-left">
-			<small>Question:</small>
+			<small>Qwery:</small>
 			<br>
 			<%= quiz.escape("question") %>
 		</h2>
 	</div>
 
-	<div class="col-xs-4">
-		<br>
-		<button type="button" id="start-game" class="btn btn-success btn-large btn-block" role="button">
+	<div class="col-xs-4 text-center">
+		<button type="button" id="start-game" class="btn btn-success btn-lg btn-block" role="button" style="margin-bottom: 5px;">
 			Start Quiz
 		</button>
-		<button type="button" id="reset-game" class="btn btn-warning btn-large btn-block" role="button" disabled>
+		<button type="button" id="reset-game" class="btn btn-warning btn-lg" role="button" style="width: 49%;" disabled>
 			Reset
+		</button>
+		<button type="button" id="quit-game" class="btn btn-danger btn-lg" role="button" style="width: 49%;" disabled>
+			Qwit
 		</button>
 	</div>
 
