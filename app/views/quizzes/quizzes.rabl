@@ -9,9 +9,3 @@ child(:quiz_prompts) do
 		attributes :id, :quiz_prompt_id, :valid_answer
 	end
 end
-# child(:comments) do
-# 	attributes :id, :author_id, :parent_comment_id, :quiz_id, :body
-# 	child(:replies) do
-# 		attributes :id, :author_id, :parent_comment_id, :quiz_id, :body
-# 	end
-# end
