@@ -23,10 +23,16 @@
 
 	  <div class="collapse navbar-collapse" id="extra-navbar-stuff">
 	    <ul class="nav navbar-nav">
-	    	<li><a href="#/quizzes">Quiz Index</a></li>
-	    	<li class="divider"></li>
-	    	<li><a href="#/quizzes/new">Create Quiz</a></li>
-		    <li><a href="#/users">Users</a></li>
+	    	<% if user_signed_in? %>
+		    	<li><a href="#/quizzes">Quiz Index</a></li>
+		    	<li class="divider"></li>
+		    	<li><a href="#/quizzes/new">Create Quiz</a></li>
+			    <li><a href="#/users">Users</a></li>
+		    <% else %>
+		    	<li><a href="/users/login">Log in</a></li>
+		    	<li class="divider"></li>
+		    	<li><a href="/users/sign_up">Sign up</a></li>
+		    <% end %>
 	    </ul>
 
 	    <% if user_signed_in? %>

@@ -53,12 +53,67 @@
 <div class="row">
 	<div class="col-xs-12">
 		<ul id="user-tabs" class="nav nav-pills nav-justified">
-			<li class="active">Quiz History</li>
-			<li><a>Favorite Quizzes</a></li>
-			<li><a>Play Statistics</a></li>
-			<li><a>Authored Quizzes</a></li>
+			<li class="active"><a href="#history-tab" data-toggle="tab">
+				<span class="h5">Quiz History</span>
+			</a></li>
+			<li><a href="#favs-tab" data-toggle="tab">
+				<span class="h5">Favorite Quizzes</span>
+			</a></li>
+			<li><a href="#stats-tab" data-toggle="tab">
+				<span class="h5">Play Statistics</span>
+			</a></li>
+			<li><a href="#authored-quizzes-tab" data-toggle="tab">
+				<span class="h5">Authored Quizzes</span>
+			</a></li>
 		</ul>
 	</div>
 </div>
 
 <hr>
+
+<div class="tab-content">
+	<div class="tab-pane fade in active" id="history-tab">
+		<div class="page-header">
+			<h2>
+				Qwistory
+				<small>Remembering your Qwest for Qwestion fulfillment</small>
+			</h2>
+		</div>
+
+		<div id="history-section"></div>
+	</div>
+
+
+	<div class="tab-pane fade" id="favs-tab">
+		<div class="page-header">
+			<h2>
+				Favorites
+				<small>Some Qwality quizzes</small>
+			</h2>
+		</div>
+
+		<div id="favs-section"></div>
+	</div>
+
+	<div class="tab-pane fade" id="stats-tab">
+		<div class="page-header">
+			<h2>
+				User Statistics
+				<small>Qwantitative reasoning</small>
+			</h2>
+		</div>
+
+		<div id="stats-section"></div>
+	</div>
+
+	<div class="tab-pane fade" id="authored-quizzes-tab">
+		<div class="page-header">
+			<h2>
+				Authored Quizzes
+				<small>A Qwiver of personal Qwibbles</small>
+			</h2>
+		</div>
+
+		<div id="authored-quizzes-section"></div>
+	</div>
+</div>

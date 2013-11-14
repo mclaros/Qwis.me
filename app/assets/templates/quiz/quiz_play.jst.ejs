@@ -50,46 +50,17 @@
 
 <hr>
 
-<div class="row">
-	<div id="answers-container" class="well text-center col-xs-6">
-	</div>
-
-	<div id="answers-container-titled" class="well text-center col-xs-6">
+<div class="row well">
+	<div id="answers-container" class="text-center col-xs-12">
 	</div>
 </div>
 
 <div class="row">
-	<div id="answers-container-images" class="well text-center col-xs-12">
+	<div id="answers-container-titled" class="well text-center col-xs-12" style="display:none">
 	</div>
 </div>
 
-<br><br>
-
-TEMPORARY:
-<button type="button" id="test-play-history">create history</button>
-
-<ul>
-<% prompts.each(function (prompt) { %>
-	<li>
-		<%= prompt.escape("question") %> ANSWERS:
-		<ul>
-		<% _.each(prompt.posAnswers(), function (vAns) { %>
-		<li>
-			<%= vAns %>
-		</li>
-		<% }) %>
-		</ul>
-	</li>
-<% }) %>
-</ul>
-
-</div>
-
-<div class="answer-with-prompt">
-	<div class="answer-prompt-container" style="height: 25px; border-bottom: 1px solid black;">
-		123456789012345 678901234567890
-	</div>
-	<div class="hidden-answer">
-		<span>some text here</span>
+<div class="row">
+	<div id="answers-container-images" class="well text-center col-xs-12" style="display:none">
 	</div>
 </div>
