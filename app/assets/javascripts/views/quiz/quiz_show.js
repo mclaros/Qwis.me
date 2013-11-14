@@ -2,7 +2,8 @@ Qwisme.Views.QuizShow = Backbone.View.extend({
 	template: JST["quiz/quiz_show"],
 
 	events: {
-		"click #comments-tab-link": "initCommentsView"
+		"click #comments-tab-link": "initCommentsView",
+		"click #fav-btn": "toggleFav"
 	},
 
 	render: function () {
@@ -53,6 +54,40 @@ Qwisme.Views.QuizShow = Backbone.View.extend({
 					that.renderCommentsView(comments);
 				}
 			});
+		}
+	},
+
+	toggleFav: function (event) {
+		event.preventDefault();
+		var that = this;
+		var currentUser = Qwisme.CURRENT_USER;
+		
+		if (this.model.get("has_favorited")) {
+			var favoriting = currentUser.get("favoritings").findWhere({quiz_id: that.model.id });
+			favoriting.destroy({
+				success: function () {
+					var currUserFavedQuiz = currentUser.get("favorite_quizzes").get(that.model.id);
+					currentUser.get("favorite_quizzes").remove(currUserFavedQuiz);
+					that.model.set({
+						has_favorited: false
+					})
+					that.render();
+				}
+			})
+		}
+		else {
+			currentUser.get("favoritings").create({
+				user_id: currentUser.id,
+				quiz_id: that.model.id
+			}, {
+				success: function () {
+					currentUser.get("favorite_quizzes").add(that.model.attributes);
+					that.model.set({
+						has_favorited: true
+					});
+					that.render();
+				}
+			})
 		}
 	}
 

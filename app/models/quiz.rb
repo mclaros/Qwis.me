@@ -71,5 +71,12 @@ class Quiz < ActiveRecord::Base
 		self.play_histories.exists?(:user_id => current_user.id)
 	end
 
+	def fav_count
+		self.favoritings.count
+	end
+
+	def play_count
+		self.play_histories.count
+	end
 
 end

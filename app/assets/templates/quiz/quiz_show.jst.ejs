@@ -13,9 +13,9 @@
 	<div class="col-xs-4 text-right">
 		<br><br><br>
 		<% if (quiz.get("has_favorited")) { %>
-			<button type="button" role="button" class="btn btn-info">Favorite</button>
+			<button type="button" role="button" id="fav-btn" class="btn btn-success active">Favorited</button>
 		<% } else { %>
-			<button type="button" role="button" class="btn btn-success active">Favorited</button>
+			<button type="button" role="button" id="fav-btn" class="btn btn-warning">Favorite</button>
 		<% } %>
 	</div>
 </div>
@@ -46,10 +46,10 @@
 			<dd>NUM/5</dd>
 			
 			<dt>Favorites</dt>
-			<dd>NUM</dd>
+			<dd><%= quiz.get("fav_count") %></dd>
 			
 			<dt>Plays</dt>
-			<dd>NUM</dd>
+			<dd><%= quiz.get("play_count") %></dd>
 			
 			<dt>Unique plays</dt>
 			<dd>Num</dd>

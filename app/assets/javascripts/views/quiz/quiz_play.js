@@ -35,6 +35,7 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 		$inputField.on("keyup keydown", function (event) {
 			var inputStr = $inputField.val();
 			inputStr = $.trim(inputStr);
+			inputStr = inputStr.toLowerCase();
 
 			if (that.isAnswer(inputStr)) {
 				$inputField.val("");
@@ -96,7 +97,10 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 	},
 
 	isAnswer: function (trimmedInput) {
-		return _.contains(this.remainingAnsrs, trimmedInput);
+		var lowerCasedAnsrs = _.map(this.remainingAnsrs, function (remainAns) {
+			return remainAns.toLowerCase();
+		});
+		return _.contains(lowerCasedAnsrs, trimmedInput);
 	},
 
 	revealAns: function (correctAns) {
@@ -149,6 +153,7 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 		$inputField.attr("disabled", false);
 		$inputField.focus();
 		$button.attr("disabled", true);
+		$button.addClass("active");
 		$button.off();
 	},
 

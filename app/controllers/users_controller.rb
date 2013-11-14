@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 	def index
-		@users = User.all
+		@users = User.includes(:favorite_quizzes)
 
 		render "users.rabl", :handlers => [:rabl]
 		# respond_to do |format|
@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		@user = User.find(params[:id])
+		@user = User.where(:id => params[:id]).includes(:favorite_quizzes)
 		render "user.rabl", :handlers => [:rabl]
 		# respond_to do |format|
 		# 	format.html { render :show }
