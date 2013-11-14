@@ -5,9 +5,9 @@ window.Qwisme = {
   Routers: {},
   initialize: function(options) {
     Qwisme.QUIZZES = new Qwisme.Collections.Quizzes(options.quizData, { parse: true });
-    Qwisme.USERS = new Qwisme.Collections.Users(options.usersData, {parse: true});
-    Qwisme.CURRENT_USER = Qwisme.Models.add(options.currentUserData);
-    this.parseInitUser(Qwisme.CURRENT_USER);
+    Qwisme.USERS = new Qwisme.Collections.Users(options.usersData, { parse: true });
+    Qwisme.CURRENT_USER = new Qwisme.Models.User(options.currentUserData, { parse: true });
+    // this.parseInitUser(Qwisme.CURRENT_USER);
 
     new Qwisme.Routers.QuizRouter({
     	$rootEl: options.$rootEl
