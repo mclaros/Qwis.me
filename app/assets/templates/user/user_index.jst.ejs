@@ -4,31 +4,33 @@
 
 <% users.each(function(user) { %>
 	<div class="row" id="user-list-col">
-		<div class="col-xs-9 media">
+		<div class="col-xs-8 media">
 			<a class="pull-left" href="#/users/<%= user.id %>">
-				AUTHOR
-				<br>
-				AVATAR
+				<img src="<%= user.get('avatar_small') || 'https://s3-us-west-1.amazonaws.com/qwisme-development/blank_avatar_resized.png' %>" alt="User image" class="img-thumbnail">
 			</a>
 			<div class="media-body">
 				<h3 class="media-heading">
 					<a href="#/users/<%= user.id %>"><%= user.escape("username") %></a>
+					<small><%= user.escape("created_at") %></small>
 				</h3>
 				<p>
-					<%= user.escape("description") || "NO DESCRIPTION" %>
+					<%= user.escape("description") || "<span class='text-muted'>NO DESCRIPTION</span>" %>
 				</p>
 			</div>
 		</div>
-			<div class="col-xs-3">
+			<div class="col-xs-4">
 				<dl class="dl-horizontal">
-					<dt>Member since</dt>
-					<dd>DATE</dd>
+					<dt><a id="q-point-explain">Qwismaster points*</a></dt>
+					<dd><%= user.get("qwismaster_points") %></dd>
+
+					<dt>Favorites</dt>
+					<dd><%= user.get("fav_count") %></dd>
 
 					<dt>Total quizzes played</dt>
-					<dd>NUM</dd>
+					<dd><%= user.get("play_count") %></dd>
 
-					<dt>Unique quizzes played</dt>
-					<dd>NUM</dd>
+					<dt>Distinct quizzes played</dt>
+					<dd><%= user.get("unique_play_count") %></dd>
 				</dl>
 			</div>
 	</div>

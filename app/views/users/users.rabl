@@ -12,6 +12,7 @@ end
 child :played_quizzes => :played_quizzes do
 	attributes :id, :author_id, :author_username, :title, :question, :description, :category,
 			   :scope, :length, :time_limit, :fav_count, :play_count, :unique_play_count
+	node(:created_at) { |played_quiz| played_quiz.created_at.to_time.to_formatted_s(:long_ordinal) }
 end
 
 child :favoritings do

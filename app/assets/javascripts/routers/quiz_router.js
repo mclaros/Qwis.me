@@ -32,6 +32,8 @@ Qwisme.Routers.QuizRouter = Backbone.Router.extend({
 		//END TEMP
 
 		Qwisme.USERS.fetch({
+			parse: true,
+			
 			success: function () {
 				var userIndex = new Qwisme.Views.UserIndex({
 					collection: Qwisme.USERS

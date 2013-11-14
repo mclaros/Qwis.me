@@ -1,5 +1,5 @@
 <div class="page-header">
-	<h1>BACKBONE: Quizzes</h1>
+	<h1>Quizzes Index</h1>
 </div>
 	<% quizzes.each(function(quiz) { %>
 		<div class="row" id="quiz-list-col">
@@ -26,8 +26,16 @@
 					</p>
 				</div>
 			</div>
-			<div class="col-xs-2">
+			<div class="col-xs-5">
 				<dl class="dl-horizontal">
+					<% if ( !_.isUndefined(Qwisme.CURRENT_USER.get("played_quizzes").get(quiz.id)) ) { %>
+					<span class="text-warning">
+						<dt>Last played on</dt>
+						<dd><%= Qwisme.CURRENT_USER.get("played_quizzes").get(quiz.id).get("created_at") %></dd>
+					</span>
+
+					<% } %>
+
 					<dt>Time limit</dt>
 					<dd><%= quiz.escape("time_limit") %>:00</dd>
 
