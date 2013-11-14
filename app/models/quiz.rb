@@ -79,4 +79,8 @@ class Quiz < ActiveRecord::Base
 		self.play_histories.count
 	end
 
+	def unique_play_count
+		PlayHistory.select("COUNT(user_id)").where(:quiz_id => self.id).group(:user_id).length
+	end
+
 end

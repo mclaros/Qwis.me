@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
 	def index
-		@quiz_comments = Comment.where(:quiz_id => params[:quiz_id]).includes(:author)
+		@quiz_comments = Comment.where(:quiz_id => params[:quiz_id]).includes(:author, :replies)
 		render "quiz_comments.rabl", :handlers => [:rabl]
 	end
 

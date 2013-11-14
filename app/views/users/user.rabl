@@ -8,3 +8,6 @@ end
 child :favoritings do
 	attributes :id, :quiz_id, :user_id
 end
+child :play_histories do
+	attributes :id, :quiz_id, :finished, :finish_time
+end

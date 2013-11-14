@@ -3,7 +3,8 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 
 	events: {
 		"click #start-game": "bindStartButton",
-		"click #reset-game": "render"
+		"click #reset-game": "render",
+		"click #test-play-history": "submitPlayRecord"
 	},
 
 	render: function () {
@@ -175,6 +176,30 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 		$("#player-input").attr("disabled", true);
 		$("#reset-game").attr("disabled", false);
 		this.revealAllAns();
+	},
+
+	submitPlayRecord: function () {
+		$.ajax({
+			url: "/play_histories",
+			type: "POST",
+			data: {play_history: {
+					"quiz_id": this.model.id,
+					"user_id": Qwisme.CURRENT_USER.id,
+					"finished": true,
+					"finish_time": 10
+				}
+			},
+			
+			success: function () {
+				console.log("play record submitted!");
+				this.render();
+			},
+
+			error: function (data) {
+				console.log("error");
+				console.log(data.responseText);
+			}
+		})
 	},
 
 	getWinPic: function () {

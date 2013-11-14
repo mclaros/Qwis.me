@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 	def index
-		@users = User.includes(:favorite_quizzes)
+		@users = User.includes(:favorite_quizzes, :play_histories)
 
 		render "users.rabl", :handlers => [:rabl]
 		# respond_to do |format|
