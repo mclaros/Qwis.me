@@ -21,9 +21,10 @@ child :play_histories do
 	attributes :id, :quiz_id, :finished, :finish_time
 end
 
-attributes :id, :created_at, :username, :description, :fav_count, :play_count,
+attributes :id, :username, :description, :fav_count, :play_count,
 		   :unique_play_count, :win_count, :loss_count, :authored_quizzes_other_plays_count,
 		   :authored_quizzes_others_favs_count, :qwismaster_points
-		   
+
+node(:created_at) { |user| user.created_at.to_time.to_formatted_s(:long_ordinal) }
 node(:avatar_small) { |user| user.avatar.url(:small) }
 node(:avatar_big) { |user| user.avatar.url(:big) }

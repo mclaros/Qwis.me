@@ -3,7 +3,7 @@
 	<h1>
 		<%= user.escape("username") %> 
 		<small> 
-			&nbsp;&nbsp; member since DATE
+			&nbsp;&nbsp; member since <%= user.escape("created_at") %>
 		</small>
 	</h1>
 	wqrwrwq

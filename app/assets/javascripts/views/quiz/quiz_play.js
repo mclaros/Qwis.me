@@ -208,6 +208,9 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 	},
 
 	onSubmitPlayRecord: function () {
+		//since we can't because of modal on win
+		$("#quiz-play-count").text( this.model.get("play_count") + 1 )
+
 		this.model.set({
 			play_count: this.model.get("play_count") + 1
 		});

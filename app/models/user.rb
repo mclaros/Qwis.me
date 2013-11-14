@@ -45,6 +45,7 @@ class User < ActiveRecord::Base
 	end
 
 	def win_count
+		#WARNING: allows you to mine your own quiz for wins
 		@win_count = self.play_histories.where(:finished => true).count
 	end
 
@@ -70,10 +71,10 @@ class User < ActiveRecord::Base
 
 	def qwismaster_points
 		#points for new record?
-		points_from_others_favs = @others_favs_count * 20
-		points_from_others_plays = @others_plays_count * 10
-		points_from_win_count = @win_count * 5
-		points_from_play_count = @play_count * 1
+		points_from_others_favs = 20 * (@others_favs_count || self.authored_quizzes_others_favs_count)
+		points_from_others_plays = 10 * (@others_plays_count || self.authored_quizzes_others_plays_count)
+		points_from_win_count = 5 * (@win_count || self.win_count)
+		points_from_play_count = 1 * (@play_count || self.loss_count)
 		@qwismaster_points = points_from_others_favs + 
 							 points_from_others_plays + 
 							 points_from_win_count + 

@@ -69,9 +69,11 @@ Qwisme.Views.QuizShow = Backbone.View.extend({
 					that.model.set({
 						has_favorited: false,
 						fav_count: that.model.get("fav_count") - 1
-					})
+					});
+
 					var currUserFavedQuiz = currentUser.get("favorite_quizzes").get(that.model.id);
 					currentUser.get("favorite_quizzes").remove(currUserFavedQuiz);
+					currentUser.set({ fav_count: currentUser.get("fav_count") - 1 });
 					that.render();
 				}
 			})
@@ -86,6 +88,7 @@ Qwisme.Views.QuizShow = Backbone.View.extend({
 						fav_count: that.model.get("fav_count") + 1
 					});
 					currentUser.get("favorite_quizzes").add(that.model.attributes);
+					currentUser.set({ fav_count: currentUser.get("fav_count") + 1 })
 					that.render();
 				}
 			})
