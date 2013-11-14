@@ -189,10 +189,9 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 			type: "POST",
 			data: {
 				play_history: {
-					"quiz_id": this.model.id,
-					"user_id": Qwisme.CURRENT_USER.id,
-					"finished": playerResult,
-					"finish_time": (that.model.get("time_limit")*60) - that.timeLeft
+					quiz_id: this.model.id,
+					finished: playerResult,
+					finish_time: (that.model.get("time_limit")*60) - that.timeLeft
 				}
 			},
 			
@@ -201,7 +200,7 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 			},
 
 			error: function (data) {
-				console.log("ERROR I SUBMITTING PLAY RECORD");
+				console.log("ERROR IN SUBMITTING PLAY RECORD");
 				$("#notice").text("Error on play record submission");
 				$("#noticeModal").modal();
 			}

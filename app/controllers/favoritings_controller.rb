@@ -1,6 +1,7 @@
 class FavoritingsController < ApplicationController
 	def create
 		@favoriting = Favoriting.new(params[:favoriting])
+		@favoriting.user_id = current_user.id
 
 		if @favoriting.save
 			render :json => @favoriting
@@ -12,6 +13,6 @@ class FavoritingsController < ApplicationController
 	def destroy
 		@favoriting = Favoriting.find(params[:id])
 		@favoriting.destroy
-		render :json => "Favoriting destroyed".to_json
+		render :json => "Favoriting destroyed".to_json, :status => :ok
 	end
 end
