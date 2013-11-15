@@ -30,7 +30,7 @@
 				<dl class="dl-horizontal">
 					<% if ( !_.isUndefined(Qwisme.CURRENT_USER.get("played_quizzes").get(quiz.id)) ) { %>
 					<span class="text-warning">
-						<dt>Last played on</dt>
+						<dt>First played on</dt>
 						<dd><%= Qwisme.CURRENT_USER.get("played_quizzes").get(quiz.id).get("created_at") %></dd>
 					</span>
 

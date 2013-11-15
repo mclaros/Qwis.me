@@ -164,7 +164,7 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 		$("#quit-game").attr("disabled", true);
 		$("#reset-game").attr("disabled", false);
 		this.revealAllAns();
-		
+
 		clearInterval(window.quizTimer);
 	},
 
@@ -207,7 +207,7 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 				}
 			},
 			
-			success: function () {
+			success: function (data) {
 				that.onSubmitPlayRecord();
 			},
 
