@@ -29,9 +29,8 @@
 		    	<li><a href="#/quizzes/new">Create Quiz</a></li>
 			    <li><a href="#/users">Users</a></li>
 		    <% else %>
-		    	<li><a href="/users/login">Log in</a></li>
+		    	<li><a href="/users/login">Log in or sign up</a></li>
 		    	<li class="divider"></li>
-		    	<li><a href="/users/sign_up">Sign up</a></li>
 		    <% end %>
 	    </ul>
 
@@ -72,7 +71,12 @@
 <%= yield %>
 
 <footer id="footer">
-	Footer
+	<div class="text-center" style="width:80%, margin: 30px auto 0 auto">
+		<h6>
+			Mainor Claros | 
+			<a href="https://github.com/mclaros">https://github.com/mclaros</a>
+		</h6>
+	</div>
 </footer>
 
 </body>
