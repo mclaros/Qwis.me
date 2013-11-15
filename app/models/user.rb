@@ -27,10 +27,12 @@ class User < ActiveRecord::Base
 	has_many :favorite_quizzes, :through => :favoritings, :source => :quiz
 	has_many :played_quizzes, :through => :play_histories, :source => :quiz
 
-	has_attached_file :avatar, :styles => {
-		:big => "200x200>",
-		:small => "65x65>"
-	}
+	has_attached_file :avatar,
+		:default_url => "http://i41.tinypic.com/rqyb12.png",
+		:styles => {
+			:big => "200x200>",
+			:small => "65x65>"
+		}
 
 	def fav_count
 		@fav_count = self.favoritings.count

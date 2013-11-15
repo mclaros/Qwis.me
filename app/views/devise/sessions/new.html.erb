@@ -1,9 +1,6 @@
 <div id="root-main-div" class="container">
   <div class="row">
 
-      <div class="col-xs-2">
-      </div>
-
       <div class="col-xs-6">
         <div class="page-header">
           <h1>
@@ -50,6 +47,86 @@
         </div>
         
     </div>
+
+
+    <div class="col-xs-6">
+      <div class="page-header">
+        <h1>Sign up</h1>
+      </div>
+
+      <%= devise_error_messages! %>
+
+      <div class="form-group">
+        <form action="<%= user_registration_url %>" method="POST" enctype="multipart/form-data">
+          <label for="user-username">
+            <span class="h4">
+              Username
+              <small>3 - 15 characters</small>
+            </span>
+          </label>
+          <input autofocus="autofocus" id="user-username" name="user[username]" type="text" class="form-control">
+
+          <br>
+
+          <label for="avatar-field">
+            <span class="h4">
+              Upload your avatar
+              <small>Optional</small>
+            </span>
+          </label>
+          <input type="file" id="avatar-field" name="user[avatar]">
+
+          <br>
+
+          <label for="user-description">
+            <span class="h4">
+              Bio
+              <small>Optional, max. 150 characters</small>
+            </span>
+          </label>
+          <textarea name="user[description]" class="form-control" rows="3"></textarea>
+
+          <br>
+
+          <label for="user-email">
+            <span class="h4">
+              Email
+            </span>
+          </label>
+          <input id="user-email" name="user[email]" type="email" value="" class="form-control">
+
+          <br>
+
+          <label for="user-password">
+            <span class="h4">
+              Password
+              <small>Min. 6 characters</small>
+            </span>
+          </label>
+          <input id="user-password" name="user[password]" type="password" class="form-control">
+
+          <br>
+
+          <label for="user-password-confirmation">
+            <span class="h4">
+              Password confirmation
+            </span>
+          </label>
+          <input id="user-password-confirmation" name="user[password_confirmation]" type="password" class="form-control">
+
+          <br>
+
+          <div>
+            <input name="commit" type="submit" value="Sign up" class="btn btn-primary">
+          </div>
+
+      </form>
+
+      </div>
+
+      
+    </div>
+
   </div>
 </div>
 

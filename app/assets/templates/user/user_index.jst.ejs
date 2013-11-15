@@ -6,7 +6,7 @@
 	<div class="row" id="user-list-col">
 		<div class="col-xs-8 media">
 			<a class="pull-left" href="#/users/<%= user.id %>">
-				<img src="<%= user.get('avatar_small') || 'https://s3-us-west-1.amazonaws.com/qwisme-development/blank_avatar_resized.png' %>" alt="User image" class="img-thumbnail">
+				<img src="<%= user.get('avatar_small') %>" alt="User image" class="img-thumbnail" style="max-height: 65px; max-width: 65px;">
 			</a>
 			<div class="media-body">
 				<h3 class="media-heading">
