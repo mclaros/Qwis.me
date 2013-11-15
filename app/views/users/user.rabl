@@ -24,7 +24,7 @@ child :play_histories do
 end
 
 attributes :id, :username, :description, :fav_count, :play_count,
-		   :unique_play_count, :win_count, :loss_count, :authored_quizzes_other_plays_count,
+		   :unique_play_count, :win_count, :loss_count, :authored_quizzes_others_plays_count,
 		   :authored_quizzes_others_favs_count, :qwismaster_points
 
 node(:created_at) { @user.created_at.to_time.to_formatted_s(:long_ordinal) }

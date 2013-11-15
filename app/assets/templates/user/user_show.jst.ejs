@@ -97,12 +97,110 @@
 	<div class="tab-pane fade" id="stats-tab">
 		<div class="page-header">
 			<h2>
-				User Statistics
+				Play Statistics
 				<small>Qwantitative reasoning</small>
 			</h2>
 		</div>
 
-		<div id="stats-section"></div>
+		<div id="stats-section">
+
+			<div class="row">
+				<div class="col-xs-3 text-left">
+					<h3>
+						Activity
+					</h3>
+
+					<h4>
+						<a id="q-point-explain">Qwismaster points*</a>:
+						<span class="text-primary">
+							<%= user.get("qwismaster_points") %>
+						</span>
+					</h4>
+						
+					<h4>Favorites:
+						<span class="text-primary">
+							<%= user.get("fav_count") %>
+						</span>
+					</h4>
+
+					<h4>
+						Plays:
+						<span class="text-primary">
+							<%= user.get("play_count") %>
+						</span>
+					</h4>
+						
+					<h4>
+						Unique plays:
+						<span class="text-primary">
+							<%= user.get("unique_play_count") %>
+						</span>
+					</h4>
+
+					<h4>
+						Last played:
+						<span class="text-primary">
+							DATE
+						</span>
+					</h4>
+				</div>
+
+
+				<div class="col-xs-4 text-left">
+					<h3>
+						Play Performance
+					</h3>
+
+					<h4>
+						Total play count:
+						<span class="text-primary">
+							<%= user.get("play_count") %>
+						</span>
+					</h4>
+						
+					<h4>
+						Distinct quizzes played:
+						<span class="text-primary">
+							<%= user.get("unique_play_count") %>
+						</span>
+					</h4>
+
+					<h4>Total wins:
+						<span class="text-primary">
+							<%= user.get("win_count") %>
+						</span>
+					</h4>
+
+					<h4>
+						Total losses:
+						<span class="text-primary">
+							<%= user.get("loss_count") %>
+						</span>
+					</h4>
+
+				</div>
+
+				<div class="col-xs-5 text-left">
+					<h3>
+						<%= user.escape("username") %>'s Quiz Statistics
+					</h3>
+						<h4>
+							Plays by others for all authored quizzes:
+							<span class="text-primary">
+								<%= user.get("authored_quizzes_others_plays_count") %>
+							</span>
+						</h4>
+						<h4>
+							Favorites by others for all authored quizzes:
+							<span class="text-primary">
+								<%= user.get("authored_quizzes_others_favs_count") %>
+							</span>
+						</h4>
+				</div>
+
+
+			</div>
+		</div>
 	</div>
 
 	<div class="tab-pane fade" id="authored-quizzes-tab">
