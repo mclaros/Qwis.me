@@ -18,7 +18,7 @@
 /* temporary location, will movelater */
 
 body {
-	background-image:url(https://s3-us-west-1.amazonaws.com/qwisme-development/geometry.png);
+	background-color: #f4e1a8;
 }
 
 div.container {
@@ -27,7 +27,7 @@ div.container {
 	margin: 50px auto 0 auto;
 	padding: 10px 50px 10px 50px;
 	border: 1px solid lightgray;
-	background-color: rgba(255,255,255,0.6);
+	background-color: rgba(255, 255, 255, 0.7);
 };
 
 
@@ -44,11 +44,12 @@ div.notices {
 }
 
 div.answer-div {
+	color: #333;
 	height: 25px;
 	width: 200px;
 	border: 1px solid black;
 	margin: 5px auto 5px auto;
-	background-color: chocolate;
+	background-color: #f0ad4e;
 	float: left;
 	padding: 2px;
 }
