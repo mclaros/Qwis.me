@@ -109,7 +109,7 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 		var $ansDiv = this.ansDivs[correctAns];
 		var $ansTextDiv = $($ansDiv.find("div"));
 		//animate reveal later
-		$ansDiv.css("background-color", "#FFD300");
+		$ansDiv.css("background-color", "#ffe047");
 		$ansTextDiv.show();
 	},
 
@@ -141,7 +141,7 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 
 	revealAllAns: function () {
 		$(".answer-div").each(function (idx, answerDiv) {
-			$(this).find("div").css("background-color", "yellow");
+			$(this).find("div").css("background-color", "#ffe047");
 			$(this).find("div").show();
 		});
 	},
