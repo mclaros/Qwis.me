@@ -122,7 +122,7 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 		var $lastDiv = $(".prompt-fields").last();
 		var pAnswerText = $.trim($lastDiv.find(".prompt-answer").val());
 
-		if (!(pAnswerText.length >=3 && pAnswerText.length <= 30)) {
+		if (!(pAnswerText.length <= 20)) {
 			$("#add-prompt-error").text("Correct answer does not meet length requirements");
 			return;
 		}
@@ -136,7 +136,7 @@ Qwisme.Views.QuizNew = Backbone.View.extend({
 		this.resetPromptDiv($newDiv);
 		$lastDiv.after($newDiv);
 		$newDiv.slideToggle("fast", function () {
-			$("body").scrollTo({top:'+=350px', left: '0'}, 300);
+			$("body").scrollTo({top:'+=330px', left: '0'}, 300);
 		});
 
 		this.addToQuizLength(1);
