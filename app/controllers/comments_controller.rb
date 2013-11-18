@@ -1,7 +1,9 @@
 class CommentsController < ApplicationController
 	def index
 		@quiz_comments = Comment.where(:quiz_id => params[:quiz_id]).includes(:author, :replies)
-		render "quiz_comments.rabl", :handlers => [:rabl]
+		respond_to do |format|
+			format.json { render "quiz_comments.rabl", :handlers => [:rabl] }
+		end
 	end
 
 	def create

@@ -12,27 +12,86 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 
 		var that = this;
 		var renderedTemp = this.template({
-			quiz: that.model,
-			prompts: that.model.get("quiz_prompts")
+			quiz: that.model
 		});
 
 		this.$el.html(renderedTemp);
-		this.genAnswerDivs(this.$el);
-		this.showFilledAnswerContainers();
+		this.genAnswerDivs();
 
 		return this;
 	},
 
-	launchQuiz: function (renderedView) {
-		var $ansContainer = renderedView.find("#answers-container");
+	getGameData: function () {
+		this.gameData = this.model.get("game_data");
+		this.promptIdToAns = this.gameData.prompt_id_to_ans;
+		this.ansToPromptId = this.gameData.ans_to_prompt_id;
+		this.remainingAnsrs = this.model.allPosAnswers();
+	},
+
+	genSimpleAnsDiv: function (options) {
+		var correctAns = options.correctAns;
+		var $container = options.$container;
+		var $newAnsDiv = this.$el.find("#simple-ans-proto").clone();
+
+		$newAnsDiv.attr("id", "");
+		$container.append($newAnsDiv);
+		this.ansDivs[correctAns] = $newAnsDiv;
+	},
+
+	genAnsWithHeaderDiv: function (options) {
+		var correctAns = options.correctAns;
+		var ansHeader = options.ansHeader;
+		var $container = options.$container;
+		var $newAnsWithHeaderDiv = this.$el.find("#ans-with-header-proto").clone();
+
+		$newAnsWithHeaderDiv.attr("id", "");
+		$newAnsWithHeaderDiv.find(".ans-header").text(ansHeader);
+		$container.append($newAnsWithHeaderDiv);
+		this.ansDivs[correctAns] = $newAnsWithHeaderDiv;
+	},
+
+	genAnsWithImgDiv: function (options) {
+		var $newAnsWithImgDiv = this.$el.find("#ans-with-img-proto").clone();
+		$newAnsWithImgDiv.attr("id", "");
+	},
+
+	genAnswerDivs: function () {
+		this.getGameData();
+		this.ansDivs = {};
+
+		var that = this;
+		var $container = this.$el.find("#answers-container");
+		var prompts = this.model.get("quiz_prompts");
+
+		prompts.each(function (prompt) {
+			var correctAns = prompt.escape("correct_answer");
+			var ansHeader = prompt.escape("prompt");
+			if (ansHeader === "") {
+				that.genSimpleAnsDiv({
+					correctAns: correctAns,
+					$container: $container
+				});
+			}
+			else {
+				that.genAnsWithHeaderDiv({
+					correctAns: correctAns,
+					ansHeader: ansHeader,
+					$container: $container
+				});
+			}
+		});
+	},
+
+	launchQuiz: function () {
+		var $ansContainer = this.$el.find("#answers-container");
 		$("#quit-game").attr("disabled", false);
-		this.listenToInput(renderedView);
+		this.listenToInput();
 		this.runTimer();
 	},
 
-	listenToInput: function (renderedView) {
+	listenToInput: function () {
 		var that = this;
-		var $inputField = renderedView.find("#player-input");
+		var $inputField = this.$el.find("#player-input");
 
 		$inputField.on("keyup keydown", function (event) {
 			var inputStr = $inputField.val();
@@ -43,11 +102,11 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 				$inputField.val("");
 				that.trackCorrectGuess(inputStr);
 
-				var $counterDiv = renderedView.find("#correct-count");
+				var $counterDiv = that.$el.find("#correct-count");
 				var newCount = 1 + parseInt($counterDiv.text());
 				$counterDiv.text(newCount);
 			}
-		})
+		});
 	},
 
 	stopListeningEl: function ($el) {
@@ -67,36 +126,6 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 		}
 	},
 
-	genAnswerDivs: function ($renderedView) {
-		this.gameData = this.model.get("game_data");
-		this.promptIdToAns = this.gameData.prompt_id_to_ans;
-		this.ansToPromptId = this.gameData.ans_to_prompt_id;
-		this.remainingAnsrs = this.model.allPosAnswers();
-		this.ansDivs = {};
-
-		var that = this;
-		var $container = $renderedView.find("#answers-container");
-		var $answerDiv = $("<div>");
-		var $hidAnsText = $("<div>");
-		$answerDiv.addClass("answer-div");
-		$hidAnsText.hide();
-
-		var prompts = this.model.get("quiz_prompts");
-		prompts.each(function (prompt) {
-			var correctAns = prompt.get("correct_answer");
-			var $newAnswerDiv = $answerDiv.clone();
-			var $newHidAnsText = $hidAnsText.clone();
-
-			$newHidAnsText.text(correctAns);
-			$newAnswerDiv.append($newHidAnsText);
-			$container.append($newAnswerDiv);
-			that.ansDivs[correctAns] = $newAnswerDiv;
-		});
-	},
-
-	showFilledAnswerContainers: function () {
-		
-	},
 
 	isAnswer: function (trimmedInput) {
 		var lowerCasedAnsrs = _.map(this.remainingAnsrs, function (remainAns) {
@@ -107,10 +136,17 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 
 	revealAns: function (correctAns) {
 		var $ansDiv = this.ansDivs[correctAns];
-		var $ansTextDiv = $($ansDiv.find("div"));
+		var $ansTextDiv = $($ansDiv.find(".ans-text"));
 		//animate reveal later
 		$ansDiv.css("background-color", "#ffe047");
-		$ansTextDiv.show();
+		$ansTextDiv.text(correctAns);
+	},
+
+	revealAllAns: function () {
+		var that = this;
+		_.each(that.ansDivs, function (val, key) {
+			that.revealAns(key);
+		});
 	},
 
 	runTimer: function (startTimeSecs) {
@@ -137,13 +173,6 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 	timeOut: function () {
 		console.log("TIME UP");
 		this.loseActions();
-	},
-
-	revealAllAns: function () {
-		$(".answer-div").each(function (idx, answerDiv) {
-			$(this).find("div").css("background-color", "#ffe047");
-			$(this).find("div").show();
-		});
 	},
 
 	bindStartButton: function (event) {
