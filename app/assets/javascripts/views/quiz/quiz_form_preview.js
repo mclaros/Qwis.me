@@ -4,12 +4,9 @@ Qwisme.Views.QuizFormPreview = Backbone.View.extend({
 	render: function (quizFormData) {
 		this.quizData = quizFormData.quiz || {};
 		this.quizPromptsDataArr = quizFormData.quiz_prompts || {};
-
-		// console.log("rendering preview");
-		// console.log("quizData");
-		// console.log(this.quizData);
-		// console.log("quizPromptsDataArr");
-		// console.log(this.quizPromptsDataArr);
+		this.quizPromptsDataArr = _.reject(this.quizPromptsDataArr, function (data) {
+			return _.isUndefined(data.correct_answer);
+		});
 
 		var renderedTemp = this.template({
 			quizTitle: this.validate(this.quizData, "title", 3, 50),
@@ -22,14 +19,14 @@ Qwisme.Views.QuizFormPreview = Backbone.View.extend({
 		});
 
 		this.$el.html(renderedTemp);
+		this.genAnswerDivPrevs();
 		return this;
 	},
 
 	validate: function (source, type, minChars, maxChars) {
-		console.log(source)
 		var specialFormat = ["category","scope"];
 		var string = _.escape(source[type]);
-		console.log(string)
+
 		if ( _.contains(specialFormat, type) ) {
 			string = _.str.capitalize(string);
 		}
@@ -51,5 +48,56 @@ Qwisme.Views.QuizFormPreview = Backbone.View.extend({
 
 	dangerize: function (string) {
 		return "<span class='text-danger'>" + string + "</span>";
+	},
+
+	genAnswerDivPrevs: function () {
+		var that = this;
+		_.each(this.quizPromptsDataArr, function (promptData) {
+			var correctAns = _.escape(promptData.correct_answer);
+			var ansHeader = _.escape(promptData.prompt);
+
+			if (ansHeader === "") {
+				that.genSimpleAnsDivPrevs({
+					correctAns: correctAns,
+					$container: that.$el.find("#simple-ans-prev")
+				});
+			}
+			else {
+				that.genAnsWithHeaderDivPrevs({
+					correctAns: correctAns,
+					ansHeader: ansHeader,
+					$container: that.$el.find("ans-with-header-prev")
+				})
+			}
+		});
+	},
+
+	genSimpleAnsDivPrevs: function (options) {
+		console.log("generating simple ans div")
+		var correctAns = options.correctAns;
+		var $container = options.$container;
+		var $newAnsDiv = this.$el.find("#simple-ans-proto").clone();
+
+		$newAnsDiv.attr("id", "");
+		$newAnsDiv.find(".ans-text").text(correctAns);
+		$container.append($newAnsDiv);
+	},
+
+	genAnsWithHeaderDivPrevs: function (options) {
+		console.log("generating answer div with header")
+		var correctAns = options.correctAns;
+		var ansHeader = options.ansHeader;
+		var $container = options.$container;
+		var $newAnsWithHeaderDiv = this.$el.find("#ans-with-header-proto").clone();
+
+		$newAnsWithHeaderDiv.attr("id", "");
+		$newAnsWithHeaderDiv.find(".ans-header").text(ansHeader);
+		$newAnsWithHeaderDiv.find(".ans-text").text(correctAns);
+		$container.append($newAnsWithHeaderDiv);
+	},
+
+	genAnsWithImgDivPrevs: function (options) {
+		var $container = this.$el.find("#ans-with-img-prev");
+
 	}
 });
