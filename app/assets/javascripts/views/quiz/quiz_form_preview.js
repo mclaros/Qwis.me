@@ -10,7 +10,7 @@ Qwisme.Views.QuizFormPreview = Backbone.View.extend({
 
 		var renderedTemp = this.template({
 			quizTitle: this.validate(this.quizData, "title", 3, 50),
-			quizDescription: _.escape(this.quizData.description) || "<span class='text-warning'>NO DESCRIPTION</span>",
+			quizDescription: _.escape(this.quizData.description) || "<span class='text-warning'>NO DESCRIPTION (optional)</span>",
 			quizLength: _.escape(this.quizData.length) || 1,
 			quizQuestion: _.escape(this.quizData.question) || this.dangerize("MISSING QUESTION"),
 			quizScope: _.str.capitalize(_.escape(this.quizData.scope)) || this.dangerize("MISSING"),
@@ -66,7 +66,7 @@ Qwisme.Views.QuizFormPreview = Backbone.View.extend({
 				that.genAnsWithHeaderDivPrevs({
 					correctAns: correctAns,
 					ansHeader: ansHeader,
-					$container: that.$el.find("ans-with-header-prev")
+					$container: that.$el.find("#ans-with-header-prev")
 				})
 			}
 		});

@@ -55,10 +55,10 @@ div.answer-div {
 	overflow: hidden;
 }
 
-div.answer-with-prompt {
+div.answer-with-header {
 	width: 200px;
 	border: 1px solid black;
-	margin: 5px auto 5px auto;
+	margin: 0 auto 5px auto;
 }
 
 div.answer-prompt-container {
@@ -72,12 +72,43 @@ div.hidden-answer * {
 
 .ans-div-prev {
 	color: #333;
-	height: 16px;
+	height: 20px;
 	width: 110px;
 	border: 1px solid #4f361a;
-	margin: 2px auto 2px auto;
+	margin: 0 auto 2px auto;
 	background-color: #ffe047;
 	float: left;
+	overflow: hidden;
+}
+
+.ans-with-head-div-prev {
+	height: 20px;
+	width: 302px;
+	margin: 0 auto 0 auto;
+	float: inline-block;
+	overflow: hidden;
+	padding: 0;
+}
+
+.ans-header {
+	min-width: 150px;
+	max-width: 150px;
+	margin: 0;
+	padding: 0;
+	color: #333;
+	background-color: lightgrey;
+	border: 1px solid #4f361a;
+	overflow: hidden;
+}
+
+.ans-header-text {
+	min-width: 150px;
+	max-width: 150px;
+	margin: 0;
+	padding: 0;
+	color: #333;
+	background-color: #ffe047;
+	border: 1px solid #4f361a;
 	overflow: hidden;
 }
 
