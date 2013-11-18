@@ -52,6 +52,7 @@ div.answer-div {
 	background-color: #e87c00;
 	float: left;
 	padding: 2px;
+	overflow: hidden;
 }
 
 div.answer-with-prompt {
@@ -67,6 +68,17 @@ div.answer-prompt-container {
 
 div.hidden-answer * {
 	visibility: hidden;
+}
+
+.ans-div-prev {
+	color: #333;
+	height: 16px;
+	width: 110px;
+	border: 1px solid #4f361a;
+	margin: 2px auto 2px auto;
+	background-color: #ffe047;
+	float: left;
+	overflow: hidden;
 }
 
 .opt-field-filled {
