@@ -1,6 +1,10 @@
 Qwisme.Collections.Users = Backbone.Collection.extend({
 	url: "/users",
 
+	initialize: function (options) {
+		this.fetched = false;
+	},
+
 	parse: function (data) {
 		_.each(data, function (singleUserData) {
 			singleUserData.favorite_quizzes = new Qwisme.Collections.FavoriteQuizzes(singleUserData.favorite_quizzes);
@@ -10,5 +14,15 @@ Qwisme.Collections.Users = Backbone.Collection.extend({
 		});
 
 		return data;
+	},
+
+	setFetchCheckTimer: function () {
+		this.fetched = true;
+		this.fetchCheckTimer = setTimeout(this.resetFetchCheck.bind(this), 300000);
+	},
+
+	resetFetchCheck: function () {
+		this.fetched = false;
+		this.fetchCheckTimer && clearTimeout(this.fetchCheckTimer);
 	}
 })

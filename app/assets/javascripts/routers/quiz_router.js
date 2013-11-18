@@ -6,14 +6,9 @@ Qwisme.Routers.QuizRouter = Backbone.Router.extend({
 		"quizzes": "renderQuizIndex",
 		"quizzes/new": "renderQuizNew",
 		"quizzes/:id/play": "renderQuizPlay",
-		"quizzes/:id": "renderQuizShow",
-		"excomment": "renderExampleComment"
+		"quizzes/:id": "renderQuizShow"
 	},
 
-	renderExampleComment: function () {
-		var template = JST["comment/nested_comments"];
-		this.$rootEl.html(template());
-	},
 
 	initialize: function (options) {
 		this.$rootEl = options.$rootEl;
@@ -27,31 +22,32 @@ Qwisme.Routers.QuizRouter = Backbone.Router.extend({
 
 	renderUserIndex: function () {
 		var that = this;
-		//TEMPORARY
-		Qwisme.USERS = Qwisme.USERS || new Qwisme.Collections.Users();
-		//END TEMP
 
-		Qwisme.USERS.fetch({
-			parse: true,
-
-			success: function () {
-				var userIndex = new Qwisme.Views.UserIndex({
-					collection: Qwisme.USERS
-				});
-
-			that._swapView(userIndex);
-			}
-		});
+		if (Qwisme.USERS.fetched) {
+			var userIndex = new Qwisme.Views.UserIndex({
+				collection: Qwisme.USERS
+			});
+			this._swapView(userIndex);
+		}
+		else {
+			Qwisme.USERS.fetch({
+				parse: true,
+				success: function () {
+					var userIndex = new Qwisme.Views.UserIndex({
+						collection: Qwisme.USERS
+					});
+					that._swapView(userIndex);
+					Qwisme.USERS.setFetchCheckTimer();
+				}
+			});
+		}
 	},
 
 	renderUserShow: function (id) {
 		var that = this;
-		//save current user as global?
-
 		Qwisme.USERS.fetch({
 			success: function () {
 				var user = Qwisme.USERS.get(id);
-
 				if ( _.isUndefined(user) ) {
 					that.showNoticeModal("User does not exist!");
 					return;
@@ -60,7 +56,6 @@ Qwisme.Routers.QuizRouter = Backbone.Router.extend({
 				var userShow = new Qwisme.Views.UserShow({
 						model: user
 					});
-					
 				that._swapView(userShow);
 			}
 		});
@@ -113,8 +108,8 @@ Qwisme.Routers.QuizRouter = Backbone.Router.extend({
 		this._currentView = newView;
 		this._currentView.render().$el.hide();
 		this.$rootEl.html(newView.$el);
-		this._currentView.$el.fadeIn()
-;	},
+		this._currentView.$el.fadeIn();
+	},
 
 	showNoticeModal: function (notice) {
 		$("#notice").text(notice);

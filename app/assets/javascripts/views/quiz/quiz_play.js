@@ -35,7 +35,7 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 
 		$newAnsDiv.attr("id", "");
 		$container.append($newAnsDiv);
-		this.ansDivs[correctAns] = $newAnsDiv;
+		this.ansDivs[correctAns.toLowerCase()] = $newAnsDiv;
 	},
 
 	genAnsWithHeaderDiv: function (options) {
@@ -47,7 +47,7 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 		$newAnsWithHeaderDiv.attr("id", "");
 		$newAnsWithHeaderDiv.find(".ans-header").text(ansHeader);
 		$container.append($newAnsWithHeaderDiv);
-		this.ansDivs[correctAns] = $newAnsWithHeaderDiv;
+		this.ansDivs[correctAns.toLowerCase()] = $newAnsWithHeaderDiv;
 	},
 
 	genAnsWithImgDiv: function (options) {
@@ -134,7 +134,7 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 	},
 
 	revealAns: function (correctAns) {
-		var $ansDiv = this.ansDivs[correctAns];
+		var $ansDiv = this.ansDivs[correctAns.toLowerCase()];
 		var $ansTextDiv = $($ansDiv.find(".ans-text"));
 		//animate reveal later
 		$ansDiv.css("background-color", "#ffe047");
