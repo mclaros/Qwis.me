@@ -81,16 +81,38 @@ div.hidden-answer * {
 	overflow: hidden;
 }
 
+.ans-with-head-div {
+	height: 25px;
+	width: 401px;
+	margin: 2px;
+	overflow: hidden;
+	padding: 0;
+	border: 1px solid #4f361a;
+	background-color: #e87c00;
+	display: inline-block;
+}
+
 .ans-with-head-div-prev {
 	height: 20px;
 	width: 302px;
 	margin: 0 auto 0 auto;
-	float: inline-block;
+	display: block;
 	overflow: hidden;
 	padding: 0;
 }
 
 .ans-header {
+	height: 25px;
+	min-width: 200px;
+	max-width: 200px;
+	margin: 0;
+	padding: 0;
+	color: #333;
+	background-color: lightgrey;
+	overflow: hidden;
+}
+
+.ans-header-prev {
 	min-width: 150px;
 	max-width: 150px;
 	margin: 0;
@@ -102,6 +124,17 @@ div.hidden-answer * {
 }
 
 .ans-header-text {
+	height: 25px;
+	min-width: 200px;
+	max-width: 200px;
+	margin: 0;
+	padding: 0;
+	color: #333;
+	overflow: hidden;
+	border-left: 1px solid #4f361a;
+}
+
+.ans-header-text-prev {
 	min-width: 150px;
 	max-width: 150px;
 	margin: 0;

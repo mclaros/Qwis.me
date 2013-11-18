@@ -60,23 +60,22 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 		this.ansDivs = {};
 
 		var that = this;
-		var $container = this.$el.find("#answers-container");
 		var prompts = this.model.get("quiz_prompts");
 
 		prompts.each(function (prompt) {
 			var correctAns = prompt.escape("correct_answer");
-			var ansHeader = prompt.escape("prompt");
+			var ansHeader = prompt.get("prompt");
 			if (ansHeader === "") {
 				that.genSimpleAnsDiv({
 					correctAns: correctAns,
-					$container: $container
+					$container: that.$el.find("#answers-container")
 				});
 			}
 			else {
 				that.genAnsWithHeaderDiv({
 					correctAns: correctAns,
 					ansHeader: ansHeader,
-					$container: $container
+					$container: that.$el.find("#answers-container-titled")
 				});
 			}
 		});

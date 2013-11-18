@@ -53,8 +53,8 @@ Qwisme.Views.QuizFormPreview = Backbone.View.extend({
 	genAnswerDivPrevs: function () {
 		var that = this;
 		_.each(this.quizPromptsDataArr, function (promptData) {
-			var correctAns = _.escape(promptData.correct_answer);
-			var ansHeader = _.escape(promptData.prompt);
+			var correctAns = promptData.correct_answer;
+			var ansHeader = promptData.prompt;
 
 			if (ansHeader === "") {
 				that.genSimpleAnsDivPrevs({
@@ -73,7 +73,6 @@ Qwisme.Views.QuizFormPreview = Backbone.View.extend({
 	},
 
 	genSimpleAnsDivPrevs: function (options) {
-		console.log("generating simple ans div")
 		var correctAns = options.correctAns;
 		var $container = options.$container;
 		var $newAnsDiv = this.$el.find("#simple-ans-proto").clone();
@@ -84,14 +83,13 @@ Qwisme.Views.QuizFormPreview = Backbone.View.extend({
 	},
 
 	genAnsWithHeaderDivPrevs: function (options) {
-		console.log("generating answer div with header")
 		var correctAns = options.correctAns;
 		var ansHeader = options.ansHeader;
 		var $container = options.$container;
 		var $newAnsWithHeaderDiv = this.$el.find("#ans-with-header-proto").clone();
 
 		$newAnsWithHeaderDiv.attr("id", "");
-		$newAnsWithHeaderDiv.find(".ans-header").text(ansHeader);
+		$newAnsWithHeaderDiv.find(".ans-header-prev").text(ansHeader);
 		$newAnsWithHeaderDiv.find(".ans-text").text(correctAns);
 		$container.append($newAnsWithHeaderDiv);
 	},
