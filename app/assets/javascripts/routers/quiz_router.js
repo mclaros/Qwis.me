@@ -62,8 +62,6 @@ Qwisme.Routers.QuizRouter = Backbone.Router.extend({
 	},
 
 	renderQuizIndex: function () {
-		console.log("rendering quiz index with collection:")
-		console.log(Qwisme.QUIZZES);
 		var quizIndex = new Qwisme.Views.QuizIndex({
 				collection: Qwisme.QUIZZES
 			});
