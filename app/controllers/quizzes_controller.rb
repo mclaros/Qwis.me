@@ -1,8 +1,13 @@
 class QuizzesController < ApplicationController
 	def index
-		@quizzes = Quiz.includes(:quiz_prompts => :valid_answers)
+		@quizzes = Quiz
+					.includes(:quiz_prompts => :valid_answers)
+					.order("created_at DESC")
+					.page(params[:page])
+					.per(5)
 
-		# render "quizzes.rabl", handlers: [:rabl]
+		@page = params[:page]
+		@total_pages = @quizzes.total_pages
 		respond_to do |format|
 			format.html { render :index }
 			format.json { render "quizzes.rabl", :handlers => [:rabl] }

@@ -9,3 +9,5 @@ child(:quiz_prompts) do
 		attributes :id, :quiz_prompt_id, :valid_answer
 	end
 end
+node(:total_pages) { @total_pages }
+node(:page) { @page }

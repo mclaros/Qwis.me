@@ -9,5 +9,7 @@ Qwisme.Views.QuizIndex = Backbone.View.extend({
 
 		this.$el.html(renderedTemp);
 		return this;
-	}
+	},
+
+	
 });

@@ -4,7 +4,10 @@ window.Qwisme = {
   Views: {},
   Routers: {},
   initialize: function(options) {
-    Qwisme.QUIZZES = new Qwisme.Collections.Quizzes(options.quizData, { parse: true });
+    Qwisme.QUIZZES = new Qwisme.Collections.Quizzes(options.quizData, {
+      parse:true,
+      page: 1
+    });
     // Qwisme.USERS = new Qwisme.Collections.Users(options.usersData, { parse: true });
     Qwisme.USERS = new Qwisme.Collections.Users();
     Qwisme.CURRENT_USER = new Qwisme.Models.User(options.currentUserData, { parse: true });
