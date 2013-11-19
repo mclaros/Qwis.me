@@ -5,8 +5,7 @@ window.Qwisme = {
   Routers: {},
   initialize: function(options) {
     Qwisme.QUIZZES = new Qwisme.Collections.Quizzes(options.quizData, {
-      parse:true,
-      page: 1
+      parse:true
     });
     // Qwisme.USERS = new Qwisme.Collections.Users(options.usersData, { parse: true });
     Qwisme.USERS = new Qwisme.Collections.Users();

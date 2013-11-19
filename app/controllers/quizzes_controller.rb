@@ -4,7 +4,7 @@ class QuizzesController < ApplicationController
 					.includes(:quiz_prompts => :valid_answers)
 					.order("created_at DESC")
 					.page(params[:page])
-					.per(5)
+					.per(1)
 
 		@page = params[:page]
 		@total_pages = @quizzes.total_pages
