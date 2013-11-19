@@ -10,7 +10,8 @@
 				<div class="media-body">
 					<h3 class="media-heading">
 						<a href="#/quizzes/<%= quiz.id %>"><%= quiz.escape("title") %></a>
-						<small> 
+						<small>
+							<br>
 							&nbsp;&nbsp; created by <a href="#/users/<%= quiz.get('author_id') %>">
 								<%= quiz.escape("author_username") %>
 							</a>
