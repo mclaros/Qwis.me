@@ -30,3 +30,5 @@ attributes :id, :username, :description, :fav_count, :play_count,
 node(:created_at) { |user| user.created_at.to_time.to_formatted_s(:long_ordinal) }
 node(:avatar_small) { |user| user.avatar.url(:small) }
 node(:avatar_big) { |user| user.avatar.url(:big) }
+node(:page) { @page }
+node(:total_pages) { @total_pages }

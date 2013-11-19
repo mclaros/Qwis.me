@@ -1,7 +1,16 @@
 class UsersController < ApplicationController
 	def index
-		@users = User.includes({:quizzes => [:play_histories, :favoritings]}, :favorite_quizzes, :play_histories, :played_quizzes)
+		@users = User
+					.includes(
+						{:quizzes => [:play_histories, :favoritings]}, 
+						:favorite_quizzes, :play_histories, :played_quizzes
+						)
+					.order("created_at DESC")
+					.page(params[:page] || 1)
+					.per(5)
 
+		@page = params[:page] || 1
+		@total_pages = @users.total_pages
 		# render "users.rabl", :handlers => [:rabl]
 		respond_to do |format|
 			format.json { render "users.rabl", :handlers => [:rabl] }

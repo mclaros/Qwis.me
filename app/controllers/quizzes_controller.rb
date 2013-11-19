@@ -3,7 +3,7 @@ class QuizzesController < ApplicationController
 		@quizzes = Quiz
 					.includes({:quiz_prompts => :valid_answers}, :favoritings, :play_histories)
 					.order("created_at DESC")
-					.page(params[:page])
+					.page(params[:page] || 1)
 					.per(5)
 
 		@page = params[:page]
