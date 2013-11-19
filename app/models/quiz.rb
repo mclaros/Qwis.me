@@ -18,21 +18,18 @@ class Quiz < ActiveRecord::Base
 	has_many :play_histories #:dependent => :nullify???
 	has_many :favoritings, :dependent => :destroy
 
-	def self.categories
-		#obsolete if set in backbone
-		cats = [
-				"entertainment", "gaming", "geography", "history", "holiday", 
-				"just For Fun", "language", "literature", "movies", "music", 
-				"odd Qwirks (Misc.)", "religion", "science", "sports", "television"
-				]
+	def self.build_full(params)
+		quiz = self.new(params[:quiz])
 
-		return cats
-	end
+		params[:quiz_prompts].each do |prompt_vals|
+			valid_answers_params = prompt_vals["valid_answers"]
+			prompt_params = prompt_vals.reject { |key| key == "valid_answers" }
+			prompt_params[:correct_answer].downcase!
+			prompt = quiz.quiz_prompts.new(prompt_params)
+			prompt.build_valid_answers(valid_answers_params) unless valid_answers_params.nil?
+		end
 
-	def self.scopes
-		#obsolete if set in backbone
-		scopes = %w{common amateur expert}
-		return scopes
+		return quiz
 	end
 
 	def author_username

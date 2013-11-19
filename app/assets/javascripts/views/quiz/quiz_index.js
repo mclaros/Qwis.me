@@ -12,18 +12,14 @@ Qwisme.Views.QuizIndex = Backbone.View.extend({
 	},
 
 	scrollFetch: function () {
-		console.log("scroll fetch check")
 		var that = this;
 		var scrollRemaining = $(document).height() - $(window).scrollTop() - $(window).height();
-		console.log(scrollRemaining);
 		if ( scrollRemaining < 50 && (this.collection.page < this.collection.total_pages) ) {
-			console.log("fetch conditions are true");
 			this.collection.fetch({
 				remove: false,
 				data: { page: that.collection.page + 1 },
 				success: function () {
 					that.render();
-					console.log("fetched");
 				}
 			});
 		}

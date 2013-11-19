@@ -4,10 +4,10 @@ class StaticPagesController < ApplicationController
 	def root
 		if user_signed_in?
 			@quizzes = Quiz
-						.includes(:quiz_prompts => :valid_answers)
+						.includes({:quiz_prompts => :valid_answers}, :favoritings, :play_histories)
 						.order("created_at DESC")
 						.page(params[:page])
-						.per(1)
+						.per(5)
 
 			@page = params[:page] || 1
 			@total_pages = @quizzes.total_pages

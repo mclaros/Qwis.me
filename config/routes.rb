@@ -8,7 +8,7 @@ Qwisme::Application.routes.draw do
   resources :users, :only => [:index, :show] do
   	resources :play_histories, :only => [:index]
   end
-  resources :quizzes do
+  resources :quizzes, :only => [:index, :create] do
   	resources :comments, :only => [:index, :create, :update, :destroy]
   end
 
