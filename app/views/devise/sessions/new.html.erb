@@ -4,8 +4,13 @@
       <div class="jumbotron">
         <h1>Qwis.me</h1>
         <p>
-          A <i>Sporcle</i> clone to test your Qwisdom.
+          A <i>Sporcle</i> clone to test your <i>Qwisdom</i>.
         </p>
+
+        <form action="<%= guest_url %>" method="GET">
+          <input type="submit" value="Log in as Guest" class="btn btn-lg btn-success">
+        </form>
+
       </div>
     </div>
   </div>
@@ -31,7 +36,7 @@
                 Username
               </span>
             </label>
-            <input type="text" class="form-control" autofocus="autofocus" id="user-username" name="user[username]" value="guest1">
+            <input type="text" class="form-control" autofocus="autofocus" id="user-username" name="user[username]">
 
             <br>
 
@@ -40,7 +45,7 @@
                 Password
               </span>
             </label>
-            <input type="password" id="user-password" name="user[password]" class="form-control" value="123456">
+            <input type="password" id="user-password" name="user[password]" class="form-control">
 
             <br>
 

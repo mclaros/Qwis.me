@@ -12,5 +12,6 @@ Qwisme::Application.routes.draw do
   	resources :comments, :only => [:index, :create, :update, :destroy]
   end
 
+  get "/guest", to: "users#guest_login"
   root :to => "static_pages#root"
 end

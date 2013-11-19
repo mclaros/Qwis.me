@@ -7,7 +7,7 @@ Qwisme.Views.QuizIndex = Backbone.View.extend({
 		});
 
 		this.$el.html(renderedTemp);
-		$(window).scroll( _.throttle(this.scrollFetch, 1000).bind(this) ) ;
+		$(window).scroll( _.throttle(this.scrollFetch, 1000).bind(this) );
 		return this;
 	},
 

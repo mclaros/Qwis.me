@@ -24,4 +24,9 @@ class UsersController < ApplicationController
 			format.json { render "user.rabl", :handlers => [:rabl] }
 		end
 	end
+
+	def guest_login
+		guest_user = User.find_by_username("guest1")
+		sign_in_and_redirect(guest_user)
+	end
 end
