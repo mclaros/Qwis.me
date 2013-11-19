@@ -13,6 +13,11 @@ Qwisme.Collections.Users = Backbone.Collection.extend({
 			singleUserData.played_quizzes = new Qwisme.Collections.Quizzes(singleUserData.played_quizzes);
 		});
 
+		if ( !_.isEmpty(data) ) {
+			this.page = parseInt(data[0].page) || 1;
+			this.total_pages = parseInt(data[0].total_pages);
+		}
+
 		return data;
 	},
 
