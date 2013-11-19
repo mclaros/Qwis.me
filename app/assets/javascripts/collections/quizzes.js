@@ -4,13 +4,16 @@ Qwisme.Collections.Quizzes = Backbone.Collection.extend({
 	
 	initialize: function (modelData, options) {
 		console.log("quizzes collection init");
-		if (options && options.page) this.page = options.page;
+		if ( !_.isUndefined(options) ) this.page = options.page;
 	},
 
 	parse: function (data) {
 		console.log("quizzes collection parse");
-		if (data[0].page) this.page = parseInt(data[0].page);
-		if (data[0].total_pages) this.total_pages = parseInt(data[0].total_pages);
+		if ( !_.isEmpty(data) ) {
+			this.page = parseInt(data[0].page) || 1;
+			this.total_pages = parseInt(data[0].total_pages);
+		}
+
 		return data;
 	}
 });
