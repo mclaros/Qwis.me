@@ -28,7 +28,7 @@ class Quiz < ActiveRecord::Base
 			prompt = quiz.quiz_prompts.new(prompt_params)
 			prompt.build_valid_answers(valid_answers_params) unless valid_answers_params.nil?
 		end
-
+		
 		return quiz
 	end
 
