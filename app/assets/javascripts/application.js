@@ -20,6 +20,7 @@
 //= require jquery.serializeJSON.min
 //= require jquery.sticky
 //= require qwisme
+//= require pace.min
 
 //= require bootstrap
 

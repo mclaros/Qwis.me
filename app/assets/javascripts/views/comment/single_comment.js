@@ -15,6 +15,7 @@ Qwisme.Views.SingleComment = Backbone.View.extend({
 		});
 		this.$el.html(renderedTemp);
 		this.$el.find("#expand-reply-" + this.model.id).on("click", this.toggleReplyBox.bind(this));
+		this.$el.find("#expand-replies-list-" + this.model.id).on("click", this.toggleRepliesList.bind(this));
 		this.generateReplyViews();
 
 		return this;
@@ -44,13 +45,25 @@ Qwisme.Views.SingleComment = Backbone.View.extend({
 
 	toggleReplyBox: function (event) {
 		event.preventDefault();
+		var $button = $(event.target);
+		$button.toggleClass("active");
 		$("#reply-box-" + this.model.id).slideToggle();
+		$("#reply-box-" + this.model.id).find("textarea").focus();
+	},
+
+	toggleRepliesList: function (event) {
+		event.preventDefault();
+		var $button = $(event.target);
+		$button.text() === "Hide Replies" ? $button.text("Show Replies") : $button.text("Hide Replies")
+		$button.toggleClass("active");
+		$button.blur();
+		$("#reply-list-" + this.model.id).slideToggle();
 	},
 
 	generateReplyViews: function () {
 		var that = this;
 		var $replyList = this.$el.find("#reply-list-" + this.model.id);
-		var orderedReplies = this.model.get("comments").models.reverse();
+		var orderedReplies = this.model.get("comments").models;
 		_.each(orderedReplies, function (reply) {
 			var replyView = new Qwisme.Views.SingleComment({
 				model: that.collection.get(reply),

@@ -41,8 +41,7 @@ Qwisme.Views.QuizComments = Backbone.View.extend({
 			author_id: Qwisme.CURRENT_USER.id
 		}, {
 			success: function (data) {
-				console.log("submit comment reply:")
-				console.log(data)
+
 			}
 		});
 	},
@@ -58,8 +57,6 @@ Qwisme.Views.QuizComments = Backbone.View.extend({
 		
 		var orderedComments = this.collection.models.reverse();
 		_.each(orderedComments, function (comment) {
-			console.log("iterating comment")
-			
 			if ( _.isNull(comment.get("parent_comment_id")) ) {
 				var commentView = new Qwisme.Views.SingleComment({
 					model: comment,

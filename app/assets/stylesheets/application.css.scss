@@ -183,3 +183,21 @@ input.opt-field-active {
 	min-height: 200px;
 	margin: 10px 0 15px 0;
 }
+
+.pace .pace-progress {
+  background: #ff5b34;
+  position: fixed;
+  z-index: 2000;
+  top: 340;
+  left: 0;
+  height: 3px;
+
+  -webkit-transition: width 1s;
+  -moz-transition: width 1s;
+  -o-transition: width 1s;
+  transition: width 1s;
+}
+
+.pace-inactive {
+  display: none;
+}

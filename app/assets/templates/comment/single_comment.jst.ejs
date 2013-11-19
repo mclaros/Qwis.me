@@ -19,8 +19,12 @@
 			<p>
 				<%= comment.escape("body") %>
 			</p>
+			<button type="button" id="expand-replies-list-<%= comment.id %>" class="btn btn-default btn-sm">Hide Replies</button>
+
 			<button type="button" id="expand-reply-<%= comment.id %>" class="btn btn-default btm-sm pull-right">Reply</button>
+
 			<br>
+			
 			<div id="reply-box-<%= comment.id %>" class="form-group" style="display: none;">
 				<span class="h5">
 					<small>Max. 200 characters</small>

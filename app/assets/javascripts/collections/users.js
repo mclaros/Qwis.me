@@ -18,7 +18,7 @@ Qwisme.Collections.Users = Backbone.Collection.extend({
 
 	setFetchCheckTimer: function () {
 		this.fetched = true;
-		this.fetchCheckTimer = setTimeout(this.resetFetchCheck.bind(this), 300000);
+		this.fetchCheckTimer = setTimeout(this.resetFetchCheck.bind(this), 180000);
 	},
 
 	resetFetchCheck: function () {

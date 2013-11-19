@@ -4,8 +4,6 @@ class CommentsController < ApplicationController
 							.includes(:author, :replies)
 							.where(:quiz_id => params[:quiz_id])
 							.order("created_at DESC")
-							.page(params[:page])
-							.per(5)
 							
 		respond_to do |format|
 			format.json { render "quiz_comments.rabl", :handlers => [:rabl] }
