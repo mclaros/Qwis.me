@@ -6,8 +6,6 @@
 
 1. [Quick Summary](#quick-summary)
 2. [Sporcle](#sporcle)
-  1. [Description](#sporcle-description)
-  2. [Quiz creation](#sporcle-quiz-creation)
 3. [Clone: Qwis.me](#clone-qwisme-domain-acquired)
   1. [Cloned features](#cloned-features)
   2. [Additional features](#additional-features-not-cloned)
@@ -19,7 +17,7 @@
 
 ####Quick Summary:
 
-Qwis.me is a trivia quiz creation and play website, inspired by [Sporcle](http://www.sporcle.com). Qwis.me diverges from Sporcle in tha its front-end (apart from the login/signup page) consists entirely of one static page with a dynamic Backbone interface. As such, it behaves more like a webapp, and performs all server queries through AJAX.
+[Qwis.me](http://www.qwis.me/) is a trivia quiz creation and play website, inspired by [Sporcle](http://www.sporcle.com). Qwis.me diverges from Sporcle in tha its front-end (apart from the login/signup page) consists entirely of one static page with a dynamic Backbone interface. As such, it behaves more like a webapp, and performs all server queries through AJAX.
 Qwis.me's frontend rests on a Ruby-on-Rails backend.
 
 Additional features include: pagination (infinite scrolling), dynamic quiz-creation form with live-preview, favorites, nested comments, quiz/user history and statistics.
@@ -117,7 +115,7 @@ Users can "mine" _Qwismaster points_ by playing quizzes repeatedly. This include
 
 ![Qwis.me Models](https://raw.github.com/mclaros/Qwis.me/master/qwisme_models.png "Qwis.me Models")
 
-Efforts were made to minimize the amount of SQL queries made. For example, using ActiveRecord `includes` when sending models' assocations' data via JSON; or reducing the number of `Backbone.Collection.fetch()`es for non-crucial data (no more frequent than every 3 minutes for UsersIndex collection on user visit to that route).
+Efforts were made to minimize the amount of SQL queries made. For example, using ActiveRecord `includes` when sending models' assocations' data via JSON; or reducing the number of `Backbone.Collection.fetch()`es for non-crucial data (no sooner than every 3 minutes for UsersIndex collection on user visit to that route; fetch quiz commets only if users opens that section).
 
 App static page contains bootstrapped `current_user` and first page of `quizzes` data.
 
