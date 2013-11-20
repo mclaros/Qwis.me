@@ -66,11 +66,8 @@ _Optional:_ tags, data source (credit for info used), images, answer/hint headin
     * Quiz History ("Qwistory")
     * Favorite Quizzes
     * Authored Quizzes
-    * stats: number of games played, favorites, authored quiz popularity, etc.
+    * User stats: number of games played, favorites, authored quiz popularity, etc.
     * "Qwismaster Points": arbitrary point system calculated using other user statistics (such as number of other users who have played or favorited your authored quizzes)
-  * Quiz History ("Qwistory")
-  * Favorite Quizzes
-  * User statistics: # of plays,
  * Quiz index pages
   * Displays quiz stats
   * Displays "First played on `DATE`" if applicable
@@ -80,7 +77,7 @@ _Optional:_ tags, data source (credit for info used), images, answer/hint headin
   * Backbone frontend, dynamic
   * Ruby on Rails backend
   * All server queries, apart from authentication, performed through AJAX
-  * Pagination, with "infinite scrolling"
+  * Pagination, with infinite scrolling
   * Recursively nested comments
    * Expandable replies list and reply field
   * Dynamic quiz-creation form with live preview, simple client-side validations
@@ -89,27 +86,62 @@ _Optional:_ tags, data source (credit for info used), images, answer/hint headin
 
 ###Proposed features, not implemented
 
+  * Cache frequent SQL queries (using Redis, perhaps?)
+  * Add quiz indices per category/type of quiz
   * Allow uploaded image for quiz
   * Allow uploaded images as answer prompts, instead of text
   * Allow users to follow other users, send "challenges" (attempt to beat quiz-completion time of opponent)
-  * Track quiz top-records, such as _fastest completion time_
+  * Track quiz top-records, such as _fastest completion time_; award _Qwismaster points_ for setting new records 
   * Multiplayer, through websockets
   * Administrator users who can moderate, alter quizzes
-  * Editing, destruction of quizzes (by moderator or author)
+  * Editing, destruction of quizzes, users (by moderator or author)
   * Tracking of individual answers
     * through an AnswerTracker model, `attr_accessible :quiz_id, :quiz_prompt_id, :guessed`(boolean)
     * average hit-rate (% of users who manage to guess a particular answer)
     * line or bar chart for answer statistics via [Chart.js](http://www.chartjs.org/)
+  * Polish the design
 
 ##Known Issues
 
-Quiz creation form's live preview has a small bug 
+Quiz creation form's live preview has a bug where it will not render `answer` preview boxes correctly if one particular `answer` does not have a `header` _and_ is followed by an `answer` that does have one. This bug is specific to the live preview and does not affect published quizzes. Bug stems from how [jquery.SerializeJSON](https://github.com/marioizquierdo/jquery.serializeJSON) operates on forms that allow arrays of optional (blank) values.
+
+Users can "mine" _Qwismaster points_ by playing quizzes repeatedly. This includes their own authored quizzes. This is something to change at a later date.
 
 ##Architecture
 
 ###Backend: Ruby-on-Rails
 
+LINK TO ERD PDF via erd gem
+
+Efforts were made to minimize the amount of SQL queries made. For example, using ActiveRecord `includes` when sending models' assocations' data via JSON; or reducing the number of `Backbone.Collection.fetch()`es for non-crucial data (no more frequent than every 3 minutes for UsersIndex collection on user visit to that route).
+
+App static page contains bootstrapped `current_user` and first page of `quizzes` data.
+
 ###Frontend: Backbone.js
+
+  * [Models](https://github.com/mclaros/Qwis.me/tree/master/app/assets/javascripts/models)
+   * Quiz
+   * QuizPrompt
+   * ValidAnswer
+   * User
+   * Comment
+   * Favoriting
+   * PlayHistory
+  * [Collections](https://github.com/mclaros/Qwis.me/tree/master/app/assets/javascripts/collections)
+   * Quizzes
+   * QuizPrompts
+   * ValidAnswers
+   * Users
+   * Comments
+   * Favoritigs
+   * PlayHistories
+  * [Views](https://github.com/mclaros/Qwis.me/tree/master/app/assets/javascripts/views) (and [Templates](https://github.com/mclaros/Qwis.me/tree/master/app/assets/templates))
+   * Quiz: Index, Show, Play, New, FormPreview
+   * User: Index, Show
+   * Comment: QuizComments, SingleComment
+  * [QuizRouter](https://github.com/mclaros/Qwis.me/blob/master/app/assets/javascripts/routers/quiz_router.js)
+
+  `Backbone.Model/Collection.parse()` was used extensively to process custom attributes, child association data delivered by server-side RABL templates
 
 ##Other Technologies Used
 
