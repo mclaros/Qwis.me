@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131118213211) do
+ActiveRecord::Schema.define(:version => 20131120010218) do
 
   create_table "comments", :force => true do |t|
     t.integer  "author_id"
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(:version => 20131118213211) do
 
   create_table "valid_answers", :force => true do |t|
     t.integer  "quiz_prompt_id",               :null => false
-    t.string   "valid_answer",   :limit => 30, :null => false
+    t.string   "valid_answer",   :limit => 20, :null => false
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
   end
