@@ -2,7 +2,18 @@
 
 > A _[Sporcle](www.sporcle.com)_ clone to test your _Qwisdom_.
 
-__Quick Summary:__ 
+####Table of Contents
+
+1. [Quick Summary](#quick-summary)
+2. [Sporcle](#sporcle)
+  1. [Description](#sporcle-description)
+  2. [Quiz creation](#sporcle-quiz-creation)
+3. [Clone: Qwis.me](#clone-qwisme-domain-acquired)
+  1. [Cloned features](#cloned-features)
+  2. [Additional features](#additional-features-not-cloned)
+  3. [Proposed features](#proposed-features-not-implemented)
+
+####Quick Summary:
 
 Qwis.me is a trivia quiz creation and play website, inspired by [Sporcle](http://www.sporcle.com). Qwis.me diverges from Sporcle in tha its front-end (apart from the login/signup page) consists entirely of one static page with a dynamic Backbone interface. As such, it behaves more like a webapp, and performs all server queries through AJAX.
 Qwis.me's frontend rests on a Ruby-on-Rails backend.
@@ -78,12 +89,43 @@ _Optional:_ tags, data source (credit for info used), images, answer/hint headin
 
 ###Proposed features, not implemented
 
-  * Allow uploaded images as answer prompts
+  * Allow uploaded image for quiz
+  * Allow uploaded images as answer prompts, instead of text
   * Allow users to follow other users, send "challenges" (attempt to beat quiz-completion time of opponent)
   * Track quiz top-records, such as _fastest completion time_
-  * Multiplayer
+  * Multiplayer, through websockets
   * Administrator users who can moderate, alter quizzes
   * Editing, destruction of quizzes (by moderator or author)
   * Tracking of individual answers
+    * through an AnswerTracker model, `attr_accessible :quiz_id, :quiz_prompt_id, :guessed`(boolean)
     * average hit-rate (% of users who manage to guess a particular answer)
     * line or bar chart for answer statistics via [Chart.js](http://www.chartjs.org/)
+
+##Known Issues
+
+Quiz creation form's live preview has a small bug 
+
+##Architecture
+
+###Backend: Ruby-on-Rails
+
+###Frontend: Backbone.js
+
+##Other Technologies Used
+
+  * Ruby gems
+   * [RABL](https://github.com/nesquena/rabl) by [Nathan Esquenazi](https://github.com/nesquena) (JSON templating)
+   * [Kaminari](https://github.com/amatsuda/kaminari) by [Akira Matsuda](https://github.com/amatsuda) (pagination)
+   * [Figaro](https://github.com/laserlemon/figaro) by [Steve Richert](https://github.com/laserlemon)
+   * [Paperclip](https://github.com/thoughtbot/paperclip/) by [thoughtbot, inc.](https://github.com/thoughtbot)
+   * [Devise](https://github.com/plataformatec/devise) by [Plataformatec](https://github.com/plataformatec)
+  * JS libraries
+   * [Underscore.js](http://underscorejs.org/)
+   * [Underscore.string](http://epeli.github.io/underscore.string/) by [Esa-Matti Suuronen](https://github.com/epeli)
+   * [jQuery](http://jquery.com/)
+   * [jquery.SerializeJSON](https://github.com/marioizquierdo/jquery.serializeJSON) by [Mario Izquierdo](https://github.com/marioizquierdo)
+   * [jQuery.ScrollTo](https://github.com/flesler/jquery.scrollTo) by [Ariel Flesler](https://github.com/flesler)
+   * [jQuery.Sticky](http://stickyjs.com/) by [Anthony Garand](https://github.com/garand)
+   * [Pace.js](http://github.hubspot.com/pace/docs/welcome/) by [HubSpot](https://github.com/HubSpot)
+
+##Screenshots
