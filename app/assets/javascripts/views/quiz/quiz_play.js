@@ -33,6 +33,7 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 		var $container = options.$container;
 		var $newAnsDiv = this.$el.find("#simple-ans-proto").clone();
 
+		$container.parent().show();
 		$newAnsDiv.attr("id", "");
 		$container.append($newAnsDiv);
 		this.ansDivs[correctAns.toLowerCase()] = $newAnsDiv;
@@ -44,6 +45,7 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 		var $container = options.$container;
 		var $newAnsWithHeaderDiv = this.$el.find("#ans-with-header-proto").clone();
 
+		$container.parent().show();
 		$newAnsWithHeaderDiv.attr("id", "");
 		$newAnsWithHeaderDiv.find(".ans-header").text(ansHeader);
 		$container.append($newAnsWithHeaderDiv);
@@ -208,9 +210,8 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 
 		this.submitPlayRecord({win: true});
 
-		$("#notice").html("<img src='" + this.getWinPic() + "' style='max-height: 400px; max-width: 400px;'>");
-		$("#notice").append($("<p>Congratulations, you win!</p>"));
-		$("#noticeModal").modal();
+		$("#victory-img").attr("src", this.getWinPic());
+		$("#victory-modal").modal();
 	},
 
 	loseActions: function () {
@@ -219,6 +220,7 @@ Qwisme.Views.QuizPlay = Backbone.View.extend({
 		$("#reset-game").attr("disabled", false);
 		this.revealAllAns();
 		this.submitPlayRecord({win: false});
+		$("#defeat-modal").modal();
 	},
 
 	submitPlayRecord: function (options) {

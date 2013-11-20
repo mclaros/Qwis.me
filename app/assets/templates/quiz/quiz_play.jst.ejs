@@ -52,17 +52,17 @@
 
 <hr>
 
-<div class="row well">
+<div class="row well" style="display: none;">
 	<div id="answers-container" class="text-center col-xs-12">
 	</div>
 </div>
 
-<div class="row well">
+<div class="row well" style="display: none;">
 	<div id="answers-container-titled" class="text-center col-xs-12">
 	</div>
 </div>
 
-<div class="row">
+<div class="row" style="display: none;">
 	<div id="answers-container-images" class="well text-center col-xs-12" style="display:none">
 	</div>
 </div>
@@ -95,30 +95,37 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="victory-modal-title">Qwis.me</h4>
+        <h4 class="modal-title" id="victory-modal-title">Victory</h4>
       </div>
-      <div class="modal-body" id="victory-modal-content">
+      <div class="modal-body text-center" id="victory-modal-content">
         
         <h3>Well done!</h3>
-        <p>
-          Qwismaster points are your way to track your overall activity and progress. You earn points as follows:
-        </p>
-        <ul>
-          <li>
-            <strong>20 points</strong> for each <i>other</i> user who favorites your quiz (if they unfavorite, you lose them)
-          </li>
-          <li>
-            <strong>10 points</strong> for each user who completes one of your quizzes (win or lose) 
-          </li>
-          <li>
-            <strong>5 points</strong> for every quiz you complete within the time limit (each time you win)
-          </li>
-          <li>
-            <strong>1 point</strong> for every quiz you complete, whether you win or lose (stacks with points earned via wins)
-          </li>
-        </ul>
 
-        See user's <i>Play Statistics</i> for more detail.
+        <img src="" class="img-thumbnail" id="victory-img" style="max-height: 400px; max-width: 400px;">
+        <p>
+          You get <strong>6</strong> <i>Qwismaster points</i>.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="defeat-modal" tabindex="-1" role="dialog" aria-labelledby="defeat-modal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="defeat-modal-title">Defeat</h4>
+      </div>
+      <div class="modal-body text-center" id="defeat-modal-content">
+        
+        <h3>Time's up</h3>
+        <p>
+          Don't worry, you still get <strong>1</strong> <i>Qwismaster point</i>.
+        </p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

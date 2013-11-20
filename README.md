@@ -105,6 +105,8 @@ _Optional:_ tags, data source (credit for info used), images, answer/hint headin
 
 ##Known Issues
 
+Because _all_ quiz data is no longer bootstrapped, users will receive a "Quiz does not exist" error if they attempt to refresh the page of a quiz not normally found within the first "page" of a quiz index fetch (currently five quizzes per page fetch). This is remedied by going to the `Quiz Index` and navigating to the individual quiz page from there. A simple solution would be to fetch individual quiz data on demand, is it hasn't lready been fetched/bootstrapped, however this require an extra query.
+
 Quiz creation form's live preview has a bug where it will not render `answer` preview boxes correctly if one particular `answer` does not have a `header` _and_ is followed by an `answer` that does have one. This bug is specific to the live preview and does not affect published quizzes. Bug stems from how [jQuery.SerializeJSON](https://github.com/marioizquierdo/jquery.serializeJSON) operates on forms that allow arrays of optional (blank) values.
 
 Users can "mine" _Qwismaster points_ by playing quizzes repeatedly. This includes their own authored quizzes. This is something to change at a later date.
