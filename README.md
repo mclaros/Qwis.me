@@ -109,6 +109,8 @@ Because _all_ quiz data is no longer bootstrapped, users will receive a "Quiz do
 
 Quiz creation form's live preview has a bug where it will not render `answer` preview boxes correctly if one particular `answer` does not have a `header` _and_ is followed by an `answer` that does have one. This bug is specific to the live preview and does not affect published quizzes. Bug stems from how [jQuery.SerializeJSON](https://github.com/marioizquierdo/jquery.serializeJSON) operates on forms that allow arrays of optional (blank) values.
 
+The "First played on `DATE`" tag does not update on quiz indices until the user refreshes the page. This is something to change at a later date.
+
 Users can "mine" _Qwismaster points_ by playing quizzes repeatedly. This includes their own authored quizzes. This is something to change at a later date.
 
 ##Architecture
