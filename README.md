@@ -128,12 +128,14 @@ Almost all quiz and user statistics are gathered from a single PlayHistory model
   * User play count: `USER.play_histories.count`
   * User unique (distinct quizzes) play count: `PlayHistory.select("COUNT(quiz_id)").where(:user_id => USER.id).group(:quiz_id).length`
   * Total play count by other users for all authored quizzes:
-  
-      @others_plays_count = 0
-      self.quizzes.each do |quiz|
-        @others_plays_count += quiz.play_histories.where("user_id != #{self.id}").count
-      end
-      @others_plays_count
+
+
+        @others_plays_count = 0
+        self.quizzes.each do |quiz|
+          @others_plays_count += quiz.play_histories.where("user_id != #{self.id}").count
+        end
+        @others_plays_count
+
 
 ###Frontend: Backbone.js
 
