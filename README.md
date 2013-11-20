@@ -60,7 +60,7 @@ _Optional:_ tags, data source (credit for info used), images, answer/hint headin
     * Allows optional answer headers (ex. "In years", "Name of famous musician")
   * Timed quiz-play, with events on win/loss
   * Completed plays (user guesses all or time runs out) are recorded onto a PlayHistory
-  * Quiz stats: number of plays, favorites, etc.
+  * Quiz stats: number of plays, favorites, etc. (mainly through queries on a single model/table)
   * Comments
  * Users
   * Authentication/authorization
@@ -70,7 +70,7 @@ _Optional:_ tags, data source (credit for info used), images, answer/hint headin
     * Quiz History ("Qwistory")
     * Favorite Quizzes
     * Authored Quizzes
-    * User stats: number of games played, favorites, authored quiz popularity, etc.
+    * User stats: number of games played, favorites, authored quiz popularity, etc. (mainly through quieries on a single model/table)
     * "Qwismaster Points": arbitrary point system calculated using other user statistics (such as number of other users who have played or favorited your authored quizzes)
  * Quiz index pages
   * Displays quiz stats
@@ -107,7 +107,7 @@ _Optional:_ tags, data source (credit for info used), images, answer/hint headin
 
 ##Known Issues
 
-Quiz creation form's live preview has a bug where it will not render `answer` preview boxes correctly if one particular `answer` does not have a `header` _and_ is followed by an `answer` that does have one. This bug is specific to the live preview and does not affect published quizzes. Bug stems from how [jquery.SerializeJSON](https://github.com/marioizquierdo/jquery.serializeJSON) operates on forms that allow arrays of optional (blank) values.
+Quiz creation form's live preview has a bug where it will not render `answer` preview boxes correctly if one particular `answer` does not have a `header` _and_ is followed by an `answer` that does have one. This bug is specific to the live preview and does not affect published quizzes. Bug stems from how [jQuery.SerializeJSON](https://github.com/marioizquierdo/jquery.serializeJSON) operates on forms that allow arrays of optional (blank) values.
 
 Users can "mine" _Qwismaster points_ by playing quizzes repeatedly. This includes their own authored quizzes. This is something to change at a later date.
 
@@ -115,11 +115,16 @@ Users can "mine" _Qwismaster points_ by playing quizzes repeatedly. This include
 
 ###Backend: Ruby-on-Rails
 
-LINK TO ERD PDF via erd gem
+![Qwis.me Models](https://raw.github.com/mclaros/Qwis.me/master/qwisme_models.png "Qwis.me Models")
 
 Efforts were made to minimize the amount of SQL queries made. For example, using ActiveRecord `includes` when sending models' assocations' data via JSON; or reducing the number of `Backbone.Collection.fetch()`es for non-crucial data (no more frequent than every 3 minutes for UsersIndex collection on user visit to that route).
 
 App static page contains bootstrapped `current_user` and first page of `quizzes` data.
+
+Almost all quiz and user statistics are gathered from a single PlayHistory model/table through the use of several custom queries. For example:
+
+  * User play count: `USER.play_histories.count`
+  * User unique (distinct quizzes) play count: `PlayHistory.select("COUNT(quiz_id)").where(:user_id => USER.id).group(:quiz_id).length`
 
 ###Frontend: Backbone.js
 
@@ -159,7 +164,7 @@ App static page contains bootstrapped `current_user` and first page of `quizzes`
    * [Underscore.js](http://underscorejs.org/)
    * [Underscore.string](http://epeli.github.io/underscore.string/) by [Esa-Matti Suuronen](https://github.com/epeli)
    * [jQuery](http://jquery.com/)
-   * [jquery.SerializeJSON](https://github.com/marioizquierdo/jquery.serializeJSON) by [Mario Izquierdo](https://github.com/marioizquierdo)
+   * [jQuery.SerializeJSON](https://github.com/marioizquierdo/jquery.serializeJSON) by [Mario Izquierdo](https://github.com/marioizquierdo)
    * [jQuery.ScrollTo](https://github.com/flesler/jquery.scrollTo) by [Ariel Flesler](https://github.com/flesler)
    * [jQuery.Sticky](http://stickyjs.com/) by [Anthony Garand](https://github.com/garand)
    * [Pace.js](http://github.hubspot.com/pace/docs/welcome/) by [HubSpot](https://github.com/HubSpot)
