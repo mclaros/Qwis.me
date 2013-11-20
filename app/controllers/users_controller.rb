@@ -18,7 +18,13 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		@user = User.where(:id => params[:id]).includes({:quizzes => [:play_histories, :favoritings]}, :favorite_quizzes, :play_histories, :played_quizzes)
+		@user = User.where(:id => params[:id])
+				.includes(
+					{:quizzes => [:play_histories, :favoritings]}, 
+					:favorite_quizzes, :play_histories, :played_quizzes
+					)
+				.first
+				
 		# render "user.rabl", :handlers => [:rabl]
 		respond_to do |format|
 			format.json { render "user.rabl", :handlers => [:rabl] }

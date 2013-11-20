@@ -45,20 +45,46 @@ Qwisme.Routers.QuizRouter = Backbone.Router.extend({
 
 	renderUserShow: function (id) {
 		var that = this;
-		Qwisme.USERS.fetch({
-			success: function () {
-				var user = Qwisme.USERS.get(id);
-				if ( _.isUndefined(user) ) {
-					that.showNoticeModal("User does not exist!");
-					return;
-				}
+		var user = Qwisme.USERS.get(id);
 
-				var userShow = new Qwisme.Views.UserShow({
+		if ( _.isUndefined(user) ) {
+			user = new Qwisme.Models.User({id: id});
+			user.fetch({
+				parse: true,
+				success: function (data, data2) {
+					var userShow = new Qwisme.Views.UserShow({
 						model: user
 					});
-				that._swapView(userShow);
-			}
-		});
+					that._swapView(userShow);
+				},
+
+				error: function (data, data2) {
+					that.showNoticeModal("User does not exist!")
+				}
+			});
+		}
+		else {
+			var userShow = new Qwisme.Views.UserShow({
+				model: user
+			});
+			that._swapView(userShow);
+		}
+
+
+		// Qwisme.USERS.fetch({
+		// 	success: function () {
+		// 		var user = Qwisme.USERS.get(id);
+		// 		if ( _.isUndefined(user) ) {
+		// 			that.showNoticeModal("User does not exist!");
+		// 			return;
+		// 		}
+
+		// 		var userShow = new Qwisme.Views.UserShow({
+		// 				model: user
+		// 			});
+		// 		that._swapView(userShow);
+		// 	}
+		// });
 	},
 
 	renderQuizIndex: function () {
