@@ -26,7 +26,8 @@ class UsersController < ApplicationController
 	end
 
 	def guest_login
-		guest_user = User.find_by_username("guest1")
+		guest_nums = (1..5).to_a
+		guest_user = User.find_by_username("guest#{guest_nums.sample}")
 		sign_in_and_redirect(guest_user)
 	end
 end

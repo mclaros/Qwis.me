@@ -1,5 +1,6 @@
 Qwisme::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
+  config.static_cache_control = "public, max-age=31536000"
 
   # Code is not reloaded between requests
   config.cache_classes = true
@@ -9,7 +10,7 @@ Qwisme::Application.configure do
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
-  config.serve_static_assets = false
+  config.serve_static_assets = true
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
