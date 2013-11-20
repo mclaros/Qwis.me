@@ -12,6 +12,10 @@
   1. [Cloned features](#cloned-features)
   2. [Additional features](#additional-features-not-cloned)
   3. [Proposed features](#proposed-features-not-implemented)
+4. [Known Issues](#known-issues)
+5. [Architecture](#architecture)
+6. [Other Technologies Used](#other-technologies-used)
+7. [Screenshots](#screenshots)
 
 ####Quick Summary:
 
