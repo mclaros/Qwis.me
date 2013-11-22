@@ -181,3 +181,9 @@ Almost all quiz and user statistics are gathered from a single PlayHistory model
    * [Pace.js](http://github.hubspot.com/pace/docs/welcome/) by [HubSpot](https://github.com/HubSpot)
 
 ##Screenshots
+
+![Quiz creation form](https://s3-us-west-1.amazonaws.com/qwisme-development/qwisme_qwizard.png "Quiz creation form")
+
+![Adding acceptable answers](https://s3-us-west-1.amazonaws.com/qwisme-development/qwisme_adding_prompts.png "Adding acceptable answers")
+
+![Playing a quiz](https://s3-us-west-1.amazonaws.com/qwisme-development/qwisme_play1.png "Playing a quiz")
