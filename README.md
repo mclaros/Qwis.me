@@ -123,9 +123,8 @@ Users can "mine" _Qwismaster points_ by playing quizzes repeatedly. This include
   * Controllers: [Quizzes](http://github.com/mclaros/Qwis.me/blob/master/app/controllers/quizzes_controller.rb), [StaticPages](http://github.com/mclaros/Qwis.me/blob/master/app/controllers/static_pages_controller.rb), [Users](http://github.com/mclaros/Qwis.me/blob/master/app/controllers/users_controller.rb), [PlayHistories](http://github.com/mclaros/Qwis.me/blob/master/app/controllers/play_histories_controller.rb), [Favoritings](http://github.com/mclaros/Qwis.me/blob/master/app/controllers/favoritings_controller.rb), [Comments](http://github.com/mclaros/Qwis.me/blob/master/app/controllers/comments_controller.rb)
 
 Efforts were made to minimize the amount of SQL queries made. For example, using ActiveRecord `includes` when sending models' assocations' data via JSON; or reducing the number of `Backbone.Collection.fetch()`es for non-crucial data (no sooner than every 3 minutes for UsersIndex collection on user visit to that route; fetch quiz commets only if users opens that section).
-The [root.html.erb](http://github.com/mclaros/Qwis.me/blob/master/app/views/static_pages/root.html.erb) view, which hosts the Backbone frontend, also contains bootstrapped data regarding the current user and the first page's worth of quiz data.
 
-App static page contains bootstrapped `current_user` and first page of `quizzes` data.
+App [static page](http://github.com/mclaros/Qwis.me/blob/master/app/views/static_pages/root.html.erb) view contains bootstrapped `current_user` and first page of `quizzes` data.
 
 Almost all quiz and user statistics are gathered from a single PlayHistory model/table through the use of several custom queries. For example:
 
