@@ -1,18 +1,29 @@
 <div id="root-main-div" class="container">
   <div class="row">
-    <div class="col-xs-12">
-      <div class="jumbotron">
-        <h1>Qwis.me</h1>
-        <p>
-          A <i>Sporcle</i> clone to test your <i>Qwisdom</i>.
-        </p>
 
-        <form action="<%= guest_url %>" method="GET">
-          <input type="submit" value="Log in as Guest" class="btn btn-lg btn-success">
-        </form>
+    <div id="ss-jumbotron" class="col-xs-12">
+
+      <div id="ss-shader">
 
       </div>
+
+      <div id="jumbotron-content">
+      <h1 style="font-size: 5em">Qwis.me</h1>
+
+      <p style="font-size: 1.6em">
+        A <i>Sporcle</i> clone to test you <i>Qwisdom</i>.
+      </p>
+
+        <form action="<%= guest_url %>" method="GET">
+          <input type="submit" value="Log in as Guest" class="btn btn-lg btn-success" style="border: 2px solid green;">
+        </form>
+    <div id="jumbotron-caption" class="h3">
+      Create quizzes<br><small>Dynamic quiz form with live preview</small>
     </div>
+      </div>
+
+    </div>
+
   </div>
 
 

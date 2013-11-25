@@ -201,3 +201,39 @@ input.opt-field-active {
 .pace-inactive {
   display: none;
 }
+
+#ss-jumbotron {
+	border-radius: 10px;
+	border: 1px solid rgb(222, 184, 135);
+	height: 300px;
+	padding: 0;
+	overflow: hidden;
+	background-image: url(http://s3-us-west-1.amazonaws.com/qwisme-development/qwisme_ss_joined.jpg);
+	background-position: 0px 0px;
+	background-repeat: repeat;
+}
+
+#ss-shader {
+	z-index: 1;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(255, 250, 228, 0.6);
+	position: relative;
+	overflow: hidden;
+}
+
+#jumbotron-content {
+	z-index: 10;
+	position: relative;
+	top: -300px;
+	padding: 20px;
+	text-shadow: 0 0 3px rgb(228, 231, 158);
+	color: rgb(70, 58, 22);
+}
+
+#jumbotron-caption, {
+	padding-left: 400px;
+	position: relative;
+	top: -20px;
+	display: inline-block;
+}
