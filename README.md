@@ -119,6 +119,9 @@ Users can "mine" _Qwismaster points_ by playing quizzes repeatedly. This include
 
 ![Qwis.me Models](https://raw.github.com/mclaros/Qwis.me/master/qwisme_models.png "Qwis.me Models")
 
+  * Models: [Quiz](http://github.com/mclaros/Qwis.me/blob/master/app/models/quiz.rb), [QuizPrompt](http://github.com/mclaros/Qwis.me/blob/master/app/models/quiz_prompt.rb), [ValidAnswer](http://github.com/mclaros/Qwis.me/blob/master/app/models/valid_answer.rb), [User](http://github.com/mclaros/Qwis.me/blob/master/app/models/user.rb), [PlayHistory](http://github.com/mclaros/Qwis.me/blob/master/app/models/play_history.rb), [Favoriting](http://github.com/mclaros/Qwis.me/blob/master/app/models/favoriting.rb), [Comment](http://github.com/mclaros/Qwis.me/blob/master/app/models/comment.rb)
+  * Controllers: [Quizzes](http://github.com/mclaros/Qwis.me/blob/master/app/controllers/quizzes_controller.rb), [StaticPages](http://github.com/mclaros/Qwis.me/blob/master/app/controllers/static_pages_controller.rb), [Users](http://github.com/mclaros/Qwis.me/blob/master/app/controllers/users_controller.rb), [PlayHistories](http://github.com/mclaros/Qwis.me/blob/master/app/controllers/play_histories_controller.rb), [Favoritings](http://github.com/mclaros/Qwis.me/blob/master/app/controllers/favoritings_controller.rb), [Comments](http://github.com/mclaros/Qwis.me/blob/master/app/controllers/comments_controller.rb)
+
 Efforts were made to minimize the amount of SQL queries made. For example, using ActiveRecord `includes` when sending models' assocations' data via JSON; or reducing the number of `Backbone.Collection.fetch()`es for non-crucial data (no sooner than every 3 minutes for UsersIndex collection on user visit to that route; fetch quiz commets only if users opens that section).
 
 App static page contains bootstrapped `current_user` and first page of `quizzes` data.
